@@ -1,3 +1,7 @@
+:root {
+  font-family: var(--font-open-sans), sans-serif;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
