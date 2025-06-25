@@ -14,6 +14,7 @@ function CustomButton({
   return (
     <Button
       sx={{
+        width: 'fit-content',
         padding: '16px 94px 25px 94px',
         fontFamily: 'Open Sans',
         fontWeight: '700',
