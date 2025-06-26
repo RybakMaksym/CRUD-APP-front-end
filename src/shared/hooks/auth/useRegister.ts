@@ -41,4 +41,3 @@ export const useRegister = () => {
 
   return { onSubmit };
 };
-

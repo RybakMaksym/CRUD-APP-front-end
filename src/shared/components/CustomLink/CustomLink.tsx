@@ -24,4 +24,3 @@ function CustomLink(props: CustomLinkProps) {
 }
 
 export default CustomLink;
-

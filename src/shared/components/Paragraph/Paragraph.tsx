@@ -27,4 +27,3 @@ function Paragraph(props: ParagraphProps) {
 }
 
 export default Paragraph;
-

@@ -37,4 +37,3 @@ function CustomImput({ customVariant, ...props }: CustomInputProps) {
 }
 
 export default CustomImput;
-

@@ -39,4 +39,3 @@ function CustomCheckbox({ label, ...props }: CustomCheckboxProps) {
 }
 
 export default CustomCheckbox;
-

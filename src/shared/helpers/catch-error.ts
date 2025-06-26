@@ -16,4 +16,3 @@ export const catchError = (error: AxiosErrorLike) => {
       : message
     : error.message;
 };
-

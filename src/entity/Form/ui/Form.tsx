@@ -26,4 +26,3 @@ function Form(props: FormProps) {
 }
 
 export default Form;
-

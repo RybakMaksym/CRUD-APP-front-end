@@ -22,4 +22,3 @@ function Headline(props: HeadlineProps) {
 }
 
 export default Headline;
-

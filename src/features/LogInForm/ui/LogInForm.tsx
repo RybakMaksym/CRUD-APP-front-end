@@ -1,13 +1,14 @@
 'use client';
 
+import { Form, Formik } from 'formik';
+
+import { logInFormSchema } from '@/features/LogInForm/config/log-in-form.schema';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomImput from '@/shared/components/CustomImput/CustomImput';
 import CustomLink from '@/shared/components/CustomLink/CustomLink';
 import Paragraph from '@/shared/components/Paragraph/Paragraph';
 import { PAGES_URL } from '@/shared/config/pages-url.config';
 import { useLogIn } from '@/shared/hooks/auth/useLogIn';
-import { Form, Formik } from 'formik';
-import { logInFormSchema } from '../config/log-in-form.schema';
 
 function LogInForm() {
   const { onSubmit } = useLogIn();
@@ -46,4 +47,3 @@ function LogInForm() {
 }
 
 export default LogInForm;
-
