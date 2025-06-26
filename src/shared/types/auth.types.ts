@@ -1,4 +1,4 @@
-import type { IUser } from './user.types';
+import { IUser } from '@/shared/types/user.types';
 
 export interface IRegisterForm {
   username: string;

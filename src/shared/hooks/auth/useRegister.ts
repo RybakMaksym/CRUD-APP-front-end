@@ -1,12 +1,13 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+import { FormikHelpers } from 'formik';
+import { useRouter } from 'next/navigation';
+
 import { PAGES_URL } from '@/shared/config/pages-url.config';
 import { isAxiosErrorLike } from '@/shared/helpers/is-axios-error-like';
 import { authService } from '@/shared/services/auth/auth.service';
 import { IRegisterForm } from '@/shared/types/auth.types';
-import { useMutation } from '@tanstack/react-query';
-import { FormikHelpers } from 'formik';
-import { useRouter } from 'next/navigation';
 
 export const useRegister = () => {
   const { push } = useRouter();

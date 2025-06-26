@@ -1,5 +1,6 @@
-import { Tokens } from '@/shared/constants/token.constants';
 import Cookies from 'js-cookie';
+
+import { Tokens } from '@/shared/constants/token.constants';
 
 export const getAccessToken = () => {
   const accessToken = Cookies.get(Tokens.ACCESS_TOKEN);

@@ -1,6 +1,7 @@
 import { Input, InputProps } from '@mui/material';
 import { useField } from 'formik';
-import Paragraph from '../Paragraph/Paragraph';
+
+import Paragraph from '@/shared/components/Paragraph/Paragraph';
 
 type CustomInputProps = InputProps & {
   customVariant?: 'white' | 'dark';

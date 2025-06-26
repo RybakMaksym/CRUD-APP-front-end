@@ -1,13 +1,13 @@
 import { baseAxios } from '@/shared/api/interceptors';
-import type {
-  IAuthResponse,
-  ILogInForm,
-  IRegisterForm,
-} from '../../types/auth.types';
 import {
   removeTokenFromStorage,
   saveTokenToStorage,
-} from './auth-token.service';
+} from '@/shared/services/auth/auth-token.service';
+import {
+  IAuthResponse,
+  ILogInForm,
+  IRegisterForm,
+} from '@/shared/types/auth.types';
 
 class AuthService {
   async register(data: IRegisterForm) {

@@ -1,6 +1,7 @@
 import { Checkbox, CheckboxProps } from '@mui/material';
 import { useField } from 'formik';
-import Paragraph from '../Paragraph/Paragraph';
+
+import Paragraph from '@/shared/components/Paragraph/Paragraph';
 
 type CustomCheckboxProps = CheckboxProps & {
   label: string;

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Tokens } from './shared/constants/token.constants';
-import { PAGES_URL } from './shared/config/pages-url.config';
+
+import { PAGES_URL } from '@/shared/config/pages-url.config';
+import { Tokens } from '@/shared/constants/token.constants';
 
 export async function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get(Tokens.REFRESH_TOKEN)?.value;

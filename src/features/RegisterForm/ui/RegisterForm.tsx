@@ -2,6 +2,7 @@
 
 import { Form, Formik } from 'formik';
 
+import { registerFormSchema } from '@/features/RegisterForm/config/register-form.schema';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomCheckbox from '@/shared/components/CustomCheckbox/CustomCheckbox';
 import CustomImput from '@/shared/components/CustomImput/CustomImput';
@@ -9,8 +10,6 @@ import CustomLink from '@/shared/components/CustomLink/CustomLink';
 import Paragraph from '@/shared/components/Paragraph/Paragraph';
 import { PAGES_URL } from '@/shared/config/pages-url.config';
 import { useRegister } from '@/shared/hooks/auth/useRegister';
-
-import { registerFormSchema } from '../config/register-form.schema';
 
 function RegisterForm() {
   const { onSubmit } = useRegister();

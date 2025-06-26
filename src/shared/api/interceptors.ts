@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { catchError } from '../helpers/catch-error';
+
+import { catchError } from '@/shared/helpers/catch-error';
 import {
   getAccessToken,
   removeTokenFromStorage,
-} from '../services/auth/auth-token.service';
-import { authService } from '../services/auth/auth.service';
+} from '@/shared/services/auth/auth-token.service';
+import { authService } from '@/shared/services/auth/auth.service';
 
 export const options = {
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
@@ -14,7 +15,7 @@ export const options = {
   withCredentials: true,
 };
 
-const baseAxios = axios.create(options);
+export const baseAxios = axios.create(options);
 
 const authAxios = axios.create(options);
 
@@ -28,7 +29,7 @@ authAxios.interceptors.request.use((config) => {
   return config;
 });
 
-authAxios.interceptors.response.use(
+export default authAxios.interceptors.response.use(
   (config) => config,
   async (error) => {
     const originalRequest = error.config;
@@ -51,5 +52,3 @@ authAxios.interceptors.response.use(
     throw error;
   },
 );
-
-export { authAxios, baseAxios };

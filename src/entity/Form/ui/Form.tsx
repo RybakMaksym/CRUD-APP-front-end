@@ -1,5 +1,6 @@
-import Headline from '@/shared/components/Headline/Headline';
 import { ReactNode } from 'react';
+
+import Headline from '@/shared/components/Headline/Headline';
 
 type FormProps = {
   title: string;
