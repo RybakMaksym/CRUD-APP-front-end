@@ -10,7 +10,7 @@ function SignUp() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: 'url("/images/auth/auth-background.png")',
+        backgroundImage: 'url("/assets/backgrounds/auth-background.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
