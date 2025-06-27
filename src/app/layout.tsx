@@ -4,10 +4,10 @@ import { Open_Sans } from 'next/font/google';
 import '@/app/globals.css';
 import Providers from '@/providers/Providers';
 
-const openSans = Open_Sans({
+const primaryFont = Open_Sans({
   subsets: ['latin'],
   weight: ['400', '700'],
-  variable: '--font-open-sans',
+  variable: '--primary-font',
   display: 'swap',
 });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable}`}>
+      <body className={`${primaryFont.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>
