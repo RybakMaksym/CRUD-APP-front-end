@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 
-import Providers from '@/providers/Providers';
 import '@/styles/globals.css';
 import '@/styles/variables.css';
 
@@ -24,9 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${primaryFont.variable}`}>
-        <Providers>{children}</Providers>
-      </body>
+      <body className={`${primaryFont.variable}`}>{children}</body>
     </html>
   );
 }
