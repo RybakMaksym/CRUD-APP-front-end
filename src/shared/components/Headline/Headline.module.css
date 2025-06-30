@@ -1,6 +1,9 @@
 .headline {
   font-family: var(--primary-font), sans-serif;
   font-weight: 700;
+}
+
+.white { 
   color: var(--color-white);
 }
 

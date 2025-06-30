@@ -5,7 +5,7 @@ import styles from '@/shared/components/Headline/Headline.module.css';
 type HeadlineProps = {
   children: ReactNode;
   size?: '45px' | '35px' | '32px';
-  variant?: 'white' | 'dark';
+  color?: 'white' | 'dark';
 };
 
 const sizeMap = {
@@ -14,20 +14,11 @@ const sizeMap = {
   '32px': styles.size32,
 } as const;
 
-function Headline({
-  children,
-  size = '45px',
-  variant = 'white',
-}: HeadlineProps) {
+function Headline({ children, size = '45px', color = 'white' }: HeadlineProps) {
   const sizeClass = sizeMap[size] ?? styles.size45;
+  const classes = `${styles.headline} ${sizeClass} ${styles[color]}`;
 
-  const variantClass = variant === 'dark' ? styles.dark : '';
-
-  return (
-    <h1 className={`${styles.headline} ${sizeClass} ${variantClass}`}>
-      {children}
-    </h1>
-  );
+  return <h1 className={classes}>{children}</h1>;
 }
 
 export default Headline;
