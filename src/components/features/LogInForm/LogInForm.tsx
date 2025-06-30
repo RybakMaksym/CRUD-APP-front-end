@@ -1,0 +1,48 @@
+'use client';
+
+import { Form, Formik } from 'formik';
+
+import CustomButton from '@/components/ui/CustomButton/CustomButton';
+import CustomInput from '@/components/ui/CustomInput/CustomInput';
+import CustomLink from '@/components/ui/CustomLink/CustomLink';
+import Headline from '@/components/ui/Headline/Headline';
+import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import { useLogIn } from '@/hooks/auth/useLogIn';
+import {
+  LOG_IN_FORM_DEFAULT_VALUES,
+  LOG_IN_FORM_SCHEMA,
+} from '@/lib/config/log-in-form';
+import { PAGES_URL } from '@/lib/config/pages-url';
+import styles from '@/styles/form.module.css';
+import { FormProps } from '@/types/form';
+
+function LogInForm(props: FormProps) {
+  const { onSubmit } = useLogIn();
+
+  return (
+    <Formik
+      initialValues={LOG_IN_FORM_DEFAULT_VALUES}
+      validationSchema={LOG_IN_FORM_SCHEMA}
+      onSubmit={onSubmit}
+    >
+      {({ status }) => (
+        <Form className={styles.form}>
+          <Headline>{props.title}</Headline>
+          {status && <Paragraph color="error">{status}</Paragraph>}
+
+          <CustomInput name="email" type="email" placeholder="email" />
+          <CustomInput name="password" type="password" placeholder="password" />
+
+          <CustomButton type="submit">Submit</CustomButton>
+
+          <Paragraph>
+            {"Don't have an account?"}
+            <CustomLink href={PAGES_URL.REGISTER}>Sign up</CustomLink>
+          </Paragraph>
+        </Form>
+      )}
+    </Formik>
+  );
+}
+
+export default LogInForm;

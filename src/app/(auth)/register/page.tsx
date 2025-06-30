@@ -1,3 +1,7 @@
-import { SignUp } from '@/pages/SignUp';
+import RegisterForm from '@/components/features/RegisterForm/RegisterForm';
 
-export default SignUp;
+function page() {
+  return <RegisterForm title="Sign-up" />;
+}
+
+export default page;

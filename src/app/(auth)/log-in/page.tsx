@@ -1,3 +1,7 @@
-import { SignIn } from '@/pages/SignIn';
+import LogInForm from '@/components/features/LogInForm/LogInForm';
 
-export default SignIn;
+function page() {
+  return <LogInForm title="Sign-in" />;
+}
+
+export default page;
