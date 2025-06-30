@@ -2,11 +2,7 @@ import type { AxiosResponse } from 'axios';
 
 import { baseAxios } from '@/shared/api/interceptors';
 import { saveTokenToStorage } from '@/shared/services/auth/auth-token.service';
-import {
-  IAuthResponse,
-  ILogInForm,
-  IRegisterForm,
-} from '@/shared/types/auth';
+import { IAuthResponse, ILogInForm, IRegisterForm } from '@/shared/types/auth';
 
 class AuthService {
   public async register(
