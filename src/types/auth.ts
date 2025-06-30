@@ -13,4 +13,5 @@ export interface IRegisterForm extends ILogInForm {
 export interface IAuthResponse {
   user: IUser;
   accessToken: string;
+  refreshToken: string;
 }
