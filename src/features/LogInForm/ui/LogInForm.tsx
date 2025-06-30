@@ -2,7 +2,7 @@
 
 import { Form, Formik } from 'formik';
 
-import { logInFormSchema } from '@/features/LogInForm/config/log-in-form.schema';
+import { LOG_IN_FORM_SCHEMA } from '@/features/LogInForm/config/log-in-form.schema';
 import styles from '@/features/LogInForm/ui/LogInForm.module.css';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomInput from '@/shared/components/CustomInput/CustomInput';
@@ -17,7 +17,7 @@ function LogInForm() {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      validationSchema={logInFormSchema}
+      validationSchema={LOG_IN_FORM_SCHEMA}
       onSubmit={onSubmit}
     >
       {({ status }) => (

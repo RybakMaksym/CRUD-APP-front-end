@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const logInFormSchema = Yup.object({
+export const LOG_IN_FORM_SCHEMA = Yup.object({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .required('Password is required')

@@ -2,7 +2,7 @@
 
 import { Form, Formik } from 'formik';
 
-import { registerFormSchema } from '@/features/RegisterForm/config/register-form.schema';
+import { REGISTER_FORM_SCHEMA } from '@/features/RegisterForm/config/register-form.schema';
 import styles from '@/features/RegisterForm/ui/RegisterForm.module.css';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomCheckbox from '@/shared/components/CustomCheckbox/CustomCheckbox';
@@ -18,7 +18,7 @@ function RegisterForm() {
   return (
     <Formik
       initialValues={{ username: '', email: '', password: '', isAdmin: false }}
-      validationSchema={registerFormSchema}
+      validationSchema={REGISTER_FORM_SCHEMA}
       onSubmit={onSubmit}
     >
       {({ status }) => (

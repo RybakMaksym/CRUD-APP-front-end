@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const registerFormSchema = Yup.object({
+export const REGISTER_FORM_SCHEMA = Yup.object({
   username: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
