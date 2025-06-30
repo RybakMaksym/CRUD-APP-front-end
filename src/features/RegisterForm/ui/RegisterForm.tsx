@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
-} from '@/features/RegisterForm/config/register-form.schema';
+} from '@/features/RegisterForm/config/register-form';
 import styles from '@/features/RegisterForm/ui/RegisterForm.module.css';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomCheckbox from '@/shared/components/CustomCheckbox/CustomCheckbox';

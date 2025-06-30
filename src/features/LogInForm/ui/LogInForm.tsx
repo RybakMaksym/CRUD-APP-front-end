@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
-} from '@/features/LogInForm/config/log-in-form.schema';
+} from '@/features/LogInForm/config/log-in-form';
 import styles from '@/features/LogInForm/ui/LogInForm.module.css';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomInput from '@/shared/components/CustomInput/CustomInput';
