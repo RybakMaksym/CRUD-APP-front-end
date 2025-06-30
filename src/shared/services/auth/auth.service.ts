@@ -6,7 +6,7 @@ import {
   IAuthResponse,
   ILogInForm,
   IRegisterForm,
-} from '@/shared/types/auth.types';
+} from '@/shared/types/auth';
 
 class AuthService {
   public async register(

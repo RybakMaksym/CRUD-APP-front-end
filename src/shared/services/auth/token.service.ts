@@ -2,7 +2,7 @@ import type { AxiosResponse } from 'axios';
 
 import { baseAxios } from '@/shared/api/interceptors';
 import { saveTokenToStorage } from '@/shared/services/auth/auth-token.service';
-import { IAuthResponse } from '@/shared/types/auth.types';
+import { IAuthResponse } from '@/shared/types/auth';
 
 class TokenService {
   public async getNewTokens(): Promise<AxiosResponse<IAuthResponse>> {

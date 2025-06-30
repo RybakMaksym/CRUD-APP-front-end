@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { PAGES_URL } from '@/shared/config/pages-url.config';
 import { isAxiosErrorLike } from '@/shared/helpers/is-axios-error-like';
 import { authService } from '@/shared/services/auth/auth.service';
-import { ILogInForm } from '@/shared/types/auth.types';
+import { ILogInForm } from '@/shared/types/auth';
 
 export const useLogIn = () => {
   const { push } = useRouter();

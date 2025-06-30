@@ -1,4 +1,4 @@
-import { IUser } from '@/shared/types/user.types';
+import { IUser } from '@/shared/types/user';
 
 export interface ILogInForm {
   email: string;
