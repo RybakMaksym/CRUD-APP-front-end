@@ -13,3 +13,10 @@ export const REGISTER_FORM_SCHEMA = Yup.object({
     }),
   isAdmin: Yup.boolean().default(false),
 });
+
+export const REGISTER_FORM_DEFAULT_VALUES = {
+  username: '',
+  email: '',
+  password: '',
+  isAdmin: false,
+};

@@ -11,3 +11,5 @@ export const LOG_IN_FORM_SCHEMA = Yup.object({
         'Password must not contain spaces or invalid characters like quotes or backslashes',
     }),
 });
+
+export const LOG_IN_FORM_DEFAULT_VALUES = { email: '', password: '' };
