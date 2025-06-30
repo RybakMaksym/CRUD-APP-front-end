@@ -1,29 +1,53 @@
 'use client';
 
 import { Form, Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomInput from '@/components/ui/CustomInput/CustomInput';
 import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import { useLogIn } from '@/hooks/auth/useLogIn';
+import { useAppDispatch } from '@/hooks/use-app-despatch';
 import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
 } from '@/lib/config/log-in-form';
 import { PAGES_URL } from '@/lib/config/pages-url';
+import { useLogInMutation } from '@/redux/auth/auth.api';
+import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.css';
 import { FormProps } from '@/types/form';
 
 function LogInForm(props: FormProps) {
-  const { onSubmit } = useLogIn();
+  const [logIn] = useLogInMutation();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleSubmit = async (
+    values: typeof LOG_IN_FORM_DEFAULT_VALUES,
+    { setStatus }: any,
+  ) => {
+    try {
+      const res = await logIn(values).unwrap();
+
+      dispatch(
+        setTokens({
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
+        }),
+      );
+      router.push(PAGES_URL.PROFILES);
+    } catch (error: any) {
+      setStatus(error?.data?.message || 'Login error');
+    }
+  };
 
   return (
     <Formik
       initialValues={LOG_IN_FORM_DEFAULT_VALUES}
       validationSchema={LOG_IN_FORM_SCHEMA}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       {({ status }) => (
         <Form className={styles.form}>

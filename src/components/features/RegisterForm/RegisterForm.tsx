@@ -1,6 +1,7 @@
 'use client';
 
 import { Form, Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomCheckbox from '@/components/ui/CustomCheckbox/CustomCheckbox';
@@ -8,23 +9,46 @@ import CustomInput from '@/components/ui/CustomInput/CustomInput';
 import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import { useRegister } from '@/hooks/auth/useRegister';
+import { useAppDispatch } from '@/hooks/use-app-despatch';
 import { PAGES_URL } from '@/lib/config/pages-url';
 import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
 } from '@/lib/config/register-form';
+import { useRegisterMutation } from '@/redux/auth/auth.api';
+import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.css';
 import { FormProps } from '@/types/form';
 
 function RegisterForm(props: FormProps) {
-  const { onSubmit } = useRegister();
+  const [register] = useRegisterMutation();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleSubmit = async (
+    values: typeof REGISTER_FORM_DEFAULT_VALUES,
+    { setStatus }: any,
+  ) => {
+    try {
+      const res = await register(values).unwrap();
+
+      dispatch(
+        setTokens({
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
+        }),
+      );
+      router.push(PAGES_URL.PROFILES);
+    } catch (error: any) {
+      setStatus(error?.data?.message || 'Registration error');
+    }
+  };
 
   return (
     <Formik
       initialValues={REGISTER_FORM_DEFAULT_VALUES}
       validationSchema={REGISTER_FORM_SCHEMA}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       {({ status }) => (
         <Form className={styles.form}>
