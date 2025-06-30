@@ -1,8 +1,9 @@
+import '@/styles/globals.css';
+import '@/styles/variables.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 
-import '@/styles/globals.css';
-import '@/styles/variables.css';
+import ClientProviders from '@/providers/ClientProviders';
 
 const primaryFont = Open_Sans({
   subsets: ['latin'],
@@ -18,12 +19,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${primaryFont.variable}`}>{children}</body>
+      <body className={`${primaryFont.variable}`}>
+        <ClientProviders>{children}</ClientProviders>
+      </body>
     </html>
   );
 }
