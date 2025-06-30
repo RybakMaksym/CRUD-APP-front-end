@@ -16,7 +16,7 @@ function CustomInput({ background = 'white', ...props }: CustomInputProps) {
     <div>
       <Input disableUnderline className={classes} {...props} {...field} />
       {meta.touched && meta.error ? (
-        <Paragraph variant="error">{meta.error}</Paragraph>
+        <Paragraph color="error">{meta.error}</Paragraph>
       ) : null}
     </div>
   );

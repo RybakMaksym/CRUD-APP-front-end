@@ -34,7 +34,7 @@ function RegisterForm() {
             <CustomCheckbox label="Is admin" name="isAdmin" />
           </div>
 
-          {status && <Paragraph variant="error">{status}</Paragraph>}
+          {status && <Paragraph color="error">{status}</Paragraph>}
 
           <CustomButton type="submit">Submit</CustomButton>
 

@@ -4,11 +4,11 @@ import styles from '@/shared/components/Paragraph/Paragraph.module.css';
 
 type ParagraphProps = {
   children: ReactNode;
-  variant?: 'white' | 'dark' | 'error';
+  color?: 'white' | 'dark' | 'error';
 };
 
-function Paragraph({ children, variant = 'white' }: ParagraphProps) {
-  const classes = `${styles.paragraph} ${styles[variant]}`;
+function Paragraph({ children, color = 'white' }: ParagraphProps) {
+  const classes = `${styles.paragraph} ${styles[color]}`;
 
   return <h1 className={classes}>{children}</h1>;
 }

@@ -25,7 +25,7 @@ function LogInForm() {
     >
       {({ status }) => (
         <Form className={styles.form}>
-          {status && <Paragraph variant="error">{status}</Paragraph>}
+          {status && <Paragraph color="error">{status}</Paragraph>}
 
           <CustomInput name="email" type="email" placeholder="email" />
           <CustomInput name="password" type="password" placeholder="password" />

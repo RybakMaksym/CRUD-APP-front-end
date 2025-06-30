@@ -34,7 +34,7 @@ function CustomCheckbox({ label, ...props }: CustomCheckboxProps) {
         <Paragraph>{label}</Paragraph>
       </div>
       {meta.touched && meta.error ? (
-        <Paragraph variant="error">{meta.error}</Paragraph>
+        <Paragraph color="error">{meta.error}</Paragraph>
       ) : null}
     </>
   );
