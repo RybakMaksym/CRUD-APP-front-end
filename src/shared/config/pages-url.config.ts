@@ -1,12 +1,8 @@
-class PAGES {
-  private root = '/';
+export enum PAGES_URL {
+  REGISTER = '/register',
+  LOG_IN = '/log-in',
 
-  REGISTER = `${this.root}register`;
-  LOG_IN = `${this.root}log-in`;
-
-  PROFILES = `${this.root}`;
-  USERS = `${this.root}users`;
-  DASHBOARD = `${this.root}dashboard`;
+  PROFILES = '/',
+  USERS = '/users',
+  DASHBOARD = '/dashboard',
 }
-
-export const PAGES_URL = new PAGES();
