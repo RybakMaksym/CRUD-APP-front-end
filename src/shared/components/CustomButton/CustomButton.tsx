@@ -3,14 +3,10 @@ import { ReactNode } from 'react';
 
 type CustomButtonProps = ButtonProps & {
   children: ReactNode;
-  customVariant?: 'red' | 'green';
+  background?: 'red' | 'green';
 };
 
-function CustomButton({
-  children,
-  customVariant,
-  ...props
-}: CustomButtonProps) {
+function CustomButton({ children, background, ...props }: CustomButtonProps) {
   return (
     <Button
       sx={{
@@ -25,11 +21,9 @@ function CustomButton({
         border: 'none',
         transition: 'background-color 0.3s ease',
         backgroundColor:
-          customVariant === 'green' ? 'var(--color-green)' : 'var(--color-red)',
+          background === 'green' ? 'var(--color-green)' : 'var(--color-red)',
         color:
-          customVariant === 'green'
-            ? 'var(--color-black)'
-            : 'var(--color-white)',
+          background === 'green' ? 'var(--color-black)' : 'var(--color-white)',
         '&:hover': {
           opacity: 0.9,
         },

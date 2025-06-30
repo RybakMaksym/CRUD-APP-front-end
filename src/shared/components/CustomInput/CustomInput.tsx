@@ -5,12 +5,12 @@ import styles from '@/shared/components/CustomInput/CustomInput.module.css';
 import Paragraph from '@/shared/components/Paragraph/Paragraph';
 
 type CustomInputProps = InputProps & {
-  customVariant?: 'white' | 'dark';
+  background?: 'white' | 'dark';
 };
 
-function CustomInput({ customVariant = 'white', ...props }: CustomInputProps) {
+function CustomInput({ background = 'white', ...props }: CustomInputProps) {
   const [field, meta] = useField(props);
-  const classes = `${styles.input} ${styles[customVariant]}`;
+  const classes = `${styles.input} ${styles[background]}`;
 
   return (
     <div>
