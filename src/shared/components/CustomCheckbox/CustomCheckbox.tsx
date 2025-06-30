@@ -1,6 +1,7 @@
 import { Checkbox, CheckboxProps } from '@mui/material';
 import { useField } from 'formik';
 
+import styles from '@/shared/components/CustomCheckbox/custom-checkbox.module.css';
 import Paragraph from '@/shared/components/Paragraph/Paragraph';
 
 type CustomCheckboxProps = CheckboxProps & {
@@ -12,19 +13,19 @@ function CustomCheckbox({ label, ...props }: CustomCheckboxProps) {
 
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+      <div className={styles.checkbox}>
         <Checkbox
           sx={{
-            color: '#AF253C',
+            color: 'var(--color-red)',
             '&:hover': {
-              backgroundColor: '#fff2f5',
+              backgroundColor: 'var(--color-white)',
               opacity: '0.1',
             },
             '&.Mui-checked': {
-              color: '#AF253C',
+              color: 'var(--color-red)',
             },
             '&.Mui-checked:hover': {
-              backgroundColor: '#fff2f5',
+              backgroundColor: 'var(--color-white)',
             },
           }}
           {...props}

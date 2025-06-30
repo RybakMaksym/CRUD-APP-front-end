@@ -1,24 +1,17 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
+import styles from '@/shared/components/CustomLink/CustomLink.module.css';
+
 type CustomLinkProps = {
   href: string;
   children: ReactNode;
 };
 
-function CustomLink(props: CustomLinkProps) {
+function CustomLink({ href, children }: CustomLinkProps) {
   return (
-    <Link
-      style={{
-        fontFamily: 'Open Sans',
-        fontWeight: '700',
-        fontSize: '21px',
-        color: '#AF253C',
-        textDecoration: 'none',
-      }}
-      href={props.href}
-    >
-      {props.children}
+    <Link className={styles.link} href={href}>
+      {children}
     </Link>
   );
 }

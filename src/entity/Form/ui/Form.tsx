@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import styles from '@/entity/Form/ui/Form.module.css';
 import Headline from '@/shared/components/Headline/Headline';
 
 type FormProps = {
@@ -7,21 +8,11 @@ type FormProps = {
   children: ReactNode;
 };
 
-function Form(props: FormProps) {
+function Form({ title, children }: FormProps) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: 'fit-content',
-        padding: '41px 46px 51px 46px',
-        backgroundColor: '#12130FEB',
-        borderRadius: '38px',
-      }}
-    >
-      <Headline>{props.title}</Headline>
-      {props.children}
+    <div className={styles.container}>
+      <Headline>{title}</Headline>
+      {children}
     </div>
   );
 }

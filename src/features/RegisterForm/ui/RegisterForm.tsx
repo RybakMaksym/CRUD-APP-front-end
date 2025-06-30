@@ -3,9 +3,10 @@
 import { Form, Formik } from 'formik';
 
 import { registerFormSchema } from '@/features/RegisterForm/config/register-form.schema';
+import styles from '@/features/RegisterForm/ui/RegisterForm.module.css';
 import CustomButton from '@/shared/components/CustomButton/CustomButton';
 import CustomCheckbox from '@/shared/components/CustomCheckbox/CustomCheckbox';
-import CustomImput from '@/shared/components/CustomImput/CustomImput';
+import CustomInput from '@/shared/components/CustomInput/CustomInput';
 import CustomLink from '@/shared/components/CustomLink/CustomLink';
 import Paragraph from '@/shared/components/Paragraph/Paragraph';
 import { PAGES_URL } from '@/shared/config/pages-url.config';
@@ -21,27 +22,19 @@ function RegisterForm() {
       onSubmit={onSubmit}
     >
       {({ status }) => (
-        <Form
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '30px',
-            marginTop: '30px',
-          }}
-        >
-          <CustomImput name="username" placeholder="username" />
-          <CustomImput name="email" type="email" placeholder="email" />
-          <CustomImput name="password" type="password" placeholder="password" />
-          <div style={{ alignSelf: 'start' }}>
+        <Form className={styles.form}>
+          <CustomInput name="username" placeholder="username" />
+          <CustomInput name="email" type="email" placeholder="email" />
+          <CustomInput name="password" type="password" placeholder="password" />
+
+          <div className={styles.checkboxWrapper}>
             <CustomCheckbox label="Is admin" name="isAdmin" />
           </div>
 
           {status && <Paragraph variant="error">{status}</Paragraph>}
 
-          <CustomButton type="submit" style={{ marginTop: '24px' }}>
-            Submit
-          </CustomButton>
+          <CustomButton type="submit">Submit</CustomButton>
+
           <Paragraph>
             Have an account?{' '}
             <CustomLink href={PAGES_URL.LOG_IN}>Sign in</CustomLink>

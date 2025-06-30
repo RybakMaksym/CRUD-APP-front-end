@@ -1,29 +1,16 @@
 import { ReactNode } from 'react';
 
-const variants = {
-  white: '#FFFFFF',
-  dark: '#242420',
-  error: '#FFC1CB',
-};
+import styles from '@/shared/components/Paragraph/Paragraph.module.css';
 
 type ParagraphProps = {
   children: ReactNode;
   variant?: 'white' | 'dark' | 'error';
 };
 
-function Paragraph(props: ParagraphProps) {
-  return (
-    <h1
-      style={{
-        fontFamily: 'Open Sans',
-        fontWeight: '400',
-        fontSize: '21px',
-        color: variants[props.variant ?? 'white'],
-      }}
-    >
-      {props.children}
-    </h1>
-  );
+function Paragraph({ children, variant = 'white' }: ParagraphProps) {
+  const classes = `${styles.paragraph} ${styles[variant]}`;
+
+  return <h1 className={classes}>{children}</h1>;
 }
 
 export default Paragraph;
