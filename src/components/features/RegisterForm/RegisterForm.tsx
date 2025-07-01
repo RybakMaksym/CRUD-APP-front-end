@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -18,6 +18,7 @@ import {
 import { useRegisterMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.css';
+import { IRegisterForm } from '@/types/auth';
 import { FormProps } from '@/types/form';
 
 function RegisterForm(props: FormProps) {
@@ -27,7 +28,7 @@ function RegisterForm(props: FormProps) {
 
   const handleSubmit = async (
     values: typeof REGISTER_FORM_DEFAULT_VALUES,
-    { setStatus }: any,
+    { setStatus }: FormikHelpers<IRegisterForm>,
   ) => {
     try {
       const res = await register(values).unwrap();

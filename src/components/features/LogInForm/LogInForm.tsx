@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -17,6 +17,7 @@ import { PAGES_URL } from '@/lib/config/pages-url';
 import { useLogInMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.css';
+import { ILogInForm } from '@/types/auth';
 import { FormProps } from '@/types/form';
 
 function LogInForm(props: FormProps) {
@@ -26,7 +27,7 @@ function LogInForm(props: FormProps) {
 
   const handleSubmit = async (
     values: typeof LOG_IN_FORM_DEFAULT_VALUES,
-    { setStatus }: any,
+    { setStatus }: FormikHelpers<ILogInForm>,
   ) => {
     try {
       const res = await logIn(values).unwrap();
