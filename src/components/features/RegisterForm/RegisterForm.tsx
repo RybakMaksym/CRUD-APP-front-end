@@ -9,7 +9,7 @@ import CustomInput from '@/components/ui/CustomInput/CustomInput';
 import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import { useAppDispatch } from '@/hooks/use-app-despatch';
+import { useAppDispatch } from '@/hooks/use-app-dipatch';
 import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
