@@ -1,3 +1,9 @@
+import ProtectedRoute from '@/components/guards/ProtectedRoute';
+
 export default function Home() {
-  return <></>;
+  return (
+    <ProtectedRoute>
+      <></>
+    </ProtectedRoute>
+  );
 }
