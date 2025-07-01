@@ -9,11 +9,10 @@ export const authApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-      let token = (getState() as RootState).auth.accessToken;
+      const state = getState() as RootState;
+      let token = state.auth.accessToken;
 
-      if (!token) {
-        token = (getState() as RootState).auth.refreshToken;
-      }
+      token ??= state.auth.refreshToken;
 
       if (token) headers.set('Authorization', `Bearer ${token}`);
 
