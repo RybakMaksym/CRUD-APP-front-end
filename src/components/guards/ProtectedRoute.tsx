@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 
 import { useAppSelector } from '@/hooks/use-app-selector';
