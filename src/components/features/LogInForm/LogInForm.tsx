@@ -12,7 +12,7 @@ import { useAppDispatch } from '@/hooks/use-app-despatch';
 import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
-} from '@/lib/config/log-in-form';
+} from '@/lib/config/auth-forms';
 import { PAGES_URL } from '@/lib/config/pages-url';
 import { useLogInMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
