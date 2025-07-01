@@ -10,13 +10,11 @@ export interface IRegisterForm extends ILogInForm {
   isAdmin: boolean;
 }
 
-export interface IAuthResponse {
-  user: IUser;
-  accessToken: string;
-  refreshToken: string;
-}
-
 export interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
+}
+
+export interface IAuthResponse extends AuthState {
+  user: IUser;
 }
