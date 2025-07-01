@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from '@/components/ui/Headline/Headline.module.css';
+import styles from '@/components/ui/Headline/Headline.module.scss';
 
 type HeadlineProps = {
   children: ReactNode;

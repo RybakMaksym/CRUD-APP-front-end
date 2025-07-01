@@ -1,5 +1,5 @@
-import '@/styles/globals.css';
-import '@/styles/variables.css';
+import '@/styles/globals.scss';
+import '@/styles/variables.scss';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 

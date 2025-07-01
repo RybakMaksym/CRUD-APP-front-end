@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from '@/styles/auth-pages.module.css';
+import styles from '@/styles/auth-pages.module.scss';
 
 type layoutProps = {
   children: ReactNode;

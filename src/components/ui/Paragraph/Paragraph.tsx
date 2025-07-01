@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from '@/components/ui/Paragraph/Paragraph.module.css';
+import styles from '@/components/ui/Paragraph/Paragraph.module.scss';
 
 type ParagraphProps = {
   children: ReactNode;

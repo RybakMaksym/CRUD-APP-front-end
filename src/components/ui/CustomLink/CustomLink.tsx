@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import styles from '@/components/ui/CustomLink/CustomLink.module.css';
+import styles from '@/components/ui/CustomLink/CustomLink.module.scss';
 
 type CustomLinkProps = {
   href: string;

@@ -17,7 +17,7 @@ import {
 } from '@/lib/config/register-form';
 import { useRegisterMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
-import styles from '@/styles/form.module.css';
+import styles from '@/styles/form.module.scss';
 import { IRegisterForm } from '@/types/auth';
 import { FormProps } from '@/types/form';
 

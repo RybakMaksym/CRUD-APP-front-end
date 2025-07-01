@@ -1,7 +1,7 @@
 import { Input, InputProps } from '@mui/material';
 import { useField } from 'formik';
 
-import styles from '@/components/ui/CustomInput/CustomInput.module.css';
+import styles from '@/components/ui/CustomInput/CustomInput.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 type CustomInputProps = InputProps & {

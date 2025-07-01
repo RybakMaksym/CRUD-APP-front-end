@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxProps } from '@mui/material';
 import { useField } from 'formik';
 
-import styles from '@/components/ui/CustomCheckbox/custom-checkbox.module.css';
+import styles from '@/components/ui/CustomCheckbox/custom-checkbox.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 type CustomCheckboxProps = CheckboxProps & {
