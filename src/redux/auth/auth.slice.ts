@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthState } from '@/types/auth';
+import { ITokens } from '@/types/auth';
 
-const initialState: AuthState = {
+const initialState: ITokens = {
   accessToken: null,
   refreshToken: null,
 };
@@ -11,7 +11,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setTokens(state, action: PayloadAction<AuthState>) {
+    setTokens(state, action: PayloadAction<ITokens>) {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
