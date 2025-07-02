@@ -9,6 +9,7 @@ import CustomInput from '@/components/ui/CustomInput/CustomInput';
 import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import PictureInput from '@/components/ui/PictureInput/PictureInput';
 import { PAGES_URL } from '@/enums/pages-url';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
 import {
@@ -31,7 +32,15 @@ function RegisterForm(props: FormProps) {
     { setStatus }: FormikHelpers<IRegisterForm>,
   ) => {
     try {
-      const res = await register(values).unwrap();
+      const formData = new FormData();
+      formData.append('username', values.username);
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+      formData.append('isAdmin', String(values.isAdmin));
+      if (values.avatar) {
+        formData.append('avatar', values.avatar);
+      }
+      const res = await register(formData).unwrap();
 
       dispatch(
         setTokens({
@@ -51,9 +60,16 @@ function RegisterForm(props: FormProps) {
       validationSchema={REGISTER_FORM_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ status }) => (
+      {({ status, setFieldValue }) => (
         <Form className={styles.form}>
           <Headline>{props.title}</Headline>
+
+          <PictureInput
+            onChange={(event) =>
+              setFieldValue('avatar', event.currentTarget.files?.[0])
+            }
+          />
+
           <CustomInput name="username" placeholder="username" />
           <CustomInput name="email" type="email" placeholder="email" />
           <CustomInput name="password" type="password" placeholder="password" />

@@ -1,17 +1,17 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/base-query';
-import { IAuthResponse, ILogInForm, IRegisterForm } from '@/types/auth';
+import { IAuthResponse, ILogInForm } from '@/types/auth';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery,
   endpoints: (builder) => ({
-    register: builder.mutation<IAuthResponse, IRegisterForm>({
-      query: (body) => ({
+    register: builder.mutation<IAuthResponse, FormData>({
+      query: (formData) => ({
         url: '/auth/register',
         method: 'POST',
-        body,
+        body: formData,
       }),
     }),
     logIn: builder.mutation<IAuthResponse, ILogInForm>({

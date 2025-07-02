@@ -8,6 +8,7 @@ export interface ILogInForm {
 export interface IRegisterForm extends ILogInForm {
   username: string;
   isAdmin: boolean;
+  avatar?: File | null;
 }
 
 export interface ITokens {
