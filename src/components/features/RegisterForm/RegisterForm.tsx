@@ -27,7 +27,7 @@ function RegisterForm(props: FormProps) {
   const router = useRouter();
 
   const handleSubmit = async (
-    values: typeof REGISTER_FORM_DEFAULT_VALUES,
+    values: IRegisterForm,
     { setStatus }: FormikHelpers<IRegisterForm>,
   ) => {
     try {

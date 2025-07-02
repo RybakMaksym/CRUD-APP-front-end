@@ -26,7 +26,7 @@ function LogInForm(props: FormProps) {
   const router = useRouter();
 
   const handleSubmit = async (
-    values: typeof LOG_IN_FORM_DEFAULT_VALUES,
+    values: ILogInForm,
     { setStatus }: FormikHelpers<ILogInForm>,
   ) => {
     try {
