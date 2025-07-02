@@ -1,13 +1,18 @@
 import * as Yup from 'yup';
 
+import {
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+} from '@/lib/constants/password-validation';
+
 const EMAIL_VALIDATION = Yup.string()
   .email('Invalid email')
   .required('Required');
 
 const PASSWORD_VALIDATION = Yup.string()
   .required('Required')
-  .min(8, 'Password must be at least 8 characters')
-  .max(32, 'Password must be at most 32 characters')
+  .min(MIN_PASSWORD_LENGTH, 'Password must be at least 8 characters')
+  .max(MAX_PASSWORD_LENGTH, 'Password must be at most 32 characters')
   .matches(/^[^\s'"`\\]+$/, {
     message:
       'Password must not contain spaces or invalid characters like quotes or backslashes',
