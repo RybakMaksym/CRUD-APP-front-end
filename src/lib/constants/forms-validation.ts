@@ -5,6 +5,7 @@ import {
   MIN_PASSWORD_LENGTH,
   PASSWORD_INVALID_CHARACTARS,
 } from '@/lib/constants/password-validation';
+import { ILogInForm, IRegisterForm } from '@/types/auth';
 
 const EMAIL_VALIDATION = Yup.string()
   .email('Invalid email')
@@ -33,9 +34,12 @@ export const REGISTER_FORM_SCHEMA = AUTH_SCHEMA.concat(
   }),
 );
 
-export const LOG_IN_FORM_DEFAULT_VALUES = { email: '', password: '' };
+export const LOG_IN_FORM_DEFAULT_VALUES: ILogInForm = {
+  email: '',
+  password: '',
+};
 
-export const REGISTER_FORM_DEFAULT_VALUES = {
+export const REGISTER_FORM_DEFAULT_VALUES: IRegisterForm = {
   ...LOG_IN_FORM_DEFAULT_VALUES,
   username: '',
   isAdmin: false,
