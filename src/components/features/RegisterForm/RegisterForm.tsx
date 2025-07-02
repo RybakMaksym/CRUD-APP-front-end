@@ -10,11 +10,11 @@ import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { PAGES_URL } from '@/lib/config/pages-url';
 import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
-} from '@/lib/config/auth-forms';
-import { PAGES_URL } from '@/lib/config/pages-url';
+} from '@/lib/constants/forms-validation';
 import { useRegisterMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.scss';

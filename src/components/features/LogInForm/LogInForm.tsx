@@ -9,11 +9,11 @@ import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { PAGES_URL } from '@/lib/config/pages-url';
 import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
-} from '@/lib/config/auth-forms';
-import { PAGES_URL } from '@/lib/config/pages-url';
+} from '@/lib/constants/forms-validation';
 import { useLogInMutation } from '@/redux/auth/auth.api';
 import { setTokens } from '@/redux/auth/auth.slice';
 import styles from '@/styles/form.module.scss';
