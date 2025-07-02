@@ -10,9 +10,7 @@ export const authApi = createApi({
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      let token = state.auth.accessToken;
-
-      token ??= state.auth.refreshToken;
+      const token = state.auth.accessToken ?? state.auth.refreshToken;
 
       if (token) headers.set('Authorization', `Bearer ${token}`);
 
