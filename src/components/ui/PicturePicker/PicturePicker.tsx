@@ -5,7 +5,11 @@ import { useState } from 'react';
 
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/PicturePicker/PicturePicker.module.scss';
-import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
+import {
+  ALLOWED_IMAGE_TYPES,
+  DEFAULT_AVATAR,
+  MAX_FILE_SIZE_MB,
+} from '@/lib/constants/avatar';
 
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -18,8 +22,21 @@ function PicturePicker({ onChange }: PictureInputProps) {
     const file = event.target.files?.[0];
 
     if (file) {
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+        alert('Only JPEG, PNG, or WEBP images are allowed');
+
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        alert(`Image size must not exceed ${MAX_FILE_SIZE_MB}MB`);
+
+        return;
+      }
+
       setPreview(URL.createObjectURL(file));
     }
+
     onChange(event);
   };
 
