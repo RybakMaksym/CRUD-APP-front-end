@@ -37,6 +37,7 @@ function RegisterForm(props: FormProps) {
       formData.append('email', values.email);
       formData.append('password', values.password);
       formData.append('isAdmin', String(values.isAdmin));
+
       if (values.avatar) {
         formData.append('avatar', values.avatar);
       }
