@@ -16,8 +16,8 @@ import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
 } from '@/lib/constants/forms-validation';
-import { useRegisterMutation } from '@/redux/auth/auth-api';
 import { setTokens } from '@/redux/auth/auth-slice';
+import { useRegisterMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
 import { IRegisterForm } from '@/types/auth';
 import { FormProps } from '@/types/form';
@@ -33,7 +33,7 @@ function RegisterForm(props: FormProps) {
   ) => {
     try {
       const formData = new FormData();
-      formData.append('username', values.username);
+      formData.append('username', String(values.username));
       formData.append('email', values.email);
       formData.append('password', values.password);
       formData.append('isAdmin', String(values.isAdmin));

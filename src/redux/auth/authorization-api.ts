@@ -1,11 +1,13 @@
+import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { baseQuery } from '@/redux/base-query';
 import { IAuthResponse, ILogInForm } from '@/types/auth';
 
-export const authApi = createApi({
+export const authorizationApi = createApi({
   reducerPath: 'authApi',
-  baseQuery,
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  }),
   endpoints: (builder) => ({
     register: builder.mutation<IAuthResponse, FormData>({
       query: (formData) => ({
@@ -24,4 +26,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useRegisterMutation, useLogInMutation } = authApi;
+export const { useRegisterMutation, useLogInMutation } = authorizationApi;

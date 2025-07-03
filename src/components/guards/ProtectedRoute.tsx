@@ -1,27 +1,17 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
-import { useAppSelector } from '@/hooks/use-app-selector';
+import { useAuthRedirect } from '@/hooks/use-auth-redirect';
 
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 function ProtectedRoute(props: ProtectedRouteProps) {
-  const router = useRouter();
-  const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const accessToken = useAuthRedirect();
 
-  useEffect(() => {
-    if (!accessToken) {
-      router.replace('/log-in');
-    }
-  }, [accessToken, router]);
-
-  if (!accessToken) {
-    return null;
-  }
+  if (!accessToken) return null;
 
   return <>{props.children}</>;
 }
