@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
-  PASSWORD_INVALID_CHARACTARS,
 } from '@/lib/constants/password-validation';
+import { QUOTATION_MARK_PATTERN } from '@/lib/constants/quotation-mark-pattern';
 import { ILogInForm, IRegisterForm } from '@/types/auth';
 
 const EMAIL_VALIDATION = Yup.string()
@@ -21,7 +21,7 @@ const PASSWORD_VALIDATION = Yup.string()
     MAX_PASSWORD_LENGTH,
     `Password must be at most ${MAX_PASSWORD_LENGTH} characters`,
   )
-  .matches(PASSWORD_INVALID_CHARACTARS, {
+  .matches(QUOTATION_MARK_PATTERN, {
     message:
       'Password must not contain spaces or invalid characters like quotes or backslashes',
   });
