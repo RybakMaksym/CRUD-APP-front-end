@@ -67,7 +67,7 @@ function RegisterForm(props: FormProps) {
 
           <PictureInput
             onChange={(event) =>
-              setFieldValue('avatar', event.currentTarget.files?.[0])
+              setFieldValue('avatar', event.target.files?.[0])
             }
           />
 

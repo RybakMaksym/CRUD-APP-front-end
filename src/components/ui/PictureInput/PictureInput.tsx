@@ -16,6 +16,7 @@ function PictureInput({ onChange }: PictureInputProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
       setPreview(URL.createObjectURL(file));
     }
