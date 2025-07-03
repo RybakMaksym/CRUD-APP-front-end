@@ -14,8 +14,8 @@ import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
 } from '@/lib/constants/forms-validation';
-import { useLogInMutation } from '@/redux/auth/auth.api';
-import { setTokens } from '@/redux/auth/auth.slice';
+import { useLogInMutation } from '@/redux/auth/auth-api';
+import { setTokens } from '@/redux/auth/auth-slice';
 import styles from '@/styles/form.module.scss';
 import { ILogInForm } from '@/types/auth';
 import { FormProps } from '@/types/form';

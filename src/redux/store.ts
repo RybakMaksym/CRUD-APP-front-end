@@ -11,8 +11,8 @@ import {
 import persistStore from 'redux-persist/es/persistStore';
 import storage from 'redux-persist/lib/storage';
 
-import { authApi } from '@/redux/auth/auth.api';
-import { authReducer } from '@/redux/auth/auth.slice';
+import { authApi } from '@/redux/auth/auth-api';
+import { authReducer } from '@/redux/auth/auth-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,

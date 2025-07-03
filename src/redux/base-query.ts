@@ -1,7 +1,7 @@
 import { BaseQueryFn, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { Mutex } from 'async-mutex';
 
-import { logout, setTokens } from '@/redux/auth/auth.slice';
+import { logout, setTokens } from '@/redux/auth/auth-slice';
 import { RootState } from '@/redux/store';
 
 const mutex = new Mutex();
@@ -42,6 +42,7 @@ export const baseQuery: BaseQueryFn<any, unknown, unknown> = async (
 
         if (!refreshToken) {
           api.dispatch(logout());
+
           return result;
         }
 
