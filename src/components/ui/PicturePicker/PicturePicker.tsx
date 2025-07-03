@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import styles from '@/components/ui/PictureInput/PictureInput.module.scss';
+import styles from '@/components/ui/PicturePicker/PicturePicker.module.scss';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
 
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function PictureInput({ onChange }: PictureInputProps) {
+function PicturePicker({ onChange }: PictureInputProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,4 +45,4 @@ function PictureInput({ onChange }: PictureInputProps) {
   );
 }
 
-export default PictureInput;
+export default PicturePicker;

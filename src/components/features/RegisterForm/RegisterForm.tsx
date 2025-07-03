@@ -9,7 +9,7 @@ import CustomInput from '@/components/ui/CustomInput/CustomInput';
 import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import PictureInput from '@/components/ui/PictureInput/PictureInput';
+import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { PAGES_URL } from '@/enums/pages-url';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
 import {
@@ -65,7 +65,7 @@ function RegisterForm(props: FormProps) {
         <Form className={styles.form}>
           <Headline>{props.title}</Headline>
 
-          <PictureInput
+          <PicturePicker
             onChange={(event) =>
               setFieldValue('avatar', event.target.files?.[0])
             }
