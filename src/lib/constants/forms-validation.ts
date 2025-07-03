@@ -13,8 +13,14 @@ const EMAIL_VALIDATION = Yup.string()
 
 const PASSWORD_VALIDATION = Yup.string()
   .required('Required')
-  .min(MIN_PASSWORD_LENGTH, 'Password must be at least 8 characters')
-  .max(MAX_PASSWORD_LENGTH, 'Password must be at most 32 characters')
+  .min(
+    MIN_PASSWORD_LENGTH,
+    `Password must be at least ${MIN_PASSWORD_LENGTH} characters`,
+  )
+  .max(
+    MAX_PASSWORD_LENGTH,
+    `Password must be at most ${MAX_PASSWORD_LENGTH} characters`,
+  )
   .matches(PASSWORD_INVALID_CHARACTARS, {
     message:
       'Password must not contain spaces or invalid characters like quotes or backslashes',
