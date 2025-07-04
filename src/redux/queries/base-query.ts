@@ -5,7 +5,8 @@ import {
 } from '@reduxjs/toolkit/query';
 import { Mutex } from 'async-mutex';
 
-import { logout, setTokens } from '@/redux/auth/auth-slice';
+import { fullLogOut } from '@/redux/actions/full-log-out';
+import { setTokens } from '@/redux/auth/auth-slice';
 import { queryWithAccessToken } from '@/redux/queries/access-token-query';
 import { queryWithRefreshToken } from '@/redux/queries/refresh-token-query';
 import { RootState } from '@/redux/store';
@@ -33,7 +34,7 @@ export const baseQuery: BaseQueryFn<
         const refreshToken = (api.getState() as RootState).auth.refreshToken;
 
         if (!refreshToken) {
-          api.dispatch(logout());
+          await api.dispatch(fullLogOut());
 
           return result;
         }
@@ -54,7 +55,7 @@ export const baseQuery: BaseQueryFn<
 
           result = await queryWithAccessToken(args, api, extraOptions);
         } else {
-          api.dispatch(logout());
+          await api.dispatch(fullLogOut());
         }
       } finally {
         release();

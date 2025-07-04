@@ -16,6 +16,7 @@ import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
 } from '@/lib/constants/forms-validation';
+import { fullLogIn } from '@/redux/actions/full-log-in';
 import { useRegisterMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
 import { IRegisterForm } from '@/types/auth';
@@ -42,13 +43,7 @@ function RegisterForm(props: AuthFormProps) {
       }
 
       const res = await register(formData).unwrap();
-
-      dispatch(
-        setTokens({
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        }),
-      );
+      await dispatch(fullLogIn(res));
       router.push(PAGES_URL.PROFILES);
     } catch (error: any) {
       setStatus(error?.data?.message || 'Registration error');

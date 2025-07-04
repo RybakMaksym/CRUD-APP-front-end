@@ -6,11 +6,14 @@ import styles from '@/components/ui/CustomLink/CustomLink.module.scss';
 type CustomLinkProps = {
   href: string;
   children: ReactNode;
+  linkVariant?: 'white' | 'red';
 };
 
-function CustomLink({ href, children }: CustomLinkProps) {
+function CustomLink({ href, linkVariant = 'red', children }: CustomLinkProps) {
+  const classes = `${styles.link} ${styles[linkVariant]}`;
+
   return (
-    <Link className={styles.link} href={href}>
+    <Link className={classes} href={href}>
       {children}
     </Link>
   );

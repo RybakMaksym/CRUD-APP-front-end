@@ -1,9 +1,12 @@
+import SideBar from '@/components/features/SideBar/SideBar';
 import ProtectedRoute from '@/components/guards/ProtectedRoute';
 
-export default function Home() {
+function page() {
   return (
     <ProtectedRoute>
-      <></>
+      <SideBar />
     </ProtectedRoute>
   );
 }
+
+export default page;

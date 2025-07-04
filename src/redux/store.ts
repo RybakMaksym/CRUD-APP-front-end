@@ -14,17 +14,19 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from '@/redux/auth/auth-slice';
 import { authorizationApi } from '@/redux/auth/authorization-api';
 import { logOutApi } from '@/redux/auth/log-out-api';
+import { userReducer } from '@/redux/user/user-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   [authorizationApi.reducerPath]: authorizationApi.reducer,
   [logOutApi.reducerPath]: logOutApi.reducer,
+  user: userReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

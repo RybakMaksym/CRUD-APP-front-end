@@ -2,7 +2,7 @@ export enum PAGES_URL {
   REGISTER = '/register',
   LOG_IN = '/log-in',
 
-  PROFILES = '/',
+  PROFILES = '/profiles',
   USERS = '/users',
   DASHBOARD = '/dashboard',
 }

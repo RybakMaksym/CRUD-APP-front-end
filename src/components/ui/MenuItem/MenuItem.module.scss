@@ -1,0 +1,10 @@
+.item {
+  padding: 21px 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.active {
+  background-color: var(--color-red);
+}

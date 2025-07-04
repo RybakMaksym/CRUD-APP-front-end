@@ -5,4 +5,7 @@ export interface IUser {
   username: string;
   email: string;
   role: Role;
+  avatarUrl?: string;
 }
+
+export type IUserState = Partial<IUser>;
