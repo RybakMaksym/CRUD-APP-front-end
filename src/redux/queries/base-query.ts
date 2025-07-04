@@ -34,7 +34,7 @@ export const baseQuery: BaseQueryFn<
         const refreshToken = (api.getState() as RootState).auth.refreshToken;
 
         if (!refreshToken) {
-          await api.dispatch(fullLogOut());
+          api.dispatch(fullLogOut());
 
           return result;
         }
@@ -55,7 +55,7 @@ export const baseQuery: BaseQueryFn<
 
           result = await queryWithAccessToken(args, api, extraOptions);
         } else {
-          await api.dispatch(fullLogOut());
+          api.dispatch(fullLogOut());
         }
       } finally {
         release();

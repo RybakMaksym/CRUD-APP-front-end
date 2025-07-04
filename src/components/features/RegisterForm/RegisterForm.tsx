@@ -43,7 +43,7 @@ function RegisterForm(props: AuthFormProps) {
       }
 
       const res = await register(formData).unwrap();
-      await dispatch(fullLogIn(res));
+      dispatch(fullLogIn(res));
       router.push(PAGES_URL.PROFILES);
     } catch (error: any) {
       setStatus(error?.data?.message || 'Registration error');

@@ -31,7 +31,7 @@ function LogInForm(props: AuthFormProps) {
   ) => {
     try {
       const res = await logIn(values).unwrap();
-      await dispatch(fullLogIn(res));
+      dispatch(fullLogIn(res));
       router.push(PAGES_URL.PROFILES);
     } catch (error: any) {
       setStatus(error?.data?.message || 'Login error');
