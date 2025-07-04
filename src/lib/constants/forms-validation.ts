@@ -4,7 +4,7 @@ import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from '@/lib/constants/password-validation';
-import { QUOTATION_MARK_PATTERN } from '@/lib/constants/quotation-mark-pattern';
+import { QUOTATION_MARK_PATTERN } from '@/lib/constants/patterns';
 import { ILogInForm, IRegisterForm } from '@/types/auth';
 
 const EMAIL_VALIDATION = Yup.string()

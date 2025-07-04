@@ -14,13 +14,12 @@ import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,
 } from '@/lib/constants/forms-validation';
-import { setTokens } from '@/redux/auth/auth-slice';
 import { useLogInMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
 import { ILogInForm } from '@/types/auth';
-import { FormProps } from '@/types/form';
+import { AuthFormProps } from '@/types/auth-form';
 
-function LogInForm(props: FormProps) {
+function LogInForm(props: AuthFormProps) {
   const [logIn] = useLogInMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();

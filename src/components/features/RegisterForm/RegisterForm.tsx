@@ -16,13 +16,12 @@ import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,
 } from '@/lib/constants/forms-validation';
-import { setTokens } from '@/redux/auth/auth-slice';
 import { useRegisterMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
 import { IRegisterForm } from '@/types/auth';
-import { FormProps } from '@/types/form';
+import { AuthFormProps } from '@/types/auth-form';
 
-function RegisterForm(props: FormProps) {
+function RegisterForm(props: AuthFormProps) {
   const [register] = useRegisterMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -41,6 +40,7 @@ function RegisterForm(props: FormProps) {
       if (values.avatar) {
         formData.append('avatar', values.avatar);
       }
+
       const res = await register(formData).unwrap();
 
       dispatch(
