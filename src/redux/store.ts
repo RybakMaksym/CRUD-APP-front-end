@@ -14,13 +14,15 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from '@/redux/auth/auth-slice';
 import { authorizationApi } from '@/redux/auth/authorization-api';
 import { logOutApi } from '@/redux/auth/log-out-api';
+import { userApi } from '@/redux/user/user-api';
 import { userReducer } from '@/redux/user/user-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  user: userReducer,
   [authorizationApi.reducerPath]: authorizationApi.reducer,
   [logOutApi.reducerPath]: logOutApi.reducer,
-  user: userReducer,
+  [userApi.reducerPath]: userApi.reducer,
 });
 
 const persistConfig = {
@@ -40,7 +42,8 @@ export const store = configureStore({
       },
     })
       .concat(authorizationApi.middleware)
-      .concat(logOutApi.middleware),
+      .concat(logOutApi.middleware)
+      .concat(userApi.middleware),
 });
 
 export const persistor = persistStore(store);

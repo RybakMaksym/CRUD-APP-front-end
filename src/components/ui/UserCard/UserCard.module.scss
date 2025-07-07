@@ -1,0 +1,14 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  padding: 14px 15px 23px 23px;
+  background-color: var(--color-black);
+  border-radius: 15px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
