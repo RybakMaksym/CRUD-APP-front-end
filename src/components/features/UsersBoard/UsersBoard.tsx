@@ -21,8 +21,8 @@ function UsersBoard() {
     <div className={styles.board}>
       <Headline color="dark">Users</Headline>
       <div className={styles.users}>
-        {users?.map((user, index) => (
-          <UserCard key={index} user={user} />
+        {users?.map((user) => (
+          <UserCard key={user._id} user={user} />
         ))}
       </div>
     </div>

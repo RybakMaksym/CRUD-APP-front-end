@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-
+import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/UserProfile/UserProfile.module.scss';
 import { useAppSelector } from '@/hooks/use-app-selector';
@@ -14,12 +13,11 @@ function UserProfile() {
 
   return (
     <div className={styles.profile}>
-      <Image
-        src={user.avatarUrl || DEFAULT_AVATAR}
+      <Avatar
+        src={user.avatarUrl ?? DEFAULT_AVATAR}
         alt="User avatar"
         width={100}
         height={100}
-        className={styles.avatar}
       />
       <Paragraph>{user.username}</Paragraph>
     </div>
