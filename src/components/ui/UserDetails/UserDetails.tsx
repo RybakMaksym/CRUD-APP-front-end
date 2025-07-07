@@ -1,3 +1,4 @@
+import DeleteUserButton from '@/components/features/DeleteUserButton/DeleteUserButton';
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/UserDetails/UserDetails.module.scss';
@@ -22,7 +23,9 @@ function UserDetails({ user }: UserDetailsProps) {
       <Paragraph size="21px" color="error">
         {user.role}
       </Paragraph>
-      <div className={styles.actions}></div>
+      <div className={styles.actions}>
+        <DeleteUserButton userId={user._id} />
+      </div>
     </div>
   );
 }

@@ -9,7 +9,6 @@ import { useUsersListQuery } from '@/redux/user/user-api';
 
 function UsersBoard() {
   const { data: users, isLoading, isError } = useUsersListQuery();
-  console.log(users);
 
   if (isLoading) return <Loader />;
 

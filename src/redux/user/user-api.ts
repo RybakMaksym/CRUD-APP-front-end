@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
+import { IMessageResponse } from '@/types/messages';
 import { IUser } from '@/types/user';
 
 export const userApi = createApi({
@@ -19,7 +20,17 @@ export const userApi = createApi({
         method: 'GET',
       }),
     }),
+    deleteUserById: builder.mutation<IMessageResponse, string>({
+      query: (id) => ({
+        url: `/user/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useUsersListQuery, useGetUserByIdQuery } = userApi;
+export const {
+  useUsersListQuery,
+  useGetUserByIdQuery,
+  useDeleteUserByIdMutation,
+} = userApi;
