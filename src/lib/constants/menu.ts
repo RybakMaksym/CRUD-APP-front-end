@@ -1,6 +1,8 @@
+import { PAGES_URL } from '@/enums/pages-url';
+
 export const USER_LINKS = [
   {
-    path: '/profiles',
+    path: PAGES_URL.PROFILES,
     label: 'Profiles',
     iconUrl: '/assets/icons/profiles.svg',
   },
@@ -8,9 +10,9 @@ export const USER_LINKS = [
 
 export const ADMIN_LINKS = [
   ...USER_LINKS,
-  { path: '/users', label: 'Users', iconUrl: '/assets/icons/users.svg' },
+  { path: PAGES_URL.USERS, label: 'Users', iconUrl: '/assets/icons/users.svg' },
   {
-    path: '/dashboard',
+    path: PAGES_URL.DASHBOARD,
     label: 'Dashboard',
     iconUrl: '/assets/icons/dashboard.svg',
   },

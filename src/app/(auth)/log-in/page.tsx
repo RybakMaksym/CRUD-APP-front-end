@@ -1,7 +1,7 @@
 import LogInForm from '@/components/features/LogInForm/LogInForm';
 
-function page() {
+function LogInPage() {
   return <LogInForm title="Sign-in" />;
 }
 
-export default page;
+export default LogInPage;

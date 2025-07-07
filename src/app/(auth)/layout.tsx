@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 import styles from '@/styles/auth-pages.module.scss';
 
-type layoutProps = {
+type AuthFormsLayoutProps = {
   children: ReactNode;
 };
 
-function layout(props: layoutProps) {
+function AuthFormsLayout(props: AuthFormsLayoutProps) {
   return <div className={styles.container}>{props.children}</div>;
 }
 
-export default layout;
+export default AuthFormsLayout;

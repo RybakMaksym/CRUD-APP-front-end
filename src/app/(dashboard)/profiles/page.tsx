@@ -1,5 +1,5 @@
-function page() {
+function ProfilesPage() {
   return <></>;
 }
 
-export default page;
+export default ProfilesPage;

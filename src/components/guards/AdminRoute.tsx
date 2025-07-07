@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 
+import { PAGES_URL } from '@/enums/pages-url';
+import { Role } from '@/enums/role';
 import { useAppSelector } from '@/hooks/use-app-selector';
 
 type ProtectedRouteProps = {
@@ -14,12 +16,12 @@ function AdminRoute(props: ProtectedRouteProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (role !== 'admin') {
-      router.replace('/profiles');
+    if (role !== Role.ADMIN) {
+      router.replace(PAGES_URL.NOT_FROUND);
     }
   }, [role, router]);
 
-  if (role !== 'admin') return null;
+  if (role !== Role.ADMIN) return null;
 
   return <>{props.children}</>;
 }

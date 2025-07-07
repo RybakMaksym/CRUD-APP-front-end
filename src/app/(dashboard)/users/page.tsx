@@ -1,6 +1,6 @@
 import AdminRoute from '@/components/guards/AdminRoute';
 
-function page() {
+function UsersPage() {
   return (
     <AdminRoute>
       <></>
@@ -8,4 +8,4 @@ function page() {
   );
 }
 
-export default page;
+export default UsersPage;
