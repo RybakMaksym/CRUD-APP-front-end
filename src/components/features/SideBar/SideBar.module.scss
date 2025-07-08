@@ -1,0 +1,22 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 320px;
+  width: fit-content;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 35px 0px 28px 0px;
+  background-color: var(--color-black);
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 85px;
+}
+
+.buttom {
+  padding: 0px 28px;
+}

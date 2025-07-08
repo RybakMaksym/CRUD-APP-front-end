@@ -1,0 +1,21 @@
+.input {
+  min-width: 489px;
+  padding: 19px 19px 22px 21px;
+  margin-bottom: 10px;
+  font-family: var(--primary-font), sans-serif;
+  font-weight: 400;
+  font-size: var(--font-body);
+  border: none;
+  outline: none;
+  border-radius: 20px;
+}
+
+.white {
+  color: var(--color-black);
+  background-color: var(--color-white);
+}
+
+.dark {
+  color: var(--color-white);
+  background-color: var(--color-black);
+}

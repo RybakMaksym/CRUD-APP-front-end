@@ -1,0 +1,21 @@
+.paragraph {
+  font-family: var(--primary-font), sans-serif;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.dark {
+  color: var(--color-black);
+}
+
+.error {
+  color: var(--color-red);
+}
+
+.size21 {
+  font-size: var(--font-body);
+}
+
+.size18 {
+  font-size: var(--font-sub-body);
+}

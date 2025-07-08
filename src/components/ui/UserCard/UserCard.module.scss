@@ -1,0 +1,12 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  padding: 14px 15px 23px 23px;
+  height: fit-content;
+  background-color: var(--color-black);
+  opacity: .97;
+  border-radius: 15px;
+  cursor: pointer;
+}
