@@ -20,6 +20,17 @@ export const userApi = createApi({
         method: 'GET',
       }),
     }),
+    updateUserById: builder.mutation<
+      IMessageResponse,
+      { id: string; formData: FormData }
+    >({
+      query: ({ id, formData }) => ({
+        url: `/user/update/${id}`,
+        method: 'PATCH',
+        body: formData,
+      }),
+    }),
+
     deleteUserById: builder.mutation<IMessageResponse, string>({
       query: (id) => ({
         url: `/user/${id}`,
@@ -32,5 +43,6 @@ export const userApi = createApi({
 export const {
   useUsersListQuery,
   useGetUserByIdQuery,
+  useUpdateUserByIdMutation,
   useDeleteUserByIdMutation,
 } = userApi;

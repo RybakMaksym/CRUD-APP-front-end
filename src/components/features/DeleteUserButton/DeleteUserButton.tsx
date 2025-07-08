@@ -36,7 +36,7 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
 
   return (
     <>
-      <CustomButton color="error" onClick={() => setOpen(true)}>
+      <CustomButton background="red" onClick={() => setOpen(true)}>
         Delete
       </CustomButton>
 

@@ -13,10 +13,11 @@ import {
 
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  prewiew?: string;
 };
 
-function PicturePicker({ onChange }: PictureInputProps) {
-  const [preview, setPreview] = useState<string | null>(null);
+function PicturePicker({ onChange, prewiew }: PictureInputProps) {
+  const [preview, setPreview] = useState<string | null>(prewiew ?? null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
