@@ -6,13 +6,14 @@ import { ReactNode, useEffect } from 'react';
 import { PAGES_URL } from '@/enums/pages-url';
 import { Role } from '@/enums/role';
 import { useAppSelector } from '@/hooks/use-app-selector';
+import userSelectors from '@/redux/user/user-selectors';
 
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 function AdminRoute(props: ProtectedRouteProps) {
-  const role = useAppSelector((state) => state.user.role);
+  const role = useAppSelector(userSelectors.getUserRole);
   const router = useRouter();
 
   useEffect(() => {

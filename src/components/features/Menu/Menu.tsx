@@ -4,9 +4,10 @@ import MenuItem from '@/components/ui/MenuItem/MenuItem';
 import { Role } from '@/enums/role';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { ADMIN_LINKS, USER_LINKS } from '@/lib/constants/menu';
+import userSelectors from '@/redux/user/user-selectors';
 
 const Menu = () => {
-  const role = useAppSelector((state) => state.user.role);
+  const role = useAppSelector(userSelectors.getUserRole);
 
   const links = role === Role.ADMIN ? ADMIN_LINKS : USER_LINKS;
 
