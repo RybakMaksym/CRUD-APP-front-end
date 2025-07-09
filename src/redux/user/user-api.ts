@@ -30,7 +30,6 @@ export const userApi = createApi({
         body: formData,
       }),
     }),
-
     deleteUserById: builder.mutation<IMessageResponse, string>({
       query: (id) => ({
         url: `/user/${id}`,
