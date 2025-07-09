@@ -5,10 +5,29 @@
   gap: 30px;
   width: fit-content;
   padding: 41px 46px 51px 46px;
-  background-color: var(--color-black);
   border-radius: 38px;
+  opacity: 0.98;
+}
+
+.dark {
+  background-color: var(--color-black);
+}
+
+.white {
+  background-color: var(--color-white);
 }
 
 .checkboxWrapper {
   align-self: start;
+}
+
+.link {
+  display: flex;
+  gap: 17px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
 }

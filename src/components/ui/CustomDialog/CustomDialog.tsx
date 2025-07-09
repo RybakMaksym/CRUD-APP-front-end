@@ -2,26 +2,32 @@
 
 import { Dialog, DialogActions } from '@mui/material';
 
-import styles from '@/components/features/DeleteUserDialog/DeleteUserDialog.module.scss';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
+import styles from '@/components/ui/CustomDialog/CustomDialog.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
-type DeleteUserDialogProps = {
-  open: boolean;
+type CustomDialogProps = {
+  title: string;
+  isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
 };
 
-function DeleteUserDialog({ open, onClose, onConfirm }: DeleteUserDialogProps) {
+function CustomDialog({
+  title,
+  isOpen,
+  onClose,
+  onConfirm,
+}: CustomDialogProps) {
   return (
     <Dialog
-      open={open}
+      open={isOpen}
       onClose={onClose}
       PaperProps={{
         className: styles.dialog,
       }}
     >
-      <Paragraph color="dark">Are you sure you want to delete user?</Paragraph>
+      <Paragraph color="dark">{title}</Paragraph>
       <DialogActions className={styles.actions}>
         <CustomButton background="green" onClick={onConfirm}>
           Yes
@@ -34,4 +40,4 @@ function DeleteUserDialog({ open, onClose, onConfirm }: DeleteUserDialogProps) {
   );
 }
 
-export default DeleteUserDialog;
+export default CustomDialog;

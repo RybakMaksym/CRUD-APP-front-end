@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import DeleteUserDialog from '@/components/features/DeleteUserDialog/DeleteUserDialog';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
+import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
 import { PAGES_URL } from '@/enums/pages-url';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
 import { useDeleteUserByIdMutation, userApi } from '@/redux/user/user-api';
@@ -17,7 +17,7 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
   const [deleteUser] = useDeleteUserByIdMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
     const res = await deleteUser(userId);
@@ -31,18 +31,19 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
       router.replace(PAGES_URL.USERS);
     }
 
-    setOpen(false);
+    setIsOpen(false);
   };
 
   return (
     <>
-      <CustomButton background="red" onClick={() => setOpen(true)}>
+      <CustomButton background="red" onClick={() => setIsOpen(true)}>
         Delete
       </CustomButton>
 
-      <DeleteUserDialog
-        open={open}
-        onClose={() => setOpen(false)}
+      <CustomDialog
+        title="Are you sure you want to delete user?"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
       />
     </>

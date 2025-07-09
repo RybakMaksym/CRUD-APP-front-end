@@ -4,13 +4,12 @@
   align-items: center;
   gap: 60px;
   padding: 85px 93px 71px 93px;
-  background-color: var(--color-white);
+  background-color: var(--color-white) !important;
   border-radius: 25px !important;
   overflow: hidden;
 }
 
 .actions {
-  padding: 16px;
   display: flex;
   justify-content: center;
   gap: 16px;

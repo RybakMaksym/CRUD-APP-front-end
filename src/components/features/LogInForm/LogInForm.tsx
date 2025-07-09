@@ -45,7 +45,7 @@ function LogInForm(props: AuthFormProps) {
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form className={styles.form}>
+        <Form className={`${styles.form} ${styles.dark}`}>
           <Headline>{props.title}</Headline>
           {status && <Paragraph color="error">{status}</Paragraph>}
 
@@ -55,8 +55,10 @@ function LogInForm(props: AuthFormProps) {
           <CustomButton type="submit">Submit</CustomButton>
 
           <Paragraph>
-            {"Don't have an account?"}
-            <CustomLink href={PAGES_URL.REGISTER}>Sign up</CustomLink>
+            <div className={styles.link}>
+              {"Don't have an account?"}
+              <CustomLink href={PAGES_URL.REGISTER}>Sign up</CustomLink>
+            </div>
           </Paragraph>
         </Form>
       )}

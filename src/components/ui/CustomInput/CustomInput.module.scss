@@ -16,6 +16,6 @@
 }
 
 .dark {
-  color: var(--color-white);
+  color: var(--color-white) !important;
   background-color: var(--color-black);
 }

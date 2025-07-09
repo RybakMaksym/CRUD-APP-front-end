@@ -14,10 +14,15 @@ import {
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   prewiew?: string;
+  labalColor?: 'white' | 'dark';
 };
 
-function PicturePicker({ onChange, prewiew }: PictureInputProps) {
-  const [preview, setPreview] = useState<string | null>(prewiew ?? null);
+function PicturePicker({
+  onChange,
+  prewiew,
+  labalColor = 'white',
+}: PictureInputProps) {
+  const [preview, setPreview] = useState<string | undefined>(prewiew);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -52,7 +57,7 @@ function PicturePicker({ onChange, prewiew }: PictureInputProps) {
           onChange={handleChange}
         />
       </label>
-      <Paragraph>Choose picture</Paragraph>
+      <Paragraph color={labalColor}>Choose picture</Paragraph>
     </div>
   );
 }

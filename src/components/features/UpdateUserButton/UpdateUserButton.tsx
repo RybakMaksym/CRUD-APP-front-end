@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 
-import UpdateUserDialog from '@/components/features/UpdateUserDialog/DeleteUserDialog';
+import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
+import CustomModal from '@/components/ui/CustomModal/CustomModal';
 import { IUser } from '@/types/user';
 
 type UpdateUserButtonProps = {
@@ -11,22 +12,19 @@ type UpdateUserButtonProps = {
 };
 
 function UpdateUserButton({ user }: UpdateUserButtonProps) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const closeForm = () => () => setOpen(false);
+  const closeForm = () => setIsOpen(false);
 
   return (
     <>
-      <CustomButton background="green" onClick={() => setOpen(true)}>
+      <CustomButton background="green" onClick={() => setIsOpen(true)}>
         Update
       </CustomButton>
 
-      <UpdateUserDialog
-        user={user}
-        open={open}
-        onClose={closeForm}
-        onConfirm={closeForm}
-      />
+      <CustomModal isOpen={isOpen}>
+        <UpdateUserForm user={user} onConfirm={closeForm} onClose={closeForm} />
+      </CustomModal>
     </>
   );
 }
