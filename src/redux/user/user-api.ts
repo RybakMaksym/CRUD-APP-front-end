@@ -14,6 +14,12 @@ export const userApi = createApi({
         method: 'GET',
       }),
     }),
+    searchUsers: builder.query<IUser[], { query: string }>({
+      query: ({ query }) => ({
+        url: `/user/search?query=${query}`,
+        method: 'GET',
+      }),
+    }),
     getUserById: builder.query<IUser, string>({
       query: (id) => ({
         url: `/user/${id}`,
@@ -41,6 +47,7 @@ export const userApi = createApi({
 
 export const {
   useUsersListQuery,
+  useSearchUsersQuery,
   useGetUserByIdQuery,
   useUpdateUserByIdMutation,
   useDeleteUserByIdMutation,
