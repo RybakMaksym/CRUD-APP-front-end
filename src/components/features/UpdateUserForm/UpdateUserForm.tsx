@@ -10,9 +10,13 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { PAGES_URL } from '@/enums/pages-url';
 import { Role } from '@/enums/role';
+import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
 import { UPDATE_USER_FORM_SCHEMA } from '@/lib/constants/forms-validation';
 import { useUpdateUserByIdMutation } from '@/redux/user/user-api';
+import userSelectors from '@/redux/user/user-selectors';
+import { setUser } from '@/redux/user/user-slice';
 import styles from '@/styles/form.module.scss';
 import { IUser, UpdateUserFormValues } from '@/types/user';
 
@@ -25,6 +29,9 @@ type UpdateUserFormProps = {
 function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
   const [updateUser] = useUpdateUserByIdMutation();
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
+  const adminId = useAppSelector(userSelectors.getUserId);
 
   const initialValues: UpdateUserFormValues = {
     avatar: undefined,
@@ -55,6 +62,10 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
       if (res) {
         onConfirm();
         router.push(PAGES_URL.USERS);
+
+        if (user.id === adminId) {
+          dispatch(setUser(res));
+        }
       }
     } catch (error: any) {
       setStatus(error?.data?.message || 'Registration error');

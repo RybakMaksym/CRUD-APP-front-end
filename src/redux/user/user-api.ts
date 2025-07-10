@@ -34,24 +34,27 @@ export const userApi = createApi({
         url: `/user/${id}`,
         method: 'GET',
       }),
+      providesTags: [{ type: 'User', id: 'ID' }],
     }),
-    updateUserById: builder.mutation<
-      IMessageResponse,
-      { id: string; formData: FormData }
-    >({
-      query: ({ id, formData }) => ({
-        url: `/user/update/${id}`,
-        method: 'PATCH',
-        body: formData,
-      }),
-    }),
+    updateUserById: builder.mutation<IUser, { id: string; formData: FormData }>(
+      {
+        query: ({ id, formData }) => ({
+          url: `/user/update/${id}`,
+          method: 'PATCH',
+          body: formData,
+        }),
+        invalidatesTags: () => [
+          { type: 'User', id: 'LIST' },
+          { type: 'User', id: 'ID' },
+        ],
+      },
+    ),
     deleteUserById: builder.mutation<IMessageResponse, string>({
       query: (id) => ({
         url: `/user/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_result, _error, id) => [
-        { type: 'User', id },
+      invalidatesTags: () => [
         { type: 'User', id: 'LIST' },
         { type: 'User', id: 'TOTAL' },
       ],
