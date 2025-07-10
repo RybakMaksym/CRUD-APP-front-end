@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUserState } from '@/types/user';
 
 const initialState: IUserState = {
-  _id: undefined,
+  id: undefined,
   username: undefined,
   email: undefined,
   role: undefined,
@@ -15,7 +15,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<IUserState>) {
-      state._id = action.payload._id;
+      state.id = action.payload.id;
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.role = action.payload.role;

@@ -77,7 +77,7 @@ function UsersBoard() {
       </div>
       <div className={styles.users}>
         {users?.map((user) => (
-          <UserCard key={user._id} user={user} />
+          <UserCard key={user.id} user={user} />
         ))}
       </div>
       {!activeSearch && totalPages > 1 && (

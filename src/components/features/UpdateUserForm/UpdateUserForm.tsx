@@ -48,7 +48,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
       }
 
       const res = await updateUser({
-        id: user._id,
+        id: user.id,
         formData,
       }).unwrap();
 
