@@ -1,24 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '@/components/features/UsersBoard/UsersBoard.module.scss';
+import CustomPagination from '@/components/ui/CustomPagination/CustomPagination';
 import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
 import UserCard from '@/components/ui/UserCard/UserCard';
-import { useSearchUsersQuery, useUsersListQuery } from '@/redux/user/user-api';
+import { USERS_PAGE_LIMIT } from '@/lib/constants/user';
+import {
+  useSearchUsersQuery,
+  useUsersListQuery,
+  useUsersTotalQuery,
+} from '@/redux/user/user-api';
 
 function UsersBoard() {
+  const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState(false);
+
+  const { data: totalUsers } = useUsersTotalQuery(undefined, {
+    skip: activeSearch,
+  });
+
+  const totalPages = totalUsers ? Math.ceil(totalUsers / USERS_PAGE_LIMIT) : 1;
 
   const {
     data: allUsers,
     isLoading: isLoadingAll,
     isError: isErrorAll,
-  } = useUsersListQuery(undefined, { skip: activeSearch });
+  } = useUsersListQuery(
+    { page, limit: USERS_PAGE_LIMIT },
+    { skip: activeSearch },
+  );
 
   const {
     data: searchedUsers,
@@ -31,6 +47,12 @@ function UsersBoard() {
       setActiveSearch(!!searchQuery.trim());
     }
   };
+
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setActiveSearch(false);
+    }
+  }, [searchQuery]);
 
   const users = activeSearch ? searchedUsers : allUsers;
   const isLoading = activeSearch ? isLoadingSearch : isLoadingAll;
@@ -58,6 +80,13 @@ function UsersBoard() {
           <UserCard key={user._id} user={user} />
         ))}
       </div>
+      {!activeSearch && totalPages > 1 && (
+        <CustomPagination
+          totalPages={totalPages}
+          page={page}
+          onChange={(_, value) => setPage(value)}
+        />
+      )}
     </div>
   );
 }

@@ -8,9 +8,15 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery,
   endpoints: (builder) => ({
-    usersList: builder.query<IUser[], void>({
+    usersList: builder.query<IUser[], { page: number; limit: number }>({
+      query: ({ page, limit }) => ({
+        url: `/user/list?page=${page}&limit=${limit}`,
+        method: 'GET',
+      }),
+    }),
+    usersTotal: builder.query<number, void>({
       query: () => ({
-        url: '/user/list',
+        url: `/user/total`,
         method: 'GET',
       }),
     }),
@@ -47,6 +53,7 @@ export const userApi = createApi({
 
 export const {
   useUsersListQuery,
+  useUsersTotalQuery,
   useSearchUsersQuery,
   useGetUserByIdQuery,
   useUpdateUserByIdMutation,
