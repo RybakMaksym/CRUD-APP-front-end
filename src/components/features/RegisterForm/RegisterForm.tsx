@@ -57,7 +57,7 @@ function RegisterForm(props: AuthFormProps) {
       onSubmit={handleSubmit}
     >
       {({ status, setFieldValue }) => (
-        <Form className={styles.form}>
+        <Form className={`${styles.form} ${styles.dark}`}>
           <Headline>{props.title}</Headline>
 
           <PicturePicker
@@ -79,8 +79,10 @@ function RegisterForm(props: AuthFormProps) {
           <CustomButton type="submit">Submit</CustomButton>
 
           <Paragraph>
-            Have an account?{' '}
-            <CustomLink href={PAGES_URL.LOG_IN}>Sign in</CustomLink>
+            <div className={styles.link}>
+              Have an account?
+              <CustomLink href={PAGES_URL.LOG_IN}>Sign in</CustomLink>
+            </div>
           </Paragraph>
         </Form>
       )}

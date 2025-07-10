@@ -6,9 +6,14 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 type CustomCheckboxProps = CheckboxProps & {
   label: string;
+  labelColor?: 'white' | 'dark';
 };
 
-function CustomCheckbox({ label, ...props }: CustomCheckboxProps) {
+function CustomCheckbox({
+  label,
+  labelColor = 'white',
+  ...props
+}: CustomCheckboxProps) {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
 
   return (
@@ -31,7 +36,7 @@ function CustomCheckbox({ label, ...props }: CustomCheckboxProps) {
           {...props}
           {...field}
         />
-        <Paragraph>{label}</Paragraph>
+        <Paragraph color={labelColor}>{label}</Paragraph>
       </div>
       {meta.touched && meta.error ? (
         <Paragraph color="error">{meta.error}</Paragraph>

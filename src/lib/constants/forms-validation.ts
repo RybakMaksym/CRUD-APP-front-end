@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 
+import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
 import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
@@ -31,14 +32,25 @@ const AUTH_SCHEMA = Yup.object({
   password: PASSWORD_VALIDATION,
 });
 
+const USERNAME_VALIDATION = Yup.string().required('Required');
+
+const IS_ADMIN_VALIDATION = Yup.boolean().default(false);
+
 export const LOG_IN_FORM_SCHEMA = AUTH_SCHEMA;
 
 export const REGISTER_FORM_SCHEMA = AUTH_SCHEMA.concat(
   Yup.object({
-    username: Yup.string().required('Required'),
-    isAdmin: Yup.boolean().default(false),
+    username: USERNAME_VALIDATION,
+    isAdmin: IS_ADMIN_VALIDATION,
   }),
 );
+
+export const UPDATE_USER_FORM_SCHEMA = Yup.object({
+  email: EMAIL_VALIDATION,
+  username: USERNAME_VALIDATION,
+  isAdmin: IS_ADMIN_VALIDATION,
+  avatar: Yup.string().default(DEFAULT_AVATAR),
+});
 
 export const LOG_IN_FORM_DEFAULT_VALUES: ILogInForm = {
   email: '',

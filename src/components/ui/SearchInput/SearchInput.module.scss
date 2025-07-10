@@ -1,0 +1,22 @@
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 4px 19px;
+  background-color: var(--color-black);
+  border: none;
+  outline: none;
+  border-radius: 15px;
+}
+
+.icon {
+  color: var(--color-white) !important;
+}
+
+.input {
+  min-width: 30px;
+  color: var(--color-white) !important;
+  font-family: var(--primary-font), sans-serif;
+  font-weight: 400;
+  font-size: var(--font-body);
+}

@@ -14,10 +14,26 @@ export const userApi = createApi({
         method: 'GET',
       }),
     }),
+    searchUsers: builder.query<IUser[], { query: string }>({
+      query: ({ query }) => ({
+        url: `/user/search?query=${query}`,
+        method: 'GET',
+      }),
+    }),
     getUserById: builder.query<IUser, string>({
       query: (id) => ({
         url: `/user/${id}`,
         method: 'GET',
+      }),
+    }),
+    updateUserById: builder.mutation<
+      IMessageResponse,
+      { id: string; formData: FormData }
+    >({
+      query: ({ id, formData }) => ({
+        url: `/user/update/${id}`,
+        method: 'PATCH',
+        body: formData,
       }),
     }),
     deleteUserById: builder.mutation<IMessageResponse, string>({
@@ -31,6 +47,8 @@ export const userApi = createApi({
 
 export const {
   useUsersListQuery,
+  useSearchUsersQuery,
   useGetUserByIdQuery,
+  useUpdateUserByIdMutation,
   useDeleteUserByIdMutation,
 } = userApi;

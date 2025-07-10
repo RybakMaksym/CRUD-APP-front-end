@@ -9,7 +9,7 @@ function DashboardLayout({ children }: { children: ReactNode }) {
     <ProtectedRoute>
       <div className={styles.dashboard}>
         <SideBar />
-        {children}
+        <div className={styles.main}>{children}</div>
       </div>
     </ProtectedRoute>
   );
