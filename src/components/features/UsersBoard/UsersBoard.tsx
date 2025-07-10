@@ -28,11 +28,7 @@ function UsersBoard() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (searchQuery.trim()) {
-        setActiveSearch(true);
-      } else {
-        setActiveSearch(false);
-      }
+      setActiveSearch(!!searchQuery.trim());
     }
   };
 
