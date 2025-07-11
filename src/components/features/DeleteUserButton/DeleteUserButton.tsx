@@ -33,6 +33,7 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
       } else {
         router.push(PAGES_URL.USERS);
       }
+
       setIsOpen(false);
     }
   };

@@ -66,7 +66,7 @@ const eslintConfig = [
         'error',
         { blankLine: 'always', prev: '*', next: 'return' },
         { blankLine: 'always', prev: '*', next: 'if' },
-        { blankLine: 'any', prev: 'if', next: 'if' },
+        { blankLine: 'always', prev: 'if', next: '*' },
       ],
     },
   },
