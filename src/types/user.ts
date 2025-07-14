@@ -2,7 +2,7 @@ import { Role } from '@/enums/role';
 import { IRegisterForm } from '@/types/auth';
 
 export interface IUser {
-  _id: string;
+  id: string;
   username: string;
   email: string;
   role: Role;

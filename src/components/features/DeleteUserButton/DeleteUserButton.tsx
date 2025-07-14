@@ -7,7 +7,10 @@ import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
 import { PAGES_URL } from '@/enums/pages-url';
 import { useAppDispatch } from '@/hooks/use-app-dipatch';
-import { useDeleteUserByIdMutation, userApi } from '@/redux/user/user-api';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { fullLogOut } from '@/redux/actions/full-log-out';
+import { useDeleteUserByIdMutation } from '@/redux/user/user-api';
+import userSelectors from '@/redux/user/user-selectors';
 
 type DeleteUserButtonProps = {
   userId: string;
@@ -15,23 +18,24 @@ type DeleteUserButtonProps = {
 
 function DeleteUserButton({ userId }: DeleteUserButtonProps) {
   const [deleteUser] = useDeleteUserByIdMutation();
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const adminId = useAppSelector(userSelectors.getUserId);
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
     const res = await deleteUser(userId);
 
     if (res.data) {
-      dispatch(
-        userApi.util.updateQueryData('usersList', undefined, (draft) =>
-          draft.filter((user) => user._id !== userId),
-        ),
-      );
-      router.replace(PAGES_URL.USERS);
-    }
+      if (userId === adminId) {
+        dispatch(fullLogOut());
+        router.push(PAGES_URL.LOG_IN);
+      } else {
+        router.push(PAGES_URL.USERS);
+      }
 
-    setIsOpen(false);
+      setIsOpen(false);
+    }
   };
 
   return (

@@ -26,7 +26,7 @@ function UserDetails({ user }: UserDetailsProps) {
       </Paragraph>
       <div className={styles.actions}>
         <UpdateUserButton user={user} />
-        <DeleteUserButton userId={user._id} />
+        <DeleteUserButton userId={user.id} />
       </div>
     </div>
   );

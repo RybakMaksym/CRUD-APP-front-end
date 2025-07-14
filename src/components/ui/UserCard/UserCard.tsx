@@ -17,7 +17,7 @@ function UserCard({ user }: UserCardProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`${PAGES_URL.USERS}/${user._id}`);
+    router.push(`${PAGES_URL.USERS}/${user.id}`);
   };
 
   return (

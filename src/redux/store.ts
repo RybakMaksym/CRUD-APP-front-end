@@ -44,6 +44,7 @@ export const store = configureStore({
       .concat(authorizationApi.middleware)
       .concat(logOutApi.middleware)
       .concat(userApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);
