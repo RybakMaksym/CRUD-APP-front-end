@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
-import { UpdateUserByIdParams } from '@/redux/user/user-types';
+import { IUpdateUserByIdParams } from '@/redux/user/user-types';
 import { IMessageResponse } from '@/types/messages';
 import { IPagination, ISearch } from '@/types/navigation';
 import { IUser } from '@/types/user';
@@ -38,7 +38,7 @@ export const userApi = createApi({
       }),
       providesTags: [{ type: 'User', id: 'ID' }],
     }),
-    updateUserById: builder.mutation<IUser, UpdateUserByIdParams>({
+    updateUserById: builder.mutation<IUser, IUpdateUserByIdParams>({
       query: ({ id, formData }) => ({
         url: `/user/update/${id}`,
         method: 'PATCH',

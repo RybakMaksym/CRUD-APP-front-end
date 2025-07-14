@@ -1,1 +1,4 @@
-export type UpdateUserByIdParams = { id: string; formData: FormData };
+export interface IUpdateUserByIdParams {
+  id: string;
+  formData: FormData;
+}
