@@ -21,9 +21,10 @@ function UsersBoard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState(false);
 
-  const { data: totalUsers } = useUsersTotalQuery(undefined, {
+  const { data } = useUsersTotalQuery(undefined, {
     skip: activeSearch,
   });
+  const totalUsers = data?.total;
 
   const totalPages = totalUsers ? Math.ceil(totalUsers / USERS_PAGE_LIMIT) : 1;
 

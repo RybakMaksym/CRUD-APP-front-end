@@ -4,6 +4,7 @@ import { baseQuery } from '@/redux/queries/base-query';
 import { IUpdateUserByIdParams } from '@/redux/user/user-types';
 import { IMessageResponse } from '@/types/messages';
 import { IPagination, ISearch } from '@/types/navigation';
+import { ITotalResponse } from '@/types/response';
 import { IUser } from '@/types/user';
 
 export const userApi = createApi({
@@ -18,7 +19,7 @@ export const userApi = createApi({
       }),
       providesTags: [{ type: 'User', id: 'LIST' }],
     }),
-    usersTotal: builder.query<number, void>({
+    usersTotal: builder.query<ITotalResponse, void>({
       query: () => ({
         url: `/user/total`,
         method: 'GET',
