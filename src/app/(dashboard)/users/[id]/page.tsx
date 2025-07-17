@@ -6,8 +6,8 @@ import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import UserDetails from '@/components/ui/UserDetails/UserDetails';
 import { useGetUserByIdQuery } from '@/redux/user/user-api';
+import styles from '@/styles/profiles-users-page.module.scss';
 import pageStyles from '@/styles/user-details-page.module.scss';
-import styles from '@/styles/users-page.module.scss';
 
 function UserDetailsPage() {
   const { id } = useParams();
