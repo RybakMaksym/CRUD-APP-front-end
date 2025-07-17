@@ -9,3 +9,5 @@ export interface IProfile {
   city: string;
   avatarUrl?: string;
 }
+
+export type CreateProfileForm = Omit<IProfile, 'id'>;
