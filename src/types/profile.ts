@@ -1,4 +1,4 @@
-import { Gender } from '@/enums/gender';
+import type { Gender } from '@/enums/gender';
 
 export interface IProfile {
   id: string;

@@ -1,5 +1,6 @@
 import { DialogActions } from '@mui/material';
-import { Form, Formik, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -18,7 +19,7 @@ import { useUpdateUserByIdMutation } from '@/redux/user/user-api';
 import userSelectors from '@/redux/user/user-selectors';
 import { setUser } from '@/redux/user/user-slice';
 import styles from '@/styles/form.module.scss';
-import { IUser, UpdateUserFormValues } from '@/types/user';
+import type { IUser, UpdateUserFormValues } from '@/types/user';
 
 type UpdateUserFormProps = {
   user: IUser;

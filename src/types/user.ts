@@ -1,5 +1,5 @@
-import { Role } from '@/enums/role';
-import { IRegisterForm } from '@/types/auth';
+import type { Role } from '@/enums/role';
+import type { IRegisterForm } from '@/types/auth';
 
 export interface IUser {
   id: string;

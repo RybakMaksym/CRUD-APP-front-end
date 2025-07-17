@@ -1,11 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
-import { IMessageResponse } from '@/types/messages';
-import { IPagination, ISearch } from '@/types/navigation';
-import { IUpdateFormWithIdParams } from '@/types/request';
-import { ITotalResponse } from '@/types/response';
-import { IUser } from '@/types/user';
+import type { IMessageResponse } from '@/types/messages';
+import type { IPagination, ISearch } from '@/types/navigation';
+import type { IUpdateFormWithIdParams } from '@/types/request';
+import type { ITotalResponse } from '@/types/response';
+import type { IUser } from '@/types/user';
 
 export const userApi = createApi({
   reducerPath: 'userApi',

@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { IAuthResponse, ILogInForm } from '@/types/auth';
+import type { IAuthResponse, ILogInForm } from '@/types/auth';
 
 export const authorizationApi = createApi({
   reducerPath: 'authApi',

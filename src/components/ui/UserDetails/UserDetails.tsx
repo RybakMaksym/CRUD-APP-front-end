@@ -4,7 +4,7 @@ import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/UserDetails/UserDetails.module.scss';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { IUser } from '@/types/user';
+import type { IUser } from '@/types/user';
 
 type UserDetailsProps = {
   user: IUser;

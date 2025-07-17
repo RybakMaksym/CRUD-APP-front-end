@@ -1,7 +1,7 @@
 import { setTokens } from '@/redux/auth/auth-slice';
-import { AppDispatch } from '@/redux/store';
+import type { AppDispatch } from '@/redux/store';
 import { setUser } from '@/redux/user/user-slice';
-import { IAuthResponse } from '@/types/auth';
+import type { IAuthResponse } from '@/types/auth';
 
 export const fullLogIn = (data: IAuthResponse) => (dispatch: AppDispatch) => {
   dispatch(

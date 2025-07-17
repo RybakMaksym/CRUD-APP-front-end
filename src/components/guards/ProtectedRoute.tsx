@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { useAuthRedirect } from '@/hooks/use-auth-redirect';
 

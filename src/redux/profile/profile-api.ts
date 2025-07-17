@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
-import { IMessageResponse } from '@/types/messages';
-import { IProfile } from '@/types/profile';
-import { IUpdateFormWithIdParams } from '@/types/request';
+import type { IMessageResponse } from '@/types/messages';
+import type { IProfile } from '@/types/profile';
+import type { IUpdateFormWithIdParams } from '@/types/request';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',

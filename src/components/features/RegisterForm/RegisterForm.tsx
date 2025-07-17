@@ -1,6 +1,7 @@
 'use client';
 
-import { Form, Formik, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -19,8 +20,8 @@ import {
 import { fullLogIn } from '@/redux/actions/full-log-in';
 import { useRegisterMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
-import { IRegisterForm } from '@/types/auth';
-import { AuthFormProps } from '@/types/auth-form';
+import type { IRegisterForm } from '@/types/auth';
+import type { AuthFormProps } from '@/types/auth-form';
 
 function RegisterForm(props: AuthFormProps) {
   const [register] = useRegisterMutation();

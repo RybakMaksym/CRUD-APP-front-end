@@ -1,4 +1,5 @@
-import { Input, InputProps } from '@mui/material';
+import type { InputProps } from '@mui/material';
+import { Input } from '@mui/material';
 import Image from 'next/image';
 
 import styles from '@/components/ui/SearchInput/SearchInput.module.scss';

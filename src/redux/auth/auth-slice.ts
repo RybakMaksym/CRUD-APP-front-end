@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { ITokens } from '@/types/auth';
+import type { ITokens } from '@/types/auth';
 
 const initialState: ITokens = {
   accessToken: null,
