@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 
 import { PAGES_URL } from '@/enums/pages-url';
 import { useAppSelector } from '@/hooks/use-app-selector';
