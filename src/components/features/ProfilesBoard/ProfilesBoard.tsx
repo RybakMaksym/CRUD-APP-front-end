@@ -1,5 +1,6 @@
 'use client';
 
+import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
 import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
@@ -8,7 +9,13 @@ import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import { useMyProfilesQuery } from '@/redux/profile/profile-api';
 
 function ProfilesBoard() {
-  const { data: profiles, isLoading, isError } = useMyProfilesQuery();
+  const {
+    data: profiles,
+    isLoading,
+    isError,
+  } = useMyProfilesQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   if (isLoading) return <Loader />;
 
@@ -23,6 +30,7 @@ function ProfilesBoard() {
         {profiles?.map((profile) => (
           <ProfileCard key={profile.id} profile={profile} />
         ))}
+        <CreateProfileButton />
       </div>
     </div>
   );
