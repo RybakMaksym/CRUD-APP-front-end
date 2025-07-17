@@ -1,7 +1,7 @@
 'use client';
 
 import { Modal } from '@mui/material';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import styles from '@/components/ui/CustomModal/CustomModal.module.scss';
 

@@ -68,6 +68,13 @@ const eslintConfig = [
         { blankLine: 'always', prev: '*', next: 'if' },
         { blankLine: 'always', prev: 'if', next: '*' },
       ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          disallowTypeAnnotations: false,
+        },
+      ],
     },
   },
 ];

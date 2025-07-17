@@ -1,4 +1,5 @@
-import { Checkbox, CheckboxProps } from '@mui/material';
+import type { CheckboxProps } from '@mui/material';
+import { Checkbox } from '@mui/material';
 import { useField } from 'formik';
 
 import styles from '@/components/ui/CustomCheckbox/CustomCheckbox.module.scss';

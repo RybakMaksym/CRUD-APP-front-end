@@ -1,4 +1,5 @@
-import { Input, InputProps } from '@mui/material';
+import type { InputProps } from '@mui/material';
+import { Input } from '@mui/material';
 import { useField } from 'formik';
 
 import styles from '@/components/ui/CustomInput/CustomInput.module.scss';

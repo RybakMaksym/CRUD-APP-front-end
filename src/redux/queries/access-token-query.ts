@@ -1,6 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 
-import { RootState } from '@/redux/store';
+import type { RootState } from '@/redux/store';
 
 export const queryWithAccessToken = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',

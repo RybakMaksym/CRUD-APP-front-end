@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IUserState } from '@/types/user';
+import type { IUserState } from '@/types/user';
 
 const initialState: IUserState = {
   id: undefined,

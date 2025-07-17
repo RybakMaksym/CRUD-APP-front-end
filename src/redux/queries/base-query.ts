@@ -1,4 +1,4 @@
-import {
+import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
@@ -9,8 +9,8 @@ import { fullLogOut } from '@/redux/actions/full-log-out';
 import { setTokens } from '@/redux/auth/auth-slice';
 import { queryWithAccessToken } from '@/redux/queries/access-token-query';
 import { queryWithRefreshToken } from '@/redux/queries/refresh-token-query';
-import { RootState } from '@/redux/store';
-import { ITokens } from '@/types/auth';
+import type { RootState } from '@/redux/store';
+import type { ITokens } from '@/types/auth';
 
 const mutex = new Mutex();
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomModal from '@/components/ui/CustomModal/CustomModal';
-import { IUser } from '@/types/user';
+import type { IUser } from '@/types/user';
 
 type UpdateUserButtonProps = {
   user: IUser;

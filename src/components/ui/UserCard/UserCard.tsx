@@ -7,7 +7,7 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/UserCard/UserCard.module.scss';
 import { PAGES_URL } from '@/enums/pages-url';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { IUser } from '@/types/user';
+import type { IUser } from '@/types/user';
 
 type UserCardProps = {
   user: IUser;

@@ -1,6 +1,7 @@
 'use client';
 
-import { Form, Formik, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -17,8 +18,8 @@ import {
 import { fullLogIn } from '@/redux/actions/full-log-in';
 import { useLogInMutation } from '@/redux/auth/authorization-api';
 import styles from '@/styles/form.module.scss';
-import { ILogInForm } from '@/types/auth';
-import { AuthFormProps } from '@/types/auth-form';
+import type { ILogInForm } from '@/types/auth';
+import type { AuthFormProps } from '@/types/auth-form';
 
 function LogInForm(props: AuthFormProps) {
   const [logIn] = useLogInMutation();
