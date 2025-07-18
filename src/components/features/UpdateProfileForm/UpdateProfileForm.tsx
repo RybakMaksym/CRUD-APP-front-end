@@ -9,31 +9,42 @@ import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import {
-  CREATE_PROFILE_FORM_DEFAULT_VALUES,
-  CREATE_PROFILE_FORM_SCHEMA,
-} from '@/lib/constants/forms-validation';
-import { useCreateProfileMutation } from '@/redux/profile/profile-api';
+import { CREATE_PROFILE_FORM_SCHEMA } from '@/lib/constants/forms-validation';
+import { useUpdateProfileByIdMutation } from '@/redux/profile/profile-api';
 import styles from '@/styles/form.module.scss';
-import type { CreateProfileFormValues } from '@/types/profile';
+import type { IProfile, UpdateProfileFormValues } from '@/types/profile';
 
-type CreateProfileFormProps = {
+type UpdateProfileFormProps = {
+  profile: IProfile;
   onClose: () => void;
   onConfirm: () => void;
 };
 
-function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
-  const [createProfile] = useCreateProfileMutation();
+function UpdateProfileForm({
+  profile,
+  onConfirm,
+  onClose,
+}: UpdateProfileFormProps) {
+  const [updateProfile] = useUpdateProfileByIdMutation();
+
+  const initialValues: UpdateProfileFormValues = {
+    name: profile.name,
+    gender: profile.gender,
+    birthDate: new Date(profile.birthDate).toISOString().split('T')[0],
+    country: profile.country,
+    city: profile.city,
+    avatarUrl: undefined,
+  };
 
   const handleSubmit = async (
-    values: CreateProfileFormValues,
-    { setStatus }: FormikHelpers<CreateProfileFormValues>,
+    values: UpdateProfileFormValues,
+    { setStatus }: FormikHelpers<UpdateProfileFormValues>,
   ) => {
     try {
       const formData = new FormData();
       formData.append('name', values.name);
       formData.append('gender', values.gender);
-      formData.append('birthDate', new Date(values.birthDate).toISOString());
+      formData.append('birthDate', values.birthDate);
       formData.append('country', values.country);
       formData.append('city', values.city);
 
@@ -41,23 +52,26 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
         formData.append('avatar', values.avatarUrl);
       }
 
-      const res = await createProfile(formData).unwrap();
+      const res = await updateProfile({
+        id: profile.id,
+        formData,
+      }).unwrap();
 
       if (res) {
         onConfirm();
       }
     } catch (error: any) {
-      setStatus(error?.data?.message || 'Error creating profile');
+      setStatus(error?.data?.message || 'Registration error');
     }
   };
 
   return (
     <Formik
       validationSchema={CREATE_PROFILE_FORM_SCHEMA}
-      initialValues={CREATE_PROFILE_FORM_DEFAULT_VALUES}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
     >
-      {({ status, setFieldValue, values }) => (
+      {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
           <Headline color="dark">Create profile</Headline>
 
@@ -67,11 +81,7 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
                 setFieldValue('avatarUrl', event.target.files[0]);
               }
             }}
-            prewiew={
-              typeof values.avatarUrl === 'string'
-                ? values.avatarUrl
-                : DEFAULT_AVATAR
-            }
+            prewiew={profile.avatarUrl ?? DEFAULT_AVATAR}
             labalColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
@@ -98,4 +108,4 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
   );
 }
 
-export default CreateProfileForm;
+export default UpdateProfileForm;

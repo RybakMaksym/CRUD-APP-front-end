@@ -1,5 +1,7 @@
 'use client';
 
+import DeleteProfileButton from '@/components/features/DeleteProfileButton/DeleteProfileButton';
+import UpdateProfileButton from '@/components/features/UpdateProfileButton/UpdateProfileButton';
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/ProfileCard/ProfileCard.module.scss';
@@ -44,6 +46,10 @@ function ProfileCard({ profile }: ProfileCardProps) {
           <Paragraph size="18px">{profile.country}</Paragraph>
           <Paragraph size="18px">{profile.city}</Paragraph>
         </div>
+      </div>
+      <div className={styles['card-actions']}>
+        <UpdateProfileButton profile={profile} />
+        <DeleteProfileButton profileId={profile.id} />
       </div>
     </div>
   );

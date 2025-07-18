@@ -10,4 +10,11 @@ export interface IProfile {
   avatarUrl?: string;
 }
 
-export type CreateProfileForm = Omit<IProfile, 'id'>;
+export type CreateProfileFormValues = Omit<IProfile, 'id'>;
+
+export type UpdateProfileFormValues = Omit<
+  CreateProfileFormValues,
+  'birthDate'
+> & {
+  birthDate: string;
+};

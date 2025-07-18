@@ -3,10 +3,12 @@
   flex-direction: column;
   width: fit-content;
   height: fit-content;
+  position: relative;
   background-color: var(--color-black);
   opacity: 0.95;
   border-radius: 15px;
   cursor: pointer;
+  overflow: hidden;
 
   &-header {
     display: flex;
@@ -26,5 +28,22 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+
+  &:hover .card-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &-actions {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 }
