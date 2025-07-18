@@ -60,6 +60,7 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
       {({ status, setFieldValue, values }) => (
         <Form className={`${styles.form} ${styles.white}`}>
           <Headline color="dark">Create profile</Headline>
+
           <PicturePicker
             onChange={(event) => {
               if (event.target.files?.[0]) {
@@ -74,7 +75,9 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
             labalColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
+
           <GenderPicker />
+
           <CustomInput
             background="dark"
             name="birthDate"
