@@ -8,4 +8,14 @@ export interface IProfile {
   country: string;
   city: string;
   avatarUrl?: string;
+  ownerId: string;
 }
+
+export type CreateProfileFormValues = Omit<IProfile, 'id'>;
+
+export type UpdateProfileFormValues = Omit<
+  CreateProfileFormValues,
+  'birthDate'
+> & {
+  birthDate: string;
+};

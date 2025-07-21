@@ -1,0 +1,32 @@
+import Image from 'next/image';
+import { useState } from 'react';
+
+import styles from '@/components/features/CreateProfileButton/CreateProfileButton.module.scss';
+import CreateProfileForm from '@/components/features/CreateProfileForm/CreateProfileForm';
+import CustomModal from '@/components/ui/CustomModal/CustomModal';
+import Paragraph from '@/components/ui/Paragraph/Paragraph';
+
+function CreateProfileButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeForm = () => setIsOpen(false);
+
+  return (
+    <>
+      <div className={styles.button} onClick={() => setIsOpen(true)}>
+        <Image
+          src={'/assets/icons/profile icon.png'}
+          alt="create profile icon"
+          width={84}
+          height={83}
+        />
+        <Paragraph>Craate new profile</Paragraph>
+      </div>
+      <CustomModal isOpen={isOpen}>
+        <CreateProfileForm onConfirm={closeForm} onClose={closeForm} />
+      </CustomModal>
+    </>
+  );
+}
+
+export default CreateProfileButton;

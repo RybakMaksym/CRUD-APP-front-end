@@ -11,4 +11,4 @@ export interface IUser {
 
 export type IUserState = Partial<IUser>;
 
-export type UpdateUserFormValues = Omit<IRegisterForm, 'password'>;
+export type UpdateUserFormValues = Omit<IRegisterForm, 'password' | 'id'>;

@@ -18,7 +18,7 @@ function AuthRoute(props: AuthRouteProps) {
 
   useEffect(() => {
     if (accessToken) {
-      router.replace(PAGES_URL.NOT_FROUND);
+      router.replace(PAGES_URL.PROFILES);
     }
   }, [accessToken, router]);
 
