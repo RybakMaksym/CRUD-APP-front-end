@@ -7,12 +7,22 @@
   width: fit-content;
   height: fit-content;
   background-color: var(--color-black);
-  opacity: .97;
+  opacity: 0.97;
   border-radius: 15px;
 }
 
 .actions {
   display: flex;
   gap: 41;
+  flex-wrap: wrap;
+}
+
+.profiles-block {
+  align-self: start;
+}
+
+.profiles {
+  display: flex;
+  gap: 33px;
   flex-wrap: wrap;
 }

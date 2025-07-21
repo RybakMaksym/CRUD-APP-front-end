@@ -1,5 +1,6 @@
 import type { Role } from '@/enums/role';
 import type { IRegisterForm } from '@/types/auth';
+import type { IProfile } from '@/types/profile';
 
 export interface IUser {
   id: string;
@@ -7,8 +8,12 @@ export interface IUser {
   email: string;
   role: Role;
   avatarUrl?: string;
+  profiles: string[] | IProfile[];
 }
 
 export type IUserState = Partial<IUser>;
 
-export type UpdateUserFormValues = Omit<IRegisterForm, 'password' | 'id'>;
+export type UpdateUserFormValues = Omit<
+  IRegisterForm,
+  'password' | 'id' | 'profiles'
+>;
