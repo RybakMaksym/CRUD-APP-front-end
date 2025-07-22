@@ -10,9 +10,10 @@ import type { IProfile } from '@/types/profile';
 
 type UpdateProfileButtonProps = {
   profile: IProfile;
+  onConfirm?: () => void;
 };
 
-function UpdateProfileButton({ profile }: UpdateProfileButtonProps) {
+function UpdateProfileButton(props: UpdateProfileButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const closeForm = () => setIsOpen(false);
 
@@ -24,8 +25,11 @@ function UpdateProfileButton({ profile }: UpdateProfileButtonProps) {
 
       <CustomModal isOpen={isOpen}>
         <UpdateProfileForm
-          profile={profile}
-          onConfirm={closeForm}
+          profile={props.profile}
+          onConfirm={() => {
+            props.onConfirm?.();
+            closeForm();
+          }}
           onClose={closeForm}
         />
       </CustomModal>

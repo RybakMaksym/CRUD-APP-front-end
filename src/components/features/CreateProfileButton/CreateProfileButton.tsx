@@ -6,7 +6,11 @@ import CreateProfileForm from '@/components/features/CreateProfileForm/CreatePro
 import CustomModal from '@/components/ui/CustomModal/CustomModal';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
-function CreateProfileButton() {
+type CreateProfileButtonProps = {
+  onConfirm?: () => void;
+};
+
+function CreateProfileButton(props: CreateProfileButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeForm = () => setIsOpen(false);
@@ -20,10 +24,16 @@ function CreateProfileButton() {
           width={84}
           height={83}
         />
-        <Paragraph>Craate new profile</Paragraph>
+        <Paragraph>Create new profile</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
-        <CreateProfileForm onConfirm={closeForm} onClose={closeForm} />
+        <CreateProfileForm
+          onConfirm={() => {
+            props.onConfirm?.();
+            closeForm();
+          }}
+          onClose={closeForm}
+        />
       </CustomModal>
     </>
   );
