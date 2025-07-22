@@ -19,6 +19,9 @@
 
 .profiles-block {
   align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
 }
 
 .profiles {

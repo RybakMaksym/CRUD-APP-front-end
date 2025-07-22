@@ -5,8 +5,17 @@ import styles from '@/components/features/CreateProfileButton/CreateProfileButto
 import CreateProfileForm from '@/components/features/CreateProfileForm/CreateProfileForm';
 import CustomModal from '@/components/ui/CustomModal/CustomModal';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import userSelectors from '@/redux/user/user-selectors';
 
-function CreateProfileButton() {
+type CreateProfileButtonProps = {
+  userId?: string;
+};
+
+function CreateProfileButton(props: CreateProfileButtonProps) {
+  let ownerId = useAppSelector(userSelectors.getUserId);
+  ownerId = props.userId ?? ownerId;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const closeForm = () => setIsOpen(false);
@@ -23,7 +32,11 @@ function CreateProfileButton() {
         <Paragraph>Craate new profile</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
-        <CreateProfileForm onConfirm={closeForm} onClose={closeForm} />
+        <CreateProfileForm
+          userId={ownerId ?? ''}
+          onConfirm={closeForm}
+          onClose={closeForm}
+        />
       </CustomModal>
     </>
   );
