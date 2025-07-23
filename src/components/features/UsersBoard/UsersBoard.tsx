@@ -49,10 +49,20 @@ function UsersBoard() {
   const isLoading = activeSearch ? isLoadingSearch : isLoadingAll;
   const isError = activeSearch ? isErrorSearch : isErrorAll;
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return (
+      <div className={styles.board}>
+        <Loader />
+      </div>
+    );
+  }
 
   if (isError) {
-    return <Paragraph color="error">Could not find any users</Paragraph>;
+    return (
+      <div className={styles.board}>
+        <Paragraph color="error">Could not find any users</Paragraph>;
+      </div>
+    );
   }
 
   return (

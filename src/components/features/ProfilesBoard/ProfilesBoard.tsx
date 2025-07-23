@@ -68,10 +68,20 @@ function ProfilesBoard() {
   const isLoading = activeSearch ? isLoadingSearch : isAllProfilesLoading;
   const isError = activeSearch ? isErrorSearch : isAllProfilesError;
 
-  if (isLoading && page === 1) return <Loader />;
+  if (isLoading && page === 1) {
+    return (
+      <div className={styles.board}>
+        <Loader />
+      </div>
+    );
+  }
 
   if (isError) {
-    return <Paragraph color="error">Could not find any profiles</Paragraph>;
+    return (
+      <div className={styles.board}>
+        <Paragraph color="error">Could not find any profiles</Paragraph>;
+      </div>
+    );
   }
 
   return (
