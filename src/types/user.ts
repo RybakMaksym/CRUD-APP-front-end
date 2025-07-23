@@ -1,6 +1,5 @@
 import type { Role } from '@/enums/role';
 import type { IRegisterForm } from '@/types/auth';
-import type { IProfile } from '@/types/profile';
 
 export interface IUser {
   id: string;
@@ -8,7 +7,7 @@ export interface IUser {
   email: string;
   role: Role;
   avatarUrl?: string;
-  profiles: string[] | IProfile[];
+  profiles: string[];
 }
 
 export type IUserState = Partial<IUser>;
