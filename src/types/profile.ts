@@ -15,7 +15,7 @@ export type CreateProfileFormValues = Omit<IProfile, 'id'>;
 
 export type UpdateProfileFormValues = Omit<
   CreateProfileFormValues,
-  'birthDate'
+  'birthDate' | 'ownerId'
 > & {
   birthDate: string;
 };
