@@ -11,7 +11,7 @@ export interface IProfile {
   ownerId: string;
 }
 
-export type CreateProfileFormValues = Omit<IProfile, 'id'>;
+export type CreateProfileFormValues = Omit<IProfile, 'id' | 'ownerId'>;
 
 export type UpdateProfileFormValues = Omit<
   CreateProfileFormValues,
