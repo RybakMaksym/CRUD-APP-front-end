@@ -2,7 +2,11 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
 import type { IMessageResponse } from '@/types/messages';
-import type { IPagination, ISearch } from '@/types/navigation';
+import type {
+  IPaginatedResponse,
+  IPagination,
+  ISearch,
+} from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
 import type { IUpdateFormWithIdParams } from '@/types/request';
 
@@ -11,7 +15,7 @@ export const profileApi = createApi({
   baseQuery,
   tagTypes: ['Profile'],
   endpoints: (builder) => ({
-    myProfiles: builder.query<IProfile[], IPagination>({
+    myProfiles: builder.query<IPaginatedResponse<IProfile>, IPagination>({
       query: ({ page, limit }) => ({
         url: `/profile/my-profiles?page=${page}&limit=${limit}`,
         method: 'GET',

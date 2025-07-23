@@ -3,6 +3,14 @@ export interface IPagination {
   limit: number;
 }
 
+export interface IPaginatedResponse<T> {
+  data: T[];
+  page: number;
+  limit: number;
+  total: number;
+  nextPage: number | null;
+}
+
 export interface ISearch {
   query: string;
 }
