@@ -10,6 +10,7 @@ import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
+import { useSearch } from '@/hooks/use-search';
 import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
 import {
   useMyProfilesQuery,
@@ -18,8 +19,14 @@ import {
 import type { IProfile } from '@/types/profile';
 
 function ProfilesBoard() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeSearch, setActiveSearch] = useState(false);
+  const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
+    useSearch();
+
+  const {
+    data: searchedProfiles,
+    isLoading: isLoadingSearch,
+    isError: isErrorSearch,
+  } = useSearchProfilesQuery({ query: searchQuery }, { skip: !activeSearch });
 
   const [page, setPage] = useState(1);
   const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
@@ -34,29 +41,11 @@ function ProfilesBoard() {
     { skip: activeSearch },
   );
 
-  const {
-    data: searchedProfiles,
-    isLoading: isLoadingSearch,
-    isError: isErrorSearch,
-  } = useSearchProfilesQuery({ query: searchQuery }, { skip: !activeSearch });
-
   const onProfileChanged = () => {
     setPage(1);
     setAllProfiles([]);
     setHasMore(true);
   };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setActiveSearch(!!searchQuery.trim());
-    }
-  };
-
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setActiveSearch(false);
-    }
-  }, [searchQuery]);
 
   useEffect(() => {
     if (paginatedData?.data?.length) {
@@ -93,7 +82,7 @@ function ProfilesBoard() {
         <SearchInput
           placeholder="Search"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
       </div>
