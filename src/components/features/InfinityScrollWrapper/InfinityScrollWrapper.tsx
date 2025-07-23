@@ -26,7 +26,7 @@ function InfinityScrollWrapper({
           onLoadMore();
         }
       },
-      { threshold: 1 },
+      { threshold: 0 },
     );
 
     const el = sentinelRef.current;
@@ -41,7 +41,7 @@ function InfinityScrollWrapper({
   return (
     <>
       {children}
-      <div ref={sentinelRef} />
+      <div ref={sentinelRef} style={{ marginTop: '50px' }} />
     </>
   );
 }

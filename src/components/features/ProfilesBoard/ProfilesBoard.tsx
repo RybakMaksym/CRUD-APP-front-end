@@ -31,6 +31,7 @@ function ProfilesBoard() {
   const [page, setPage] = useState(1);
   const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const {
     data: paginatedData,
@@ -48,7 +49,9 @@ function ProfilesBoard() {
   };
 
   useEffect(() => {
-    if (paginatedData?.data?.length) {
+    if (!paginatedData || isAllProfilesLoading) return;
+
+    if (paginatedData.data?.length) {
       setAllProfiles((prev) => {
         const existingIds = new Set(prev.map((p) => p.id));
         const unique = paginatedData.data.filter((p) => !existingIds.has(p.id));
@@ -56,13 +59,13 @@ function ProfilesBoard() {
         return [...prev, ...unique];
       });
 
-      if (!paginatedData.nextPage) {
-        setHasMore(false);
-      }
+      setHasMore(!!paginatedData.nextPage);
     } else {
       setHasMore(false);
     }
-  }, [paginatedData]);
+
+    setIsFetchingMore(false);
+  }, [paginatedData, isAllProfilesLoading]);
 
   const profiles = activeSearch ? searchedProfiles : allProfiles;
   const isLoading = activeSearch ? isLoadingSearch : isAllProfilesLoading;
@@ -99,7 +102,12 @@ function ProfilesBoard() {
 
       <InfinityScrollWrapper
         hasMore={hasMore}
-        onLoadMore={() => setPage((prev) => prev + 1)}
+        onLoadMore={() => {
+          if (!isFetchingMore) {
+            setIsFetchingMore(true);
+            setPage((prev) => prev + 1);
+          }
+        }}
         additionalConditions={!activeSearch && !isAllProfilesLoading}
       >
         <div className={styles.profiles}>
