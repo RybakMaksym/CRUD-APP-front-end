@@ -31,9 +31,9 @@ export const profileApi = createApi({
         method: 'GET',
       }),
     }),
-    createProfile: builder.mutation<IProfile, FormData>({
-      query: (formData) => ({
-        url: `/profile/create`,
+    createProfile: builder.mutation<IProfile, IFormWithIdParams>({
+      query: ({ id, formData }) => ({
+        url: `/profile/create/${id}`,
         method: 'POST',
         body: formData,
       }),
