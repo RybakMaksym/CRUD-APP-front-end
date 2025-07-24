@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
 import type { IMessageResponse } from '@/types/messages';
+import type { ISearch } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
 import type { IFormWithIdParams } from '@/types/request';
 
@@ -24,9 +25,15 @@ export const profileApi = createApi({
       }),
       providesTags: [{ type: 'Profile', id: 'USERS-PROFILES' }],
     }),
-    createProfile: builder.mutation<IProfile, IFormWithIdParams>({
-      query: ({ id, formData }) => ({
-        url: `/profile/create/${id}`,
+    searchProfiles: builder.query<IProfile[], ISearch>({
+      query: ({ query }) => ({
+        url: `/profile/search?query=${query}`,
+        method: 'GET',
+      }),
+    }),
+    createProfile: builder.mutation<IProfile, FormData>({
+      query: (formData) => ({
+        url: `/profile/create`,
         method: 'POST',
         body: formData,
       }),
@@ -62,6 +69,7 @@ export const profileApi = createApi({
 export const {
   useMyProfilesQuery,
   useGetProfilesByUserIdQuery,
+  useSearchProfilesQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,
   useDeleteProfileByIdMutation,
