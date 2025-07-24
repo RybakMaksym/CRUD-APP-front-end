@@ -4,7 +4,7 @@ import { baseQuery } from '@/redux/queries/base-query';
 import type { IMessageResponse } from '@/types/messages';
 import type { ISearch } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
-import type { IUpdateFormWithIdParams } from '@/types/request';
+import type { IFormWithIdParams } from '@/types/request';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -18,6 +18,13 @@ export const profileApi = createApi({
       }),
       providesTags: [{ type: 'Profile', id: 'LIST' }],
     }),
+    getProfilesByUserId: builder.query<IProfile[], string>({
+      query: (id) => ({
+        url: `/profile/profiles/${id}`,
+        method: 'GET',
+      }),
+      providesTags: [{ type: 'Profile', id: 'USERS-PROFILES' }],
+    }),
     searchProfiles: builder.query<IProfile[], ISearch>({
       query: ({ query }) => ({
         url: `/profile/search?query=${query}`,
@@ -30,28 +37,38 @@ export const profileApi = createApi({
         method: 'POST',
         body: formData,
       }),
-      invalidatesTags: () => [{ type: 'Profile', id: 'LIST' }],
+      invalidatesTags: () => [
+        { type: 'Profile', id: 'LIST' },
+        { type: 'Profile', id: 'USERS-PROFILES' },
+      ],
     }),
-    updateProfileById: builder.mutation<IProfile, IUpdateFormWithIdParams>({
+    updateProfileById: builder.mutation<IProfile, IFormWithIdParams>({
       query: ({ id, formData }) => ({
         url: `/profile/update/${id}`,
         method: 'PATCH',
         body: formData,
       }),
-      invalidatesTags: () => [{ type: 'Profile', id: 'LIST' }],
+      invalidatesTags: () => [
+        { type: 'Profile', id: 'LIST' },
+        { type: 'Profile', id: 'USERS-PROFILES' },
+      ],
     }),
     deleteProfileById: builder.mutation<IMessageResponse, string>({
       query: (id) => ({
         url: `/profile/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: () => [{ type: 'Profile', id: 'LIST' }],
+      invalidatesTags: () => [
+        { type: 'Profile', id: 'LIST' },
+        { type: 'Profile', id: 'USERS-PROFILES' },
+      ],
     }),
   }),
 });
 
 export const {
   useMyProfilesQuery,
+  useGetProfilesByUserIdQuery,
   useSearchProfilesQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,

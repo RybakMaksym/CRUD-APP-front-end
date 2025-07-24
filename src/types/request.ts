@@ -1,4 +1,4 @@
-export interface IUpdateFormWithIdParams {
+export interface IFormWithIdParams {
   id: string;
   formData: FormData;
 }
