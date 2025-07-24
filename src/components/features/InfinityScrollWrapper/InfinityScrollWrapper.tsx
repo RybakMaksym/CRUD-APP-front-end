@@ -2,46 +2,53 @@
 
 import { useEffect, useRef } from 'react';
 
+import Loader from '@/components/ui/Loader/Loader';
+
 type InfinityScrollWrapperProps = {
   children: React.ReactNode;
-  hasMore: boolean;
   onLoadMore: () => void;
   additionalConditions?: boolean;
 };
 
 function InfinityScrollWrapper({
   children,
-  hasMore,
   onLoadMore,
   additionalConditions = true,
 }: InfinityScrollWrapperProps) {
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const observerTargetRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!hasMore || !additionalConditions) return;
+    const target = observerTargetRef.current;
+
+    if (!target) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        console.log('additionalConditions - ', additionalConditions);
+
+        if (entry.isIntersecting && additionalConditions) {
           onLoadMore();
         }
       },
-      { threshold: 0 },
+      { threshold: 1 },
     );
 
-    const el = sentinelRef.current;
-
-    if (el) observer.observe(el);
+    observer.observe(target);
 
     return () => {
-      if (el) observer.unobserve(el);
+      observer.unobserve(target);
     };
-  }, [hasMore, additionalConditions, onLoadMore]);
+  }, [additionalConditions, onLoadMore]);
 
   return (
     <>
       {children}
-      <div ref={sentinelRef} style={{ marginTop: '50px' }} />
+      <div ref={observerTargetRef} />
+      {additionalConditions && (
+        <div>
+          <Loader />
+        </div>
+      )}
     </>
   );
 }

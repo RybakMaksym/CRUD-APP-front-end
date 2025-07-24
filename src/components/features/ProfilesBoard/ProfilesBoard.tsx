@@ -22,16 +22,15 @@ function ProfilesBoard() {
   const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
     useSearch();
 
+  const [page, setPage] = useState(1);
+  const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
   const {
     data: searchedProfiles,
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
   } = useSearchProfilesQuery({ query: searchQuery }, { skip: !activeSearch });
-
-  const [page, setPage] = useState(1);
-  const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const {
     data: paginatedData,
@@ -42,47 +41,44 @@ function ProfilesBoard() {
     { skip: activeSearch },
   );
 
-  const onProfileChanged = () => {
-    setPage(1);
-    setAllProfiles([]);
-    setHasMore(true);
-  };
-
-  useEffect(() => {
-    if (!paginatedData || isAllProfilesLoading) return;
-
-    if (paginatedData.data?.length) {
-      setAllProfiles((prev) => {
-        const existingIds = new Set(prev.map((p) => p.id));
-        const unique = paginatedData.data.filter((p) => !existingIds.has(p.id));
-
-        return [...prev, ...unique];
-      });
-
-      setHasMore(!!paginatedData.nextPage);
-    } else {
-      setHasMore(false);
-    }
-
-    setIsFetchingMore(false);
-  }, [paginatedData, isAllProfilesLoading]);
-
-  const profiles = activeSearch ? searchedProfiles : allProfiles;
+  const isInitialLoading = isAllProfilesLoading && page === 1;
   const isLoading = activeSearch ? isLoadingSearch : isAllProfilesLoading;
   const isError = activeSearch ? isErrorSearch : isAllProfilesError;
 
-  if (isLoading && page === 1) {
-    return (
-      <div className={styles.board}>
-        <Loader />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!paginatedData || isAllProfilesLoading || activeSearch) return;
+
+    setAllProfiles((prev) => {
+      const existingIds = new Set(prev.map((p) => p.id));
+      const unique = paginatedData.data.filter((p) => !existingIds.has(p.id));
+
+      return [...prev, ...unique];
+    });
+
+    setIsFetchingMore(false);
+  }, [paginatedData, isAllProfilesLoading, activeSearch]);
+
+  const onProfileChanged = () => {
+    setPage(1);
+    setAllProfiles([]);
+  };
+
+  const profiles = activeSearch ? (searchedProfiles ?? []) : allProfiles;
+  const isLastPage = !paginatedData?.nextPage;
+  const canLoadMore = !activeSearch && !isAllProfilesLoading && !isLastPage;
 
   if (isError) {
     return (
       <div className={styles.board}>
-        <Paragraph color="error">Could not find any profiles</Paragraph>;
+        <Paragraph color="error">Could not find any profiles</Paragraph>
+      </div>
+    );
+  }
+
+  if (isInitialLoading || isLoading) {
+    return (
+      <div className={styles.board}>
+        <Loader />
       </div>
     );
   }
@@ -101,17 +97,17 @@ function ProfilesBoard() {
       </div>
 
       <InfinityScrollWrapper
-        hasMore={hasMore}
         onLoadMore={() => {
-          if (!isFetchingMore) {
-            setIsFetchingMore(true);
-            setPage((prev) => prev + 1);
-          }
+          if (isFetchingMore) return;
+
+          setIsFetchingMore(true);
+          setPage((prev) => prev + 1);
+          console.log('page - ', page);
         }}
-        additionalConditions={!activeSearch && !isAllProfilesLoading}
+        additionalConditions={canLoadMore}
       >
         <div className={styles.profiles}>
-          {profiles?.map((profile) => (
+          {profiles.map((profile) => (
             <ProfileCard
               key={profile.id}
               profile={profile}
@@ -122,7 +118,6 @@ function ProfilesBoard() {
             <CreateProfileButton onConfirm={onProfileChanged} />
           )}
         </div>
-        {isLoading && page !== 1 && <Loader />}
       </InfinityScrollWrapper>
     </div>
   );
