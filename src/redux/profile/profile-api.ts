@@ -4,7 +4,11 @@ import { baseQuery } from '@/redux/queries/base-query';
 import type { IMessageResponse } from '@/types/messages';
 import type { ISearch } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
-import type { IFormWithIdParams } from '@/types/request';
+import type {
+  IFilterParams,
+  IFormWithIdParams,
+  ISuggestionParams,
+} from '@/types/request';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -28,6 +32,18 @@ export const profileApi = createApi({
     searchProfiles: builder.query<IProfile[], ISearch>({
       query: ({ query }) => ({
         url: `/profile/search?query=${query}`,
+        method: 'GET',
+      }),
+    }),
+    getSuggestions: builder.query<string[], ISuggestionParams>({
+      query: ({ field, query }) => ({
+        url: `/profile/suggestions?field=${field}&query=${query}`,
+        method: 'GET',
+      }),
+    }),
+    filterProfiles: builder.query<IProfile[], IFilterParams>({
+      query: ({ field, query }) => ({
+        url: `/profile/filter?field=${field}&query=${query}`,
         method: 'GET',
       }),
     }),
@@ -70,6 +86,8 @@ export const {
   useMyProfilesQuery,
   useGetProfilesByUserIdQuery,
   useSearchProfilesQuery,
+  useLazyGetSuggestionsQuery,
+  useLazyFilterProfilesQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,
   useDeleteProfileByIdMutation,

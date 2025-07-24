@@ -1,20 +1,37 @@
 'use client';
 
+import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
+import FilterInput from '@/components/features/FilterInput/FilterInput';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
+import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
 import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
+import { useProfileFilter } from '@/hooks/use-profile-filter';
 import {
   useMyProfilesQuery,
   useSearchProfilesQuery,
 } from '@/redux/profile/profile-api';
+import type { FilterOption } from '@/types/filter.type';
 
 function ProfilesBoard() {
+  const {
+    filter,
+    setFilter,
+    filteredProfiles,
+    isFiltering,
+    isFilterError,
+    inputValue,
+    setInputValue,
+    setSelectedOption,
+    suggestions,
+  } = useProfileFilter();
+
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState(false);
 
@@ -24,7 +41,7 @@ function ProfilesBoard() {
     isError: isAllProfilesError,
   } = useMyProfilesQuery(undefined, {
     refetchOnMountOrArgChange: true,
-    skip: activeSearch,
+    skip: activeSearch || filter !== 'default',
   });
 
   const {
@@ -45,9 +62,23 @@ function ProfilesBoard() {
     }
   }, [searchQuery]);
 
-  const profiles = activeSearch ? searchedProfiles : allProfiles;
-  const isLoading = activeSearch ? isLoadingSearch : isAllProfilesLoading;
-  const isError = activeSearch ? isErrorSearch : isAllProfilesError;
+  const profiles = activeSearch
+    ? searchedProfiles
+    : filter === 'default'
+      ? allProfiles
+      : filteredProfiles;
+
+  const isLoading = activeSearch
+    ? isLoadingSearch
+    : filter === 'default'
+      ? isAllProfilesLoading
+      : isFiltering;
+
+  const isError = activeSearch
+    ? isErrorSearch
+    : filter === 'default'
+      ? isAllProfilesError
+      : isFilterError;
 
   if (isLoading) return <Loader />;
 
@@ -65,12 +96,31 @@ function ProfilesBoard() {
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleKeyDown}
         />
+
+        {(filter === 'country' || filter === 'city') && (
+          <FilterInput
+            options={suggestions}
+            inputValue={inputValue}
+            onInputChange={(e, value) => setInputValue(value)}
+            onChange={(e, value) => setSelectedOption(value || '')}
+          />
+        )}
+
+        <FilterSelect
+          value={filter}
+          onChange={(e: SelectChangeEvent) => {
+            const val = e.target.value as FilterOption;
+            setFilter(val);
+            setInputValue('');
+            setSelectedOption('');
+          }}
+        />
       </div>
       <div className={styles.profiles}>
         {profiles?.map((profile) => (
           <ProfileCard key={profile.id} profile={profile} />
         ))}
-        {!activeSearch && <CreateProfileButton />}
+        {!activeSearch && filter === 'default' && <CreateProfileButton />}
       </div>
     </div>
   );
