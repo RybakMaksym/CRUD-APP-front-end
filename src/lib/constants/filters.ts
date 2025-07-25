@@ -1,18 +1,20 @@
+import { FilterOption } from '@/enums/filter.enums';
+
 export const FILTERS = [
   {
-    value: 'default',
+    value: FilterOption.DEFAULT,
     label: 'Filter',
   },
   {
-    value: 'country',
+    value: FilterOption.COUNRTY,
     label: 'Country',
   },
   {
-    value: 'city',
+    value: FilterOption.CITY,
     label: 'City',
   },
   {
-    value: 'age',
+    value: FilterOption.AGE,
     label: 'Users 18+',
   },
 ];

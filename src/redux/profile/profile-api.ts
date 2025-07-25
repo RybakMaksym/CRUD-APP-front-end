@@ -1,14 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
+import type { FilterableFields, FilterFields } from '@/types/filter.type';
 import type { IMessageResponse } from '@/types/messages';
 import type { ISearch } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
-import type {
-  IFilterParams,
-  IFormWithIdParams,
-  ISuggestionParams,
-} from '@/types/request';
+import type { IFieldQueryParams, IFormWithIdParams } from '@/types/request';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -35,13 +32,16 @@ export const profileApi = createApi({
         method: 'GET',
       }),
     }),
-    getSuggestions: builder.query<string[], ISuggestionParams>({
+    getSuggestions: builder.query<
+      string[],
+      IFieldQueryParams<FilterableFields>
+    >({
       query: ({ field, query }) => ({
         url: `/profile/suggestions?field=${field}&query=${query}`,
         method: 'GET',
       }),
     }),
-    filterProfiles: builder.query<IProfile[], IFilterParams>({
+    filterProfiles: builder.query<IProfile[], IFieldQueryParams<FilterFields>>({
       query: ({ field, query }) => ({
         url: `/profile/filter?field=${field}&query=${query}`,
         method: 'GET',

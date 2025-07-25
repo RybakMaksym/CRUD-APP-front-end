@@ -1,4 +1,4 @@
-export type FilterOption = 'default' | 'country' | 'city' | 'age';
+import type { FilterOption } from '@/enums/filter.enums';
 
 export type FilterFields = Omit<FilterOption, 'default'>;
 

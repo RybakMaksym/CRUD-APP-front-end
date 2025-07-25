@@ -12,12 +12,12 @@ import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
+import { FilterOption } from '@/enums/filter.enums';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
 import {
   useMyProfilesQuery,
   useSearchProfilesQuery,
 } from '@/redux/profile/profile-api';
-import type { FilterOption } from '@/types/filter.type';
 
 function ProfilesBoard() {
   const {
@@ -41,7 +41,7 @@ function ProfilesBoard() {
     isError: isAllProfilesError,
   } = useMyProfilesQuery(undefined, {
     refetchOnMountOrArgChange: true,
-    skip: activeSearch || filter !== 'default',
+    skip: activeSearch || filter !== FilterOption.DEFAULT,
   });
 
   const {
@@ -64,19 +64,19 @@ function ProfilesBoard() {
 
   const profiles = activeSearch
     ? searchedProfiles
-    : filter === 'default'
+    : filter === FilterOption.DEFAULT
       ? allProfiles
       : filteredProfiles;
 
   const isLoading = activeSearch
     ? isLoadingSearch
-    : filter === 'default'
+    : filter === FilterOption.DEFAULT
       ? isAllProfilesLoading
       : isFiltering;
 
   const isError = activeSearch
     ? isErrorSearch
-    : filter === 'default'
+    : filter === FilterOption.DEFAULT
       ? isAllProfilesError
       : isFilterError;
 
@@ -97,7 +97,7 @@ function ProfilesBoard() {
           onKeyDown={handleKeyDown}
         />
 
-        {(filter === 'country' || filter === 'city') && (
+        {(filter === FilterOption.COUNRTY || filter === FilterOption.CITY) && (
           <FilterInput
             options={suggestions}
             inputValue={inputValue}
@@ -120,7 +120,9 @@ function ProfilesBoard() {
         {profiles?.map((profile) => (
           <ProfileCard key={profile.id} profile={profile} />
         ))}
-        {!activeSearch && filter === 'default' && <CreateProfileButton />}
+        {!activeSearch && filter === FilterOption.DEFAULT && (
+          <CreateProfileButton />
+        )}
       </div>
     </div>
   );

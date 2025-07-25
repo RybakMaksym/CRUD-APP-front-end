@@ -5,12 +5,7 @@ export interface IFormWithIdParams {
   formData: FormData;
 }
 
-export interface ISuggestionParams {
-  field: FilterableFields;
-  query: string;
-}
-
-export interface IFilterParams {
-  field: FilterFields;
+export interface IFieldQueryParams<T extends FilterableFields | FilterFields> {
+  field: T;
   query: string;
 }

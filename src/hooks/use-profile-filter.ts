@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { FilterOption } from '@/enums/filter.enums';
 import {
   useLazyFilterProfilesQuery,
   useLazyGetSuggestionsQuery,
 } from '@/redux/profile/profile-api';
-import type { FilterOption } from '@/types/filter.type';
 
 export const useProfileFilter = () => {
-  const [filter, setFilter] = useState<FilterOption>('default');
+  const [filter, setFilter] = useState<FilterOption>(FilterOption.DEFAULT);
   const [inputValue, setInputValue] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -20,7 +20,10 @@ export const useProfileFilter = () => {
   const [triggerSuggestions] = useLazyGetSuggestionsQuery();
 
   useEffect(() => {
-    if ((filter === 'city' || filter === 'country') && inputValue) {
+    if (
+      (filter === FilterOption.CITY || filter === FilterOption.COUNRTY) &&
+      inputValue
+    ) {
       triggerSuggestions({ field: filter, query: inputValue }).then(
         (res: any) => {
           setSuggestions(res?.data || []);
@@ -30,9 +33,12 @@ export const useProfileFilter = () => {
   }, [inputValue, filter, triggerSuggestions]);
 
   useEffect(() => {
-    if (filter === 'age') {
-      triggerFilterProfiles({ field: 'age', query: '' });
-    } else if ((filter === 'city' || filter === 'country') && selectedOption) {
+    if (filter === FilterOption.AGE) {
+      triggerFilterProfiles({ field: FilterOption.AGE, query: '' });
+    } else if (
+      (filter === FilterOption.CITY || filter === FilterOption.COUNRTY) &&
+      selectedOption
+    ) {
       triggerFilterProfiles({ field: filter, query: selectedOption });
     }
   }, [filter, selectedOption, triggerFilterProfiles]);
