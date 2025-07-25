@@ -21,6 +21,7 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
 
     if (res.data) {
       setIsOpen(false);
+      props.onConfirm?.();
     }
   };
 
@@ -34,10 +35,7 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
         title="Are you sure you want to delete profile?"
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={async () => {
-          props.onConfirm?.();
-          await handleDelete();
-        }}
+        onConfirm={handleDelete}
       />
     </>
   );

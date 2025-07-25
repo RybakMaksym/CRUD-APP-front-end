@@ -24,8 +24,6 @@ function InfinityScrollWrapper({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log('additionalConditions - ', additionalConditions);
-
         if (entry.isIntersecting && additionalConditions) {
           onLoadMore();
         }

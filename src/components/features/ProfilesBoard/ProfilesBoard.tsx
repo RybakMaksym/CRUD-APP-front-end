@@ -59,8 +59,9 @@ function ProfilesBoard() {
   }, [paginatedData, isAllProfilesLoading, activeSearch]);
 
   const onProfileChanged = () => {
-    setPage(1);
     setAllProfiles([]);
+    setPage(1);
+    setIsFetchingMore(true);
   };
 
   const profiles = activeSearch ? (searchedProfiles ?? []) : allProfiles;
@@ -102,7 +103,6 @@ function ProfilesBoard() {
 
           setIsFetchingMore(true);
           setPage((prev) => prev + 1);
-          console.log('page - ', page);
         }}
         additionalConditions={canLoadMore}
       >
