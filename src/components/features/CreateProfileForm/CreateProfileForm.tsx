@@ -18,11 +18,16 @@ import styles from '@/styles/form.module.scss';
 import type { CreateProfileFormValues } from '@/types/profile';
 
 type CreateProfileFormProps = {
+  userId: string;
   onClose: () => void;
   onConfirm: () => void;
 };
 
-function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
+function CreateProfileForm({
+  userId,
+  onClose,
+  onConfirm,
+}: CreateProfileFormProps) {
   const [createProfile] = useCreateProfileMutation();
 
   const handleSubmit = async (
@@ -41,7 +46,7 @@ function CreateProfileForm({ onClose, onConfirm }: CreateProfileFormProps) {
         formData.append('avatar', values.avatarUrl);
       }
 
-      const res = await createProfile(formData).unwrap();
+      const res = await createProfile({ id: userId, formData }).unwrap();
 
       if (res) {
         onConfirm();

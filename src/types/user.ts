@@ -7,8 +7,12 @@ export interface IUser {
   email: string;
   role: Role;
   avatarUrl?: string;
+  profiles: string[];
 }
 
 export type IUserState = Partial<IUser>;
 
-export type UpdateUserFormValues = Omit<IRegisterForm, 'password' | 'id'>;
+export type UpdateUserFormValues = Omit<
+  IRegisterForm,
+  'password' | 'id' | 'profiles'
+>;

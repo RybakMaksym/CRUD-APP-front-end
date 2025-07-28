@@ -5,12 +5,17 @@ import styles from '@/components/features/CreateProfileButton/CreateProfileButto
 import CreateProfileForm from '@/components/features/CreateProfileForm/CreateProfileForm';
 import CustomModal from '@/components/ui/CustomModal/CustomModal';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import userSelectors from '@/redux/user/user-selectors';
 
 type CreateProfileButtonProps = {
-  onConfirm?: () => void;
+  userId?: string;
 };
 
 function CreateProfileButton(props: CreateProfileButtonProps) {
+  let ownerId = useAppSelector(userSelectors.getUserId);
+  ownerId = props.userId ?? ownerId;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const closeForm = () => setIsOpen(false);
@@ -32,6 +37,8 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
             props.onConfirm?.();
             closeForm();
           }}
+          userId={ownerId ?? ''}
+          onConfirm={closeForm}
           onClose={closeForm}
         />
       </CustomModal>
