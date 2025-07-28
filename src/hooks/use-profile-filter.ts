@@ -24,11 +24,12 @@ export const useProfileFilter = () => {
       (filter === FilterOption.CITY || filter === FilterOption.COUNRTY) &&
       inputValue
     ) {
-      triggerSuggestions({ field: filter, query: inputValue }).then(
-        (res: any) => {
-          setSuggestions(res?.data || []);
-        },
-      );
+      triggerSuggestions({
+        field: filter,
+        query: inputValue,
+      }).then((res) => {
+        setSuggestions(res?.data || []);
+      });
     }
   }, [inputValue, filter, triggerSuggestions]);
 
