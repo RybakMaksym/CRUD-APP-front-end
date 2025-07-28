@@ -1,0 +1,22 @@
+.bar {
+  display: flex;
+  border-bottom: 1px solid var(--color-white);
+}
+
+.label {
+  min-width: 310px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 62px 38px 77px 55px;
+  background-color: var(--color-black-90);
+}
+
+.count {
+  display: flex;
+  min-width: 140px;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 56px;
+  background-color: var(--color-red);
+}
