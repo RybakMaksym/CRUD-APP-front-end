@@ -15,11 +15,22 @@ import {
   QUOTATION_MARK_PATTERN,
 } from '@/lib/constants/patterns';
 import type { ILogInForm, IRegisterForm } from '@/types/auth';
-import type { CreateProfileForm } from '@/types/profile';
+import type { CreateProfileFormValues } from '@/types/profile';
 
 const EMAIL_VALIDATION = Yup.string()
   .email('Invalid email')
-  .required('Required');
+  .required('Required')
+  .test(
+    'has-domain-dot',
+    'Email must contain a dot in the domain part',
+    (value) => {
+      if (!value) return false;
+
+      const domain = value.split('@')[1];
+
+      return domain?.includes('.') ?? false;
+    },
+  );
 
 const PASSWORD_VALIDATION = Yup.string()
   .required('Required')
@@ -95,7 +106,7 @@ export const CREATE_PROFILE_FORM_SCHEMA = Yup.object({
   avatar: Yup.string().default(DEFAULT_AVATAR),
 });
 
-export const CREATE_PROFILE_FORM_DEFAULT_VALUES: CreateProfileForm = {
+export const CREATE_PROFILE_FORM_DEFAULT_VALUES: CreateProfileFormValues = {
   name: '',
   birthDate: new Date(),
   gender: Gender.Male,

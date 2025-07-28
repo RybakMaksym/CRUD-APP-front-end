@@ -14,10 +14,19 @@ function UserDetailsPage() {
 
   const { data: user, isLoading, isError } = useGetUserByIdQuery(id as string);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className={`${styles.container} ${pageStyles.page}`}>
+        <Loader />
+      </div>
+    );
 
   if (isError || !user) {
-    return <Paragraph color="error">User not found</Paragraph>;
+    return (
+      <div className={`${styles.container} ${pageStyles.page}`}>
+        <Paragraph color="error">User not found</Paragraph>;
+      </div>
+    );
   }
 
   return (

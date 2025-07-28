@@ -29,10 +29,14 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
           width={84}
           height={83}
         />
-        <Paragraph>Craate new profile</Paragraph>
+        <Paragraph>Create new profile</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
         <CreateProfileForm
+          onConfirm={() => {
+            props.onConfirm?.();
+            closeForm();
+          }}
           userId={ownerId ?? ''}
           onConfirm={closeForm}
           onClose={closeForm}
