@@ -10,6 +10,7 @@ import userSelectors from '@/redux/user/user-selectors';
 
 type CreateProfileButtonProps = {
   userId?: string;
+  onConfirm?: () => void;
 };
 
 function CreateProfileButton(props: CreateProfileButtonProps) {
@@ -38,7 +39,6 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
             closeForm();
           }}
           userId={ownerId ?? ''}
-          onConfirm={closeForm}
           onClose={closeForm}
         />
       </CustomModal>
