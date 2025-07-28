@@ -8,7 +8,10 @@ import type {
   ISearch,
 } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
-import type { IFormWithIdParams } from '@/types/request';
+import type {
+  IFormWithIdParams,
+  IPaginationWithIdParams,
+} from '@/types/request';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -22,9 +25,12 @@ export const profileApi = createApi({
       }),
       providesTags: [{ type: 'Profile', id: 'LIST' }],
     }),
-    getProfilesByUserId: builder.query<IProfile[], string>({
-      query: (id) => ({
-        url: `/profile/profiles/${id}`,
+    getProfilesByUserId: builder.query<
+      IPaginatedResponse<IProfile>,
+      IPaginationWithIdParams
+    >({
+      query: ({ id, pagination }) => ({
+        url: `/profile/profiles/${id}?page=${pagination.page}&limit=${pagination.limit}`,
         method: 'GET',
       }),
       providesTags: [{ type: 'Profile', id: 'USERS-PROFILES' }],
