@@ -1,15 +1,20 @@
 'use client';
 
+import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
+import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButto;
+import FilterInput from '@/components/features/FilterInput/FilterInput';
 import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
+import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
 import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
+import { FilterOption } from '@/enums/filter.enums';
+import { useProfileFilter } from '@/hooks/use-profile-filter';
 import { useSearch } from '@/hooks/use-search';
 import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
 import {
@@ -19,12 +24,27 @@ import {
 import type { IProfile } from '@/types/profile';
 
 function ProfilesBoard() {
+  const {
+    filter,
+    setFilter,
+    filteredProfiles,
+    isFiltering,
+    isFilterError,
+    inputValue,
+    setInputValue,
+    setSelectedOption,
+    suggestions,
+  } = useProfileFilter();
+
   const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
     useSearch();
-
+  
   const [page, setPage] = useState(1);
   const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeSearch, setActiveSearch] = useState(false);
 
   const {
     data: searchedProfiles,
@@ -38,12 +58,28 @@ function ProfilesBoard() {
     isError: isAllProfilesError,
   } = useMyProfilesQuery(
     { page, limit: PROFILES_PAGE_LIMIT },
-    { skip: activeSearch },
+    { skip: activeSearch || filter !== FilterOption.DEFAULT },
   );
 
+  const profiles = activeSearch
+    ? searchedProfiles
+    : filter === FilterOption.DEFAULT
+      ? allProfiles
+      : filteredProfiles;
+
+  const isLoading = activeSearch
+    ? isLoadingSearch
+    : filter === FilterOption.DEFAULT
+      ? isAllProfilesLoading
+      : isFiltering;
+
+  const isError = activeSearch
+    ? isErrorSearch
+    : filter === FilterOption.DEFAULT
+      ? isAllProfilesError
+      : isFilterError;
+  
   const isInitialLoading = isAllProfilesLoading && page === 1;
-  const isLoading = activeSearch ? isLoadingSearch : isAllProfilesLoading;
-  const isError = activeSearch ? isErrorSearch : isAllProfilesError;
 
   useEffect(() => {
     if (!paginatedData || isAllProfilesLoading || activeSearch) return;
@@ -95,8 +131,26 @@ function ProfilesBoard() {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
-      </div>
 
+        {(filter === FilterOption.COUNRTY || filter === FilterOption.CITY) && (
+          <FilterInput
+            options={suggestions}
+            inputValue={inputValue}
+            onInputChange={(e, value) => setInputValue(value)}
+            onChange={(e, value) => setSelectedOption(value || '')}
+          />
+        )}
+
+        <FilterSelect
+          value={filter}
+          onChange={(e: SelectChangeEvent) => {
+            const val = e.target.value as FilterOption;
+            setFilter(val);
+            setInputValue('');
+            setSelectedOption('');
+          }}
+        />
+      </div>
       <InfinityScrollWrapper
         onLoadMore={() => {
           if (isFetchingMore) return;

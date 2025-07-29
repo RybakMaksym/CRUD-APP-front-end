@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
+import type { FilterableFields, FilterFields } from '@/types/filter.type';
 import type { IMessageResponse } from '@/types/messages';
 import type {
   IPaginatedResponse,
@@ -11,6 +12,7 @@ import type { IProfile } from '@/types/profile';
 import type {
   IFormWithIdParams,
   IPaginationWithIdParams,
+  IFieldQueryParams,
 } from '@/types/request';
 import type { IStatsResponse } from '@/types/response';
 
@@ -42,12 +44,27 @@ export const profileApi = createApi({
         method: 'GET',
       }),
     }),
+    getSuggestions: builder.query<
+      string[],
+      IFieldQueryParams<FilterableFields>
+    >({
+      query: ({ field, query }) => ({
+        url: `/profile/suggestions?field=${field}&query=${query}`,
+        method: 'GET',
+      }),
+    }),
+    filterProfiles: builder.query<IProfile[], IFieldQueryParams<FilterFields>>({
+      query: ({ field, query }) => ({
+        url: `/profile/filter?field=${field}&query=${query}`,
+        method: 'GET',
+      }),
+    }),
     profilesStats: builder.query<IStatsResponse, void>({
       query: () => ({
         url: `/profile/stats`,
         method: 'GET',
       }),
-      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }],
+      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }
     }),
     createProfile: builder.mutation<IProfile, IFormWithIdParams>({
       query: ({ id, formData }) => ({
@@ -90,6 +107,8 @@ export const {
   useMyProfilesQuery,
   useGetProfilesByUserIdQuery,
   useSearchProfilesQuery,
+  useLazyGetSuggestionsQuery,
+  useLazyFilterProfilesQuery,
   useProfilesStatsQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,
