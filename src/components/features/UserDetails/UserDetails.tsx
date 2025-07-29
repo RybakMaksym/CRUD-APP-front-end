@@ -1,15 +1,11 @@
-import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import DeleteUserButton from '@/components/features/DeleteUserButton/DeleteUserButton';
 import UpdateUserButton from '@/components/features/UpdateUserButton/UpdateUserButton';
+import styles from '@/components/features/UserDetails/UserDetails.module.scss';
+import UsersProfiles from '@/components/features/UsersProfiles/UsersProfiles';
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Headline from '@/components/ui/Headline/Headline';
-import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
-import styles from '@/components/ui/UserDetails/UserDetails.module.scss';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { useGetProfilesByUserIdQuery } from '@/redux/profile/profile-api';
-import type { IProfile } from '@/types/profile';
 import type { IUser } from '@/types/user';
 
 type UserDetailsProps = {
@@ -17,8 +13,6 @@ type UserDetailsProps = {
 };
 
 function UserDetails({ user }: UserDetailsProps) {
-  const { data: profiles, isLoading } = useGetProfilesByUserIdQuery(user.id);
-
   return (
     <>
       <div className={styles.details}>
@@ -40,16 +34,7 @@ function UserDetails({ user }: UserDetailsProps) {
       </div>
       <div className={styles['profiles-block']}>
         <Headline color="dark">Profiles</Headline>
-        <div className={styles.profiles}>
-          {isLoading ?? <Loader />}
-          {profiles?.map((profile) => (
-            <ProfileCard
-              key={(profile as IProfile).id}
-              profile={profile as IProfile}
-            />
-          ))}
-          <CreateProfileButton userId={user.id} />
-        </div>
+        <UsersProfiles userId={user.id} />
       </div>
     </>
   );
