@@ -1,10 +1,14 @@
+import StatsBoard from '@/components/features/StatsBoard/StatsBoard';
 import AdminRoute from '@/components/guards/AdminRoute';
+import styles from '@/styles/dashboard-page.module.scss';
 
 function DashBaordPage() {
   return (
-    <AdminRoute>
-      <></>
-    </AdminRoute>
+    <div className={styles.container}>
+      <AdminRoute>
+        <StatsBoard />
+      </AdminRoute>
+    </div>
   );
 }
 

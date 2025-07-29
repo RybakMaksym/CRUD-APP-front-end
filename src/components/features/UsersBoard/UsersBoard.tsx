@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from '@/components/features/UsersBoard/UsersBoard.module.scss';
 import CustomPagination from '@/components/ui/CustomPagination/CustomPagination';
@@ -9,6 +9,7 @@ import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
 import UserCard from '@/components/ui/UserCard/UserCard';
+import { useSearch } from '@/hooks/use-search';
 import { USERS_PAGE_LIMIT } from '@/lib/constants/user';
 import {
   useSearchUsersQuery,
@@ -17,9 +18,16 @@ import {
 } from '@/redux/user/user-api';
 
 function UsersBoard() {
+  const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
+    useSearch();
+
+  const {
+    data: searchedUsers,
+    isLoading: isLoadingSearch,
+    isError: isErrorSearch,
+  } = useSearchUsersQuery({ query: searchQuery }, { skip: !activeSearch });
+
   const [page, setPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeSearch, setActiveSearch] = useState(false);
 
   const { data } = useUsersTotalQuery(undefined, {
     skip: activeSearch,
@@ -37,32 +45,24 @@ function UsersBoard() {
     { skip: activeSearch },
   );
 
-  const {
-    data: searchedUsers,
-    isLoading: isLoadingSearch,
-    isError: isErrorSearch,
-  } = useSearchUsersQuery({ query: searchQuery }, { skip: !activeSearch });
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setActiveSearch(!!searchQuery.trim());
-    }
-  };
-
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setActiveSearch(false);
-    }
-  }, [searchQuery]);
-
   const users = activeSearch ? searchedUsers : allUsers;
   const isLoading = activeSearch ? isLoadingSearch : isLoadingAll;
   const isError = activeSearch ? isErrorSearch : isErrorAll;
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return (
+      <div className={styles.board}>
+        <Loader />
+      </div>
+    );
+  }
 
   if (isError) {
-    return <Paragraph color="error">Could not find any users</Paragraph>;
+    return (
+      <div className={styles.board}>
+        <Paragraph color="error">Could not find any users</Paragraph>;
+      </div>
+    );
   }
 
   return (
@@ -72,7 +72,7 @@ function UsersBoard() {
         <SearchInput
           placeholder="Search"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
       </div>

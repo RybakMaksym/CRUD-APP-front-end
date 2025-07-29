@@ -11,19 +11,20 @@ import type { IProfile } from '@/types/profile';
 
 type ProfileCardProps = {
   profile: IProfile;
+  actionSuccess?: () => void;
 };
 
-function ProfileCard({ profile }: ProfileCardProps) {
+function ProfileCard(props: ProfileCardProps) {
   return (
     <div className={styles.card}>
       <div className={styles['card-header']}>
         <Avatar
-          src={profile.avatarUrl ?? DEFAULT_AVATAR}
+          src={props.profile.avatarUrl ?? DEFAULT_AVATAR}
           alt="Profile avatar"
           width={50}
           height={50}
         />
-        <Paragraph size="18px">{profile.name}</Paragraph>
+        <Paragraph size="18px">{props.profile.name}</Paragraph>
       </div>
       <div className={styles['card-body']}>
         <div className={styles['card-column']}>
@@ -41,15 +42,23 @@ function ProfileCard({ profile }: ProfileCardProps) {
           </Paragraph>
         </div>
         <div className={styles['card-column']}>
-          <Paragraph size="18px">{profile.gender}</Paragraph>
-          <Paragraph size="18px">{formatDate(profile.birthDate)}</Paragraph>
-          <Paragraph size="18px">{profile.country}</Paragraph>
-          <Paragraph size="18px">{profile.city}</Paragraph>
+          <Paragraph size="18px">{props.profile.gender}</Paragraph>
+          <Paragraph size="18px">
+            {formatDate(props.profile.birthDate)}
+          </Paragraph>
+          <Paragraph size="18px">{props.profile.country}</Paragraph>
+          <Paragraph size="18px">{props.profile.city}</Paragraph>
         </div>
       </div>
       <div className={styles['card-actions']}>
-        <UpdateProfileButton profile={profile} />
-        <DeleteProfileButton profileId={profile.id} />
+        <UpdateProfileButton
+          profile={props.profile}
+          onConfirm={props.actionSuccess}
+        />
+        <DeleteProfileButton
+          profileId={props.profile.id}
+          onConfirm={props.actionSuccess}
+        />
       </div>
     </div>
   );

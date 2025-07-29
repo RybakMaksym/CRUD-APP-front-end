@@ -9,17 +9,19 @@ import { useDeleteProfileByIdMutation } from '@/redux/profile/profile-api';
 
 type DeleteProfileButtonProps = {
   profileId: string;
+  onConfirm?: () => void;
 };
 
-function DeleteProfileButton({ profileId }: DeleteProfileButtonProps) {
+function DeleteProfileButton(props: DeleteProfileButtonProps) {
   const [deleteProfile] = useDeleteProfileByIdMutation();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
-    const res = await deleteProfile(profileId);
+    const res = await deleteProfile(props.profileId);
 
     if (res.data) {
       setIsOpen(false);
+      props.onConfirm?.();
     }
   };
 

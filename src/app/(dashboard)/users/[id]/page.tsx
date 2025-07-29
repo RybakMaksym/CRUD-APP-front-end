@@ -2,9 +2,9 @@
 
 import { useParams } from 'next/navigation';
 
+import UserDetails from '@/components/features/UserDetails/UserDetails';
 import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import UserDetails from '@/components/ui/UserDetails/UserDetails';
 import { useGetUserByIdQuery } from '@/redux/user/user-api';
 import styles from '@/styles/profiles-users-page.module.scss';
 import pageStyles from '@/styles/user-details-page.module.scss';
@@ -14,10 +14,19 @@ function UserDetailsPage() {
 
   const { data: user, isLoading, isError } = useGetUserByIdQuery(id as string);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className={`${styles.container} ${pageStyles.page}`}>
+        <Loader />
+      </div>
+    );
 
   if (isError || !user) {
-    return <Paragraph color="error">User not found</Paragraph>;
+    return (
+      <div className={`${styles.container} ${pageStyles.page}`}>
+        <Paragraph color="error">User not found</Paragraph>;
+      </div>
+    );
   }
 
   return (

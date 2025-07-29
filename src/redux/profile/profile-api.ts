@@ -3,25 +3,37 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from '@/redux/queries/base-query';
 import type { FilterableFields, FilterFields } from '@/types/filter.type';
 import type { IMessageResponse } from '@/types/messages';
-import type { ISearch } from '@/types/navigation';
+import type {
+  IPaginatedResponse,
+  IPagination,
+  ISearch,
+} from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
-import type { IFieldQueryParams, IFormWithIdParams } from '@/types/request';
+import type {
+  IFormWithIdParams,
+  IPaginationWithIdParams,
+  IFieldQueryParams,
+} from '@/types/request';
+import type { IStatsResponse } from '@/types/response';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
   baseQuery,
   tagTypes: ['Profile'],
   endpoints: (builder) => ({
-    myProfiles: builder.query<IProfile[], void>({
-      query: () => ({
-        url: `/profile/my-profiles`,
+    myProfiles: builder.query<IPaginatedResponse<IProfile>, IPagination>({
+      query: ({ page, limit }) => ({
+        url: `/profile/my-profiles?page=${page}&limit=${limit}`,
         method: 'GET',
       }),
       providesTags: [{ type: 'Profile', id: 'LIST' }],
     }),
-    getProfilesByUserId: builder.query<IProfile[], string>({
-      query: (id) => ({
-        url: `/profile/profiles/${id}`,
+    getProfilesByUserId: builder.query<
+      IPaginatedResponse<IProfile>,
+      IPaginationWithIdParams
+    >({
+      query: ({ id, pagination }) => ({
+        url: `/profile/profiles/${id}?page=${pagination.page}&limit=${pagination.limit}`,
         method: 'GET',
       }),
       providesTags: [{ type: 'Profile', id: 'USERS-PROFILES' }],
@@ -47,6 +59,13 @@ export const profileApi = createApi({
         method: 'GET',
       }),
     }),
+    profilesStats: builder.query<IStatsResponse, void>({
+      query: () => ({
+        url: `/profile/stats`,
+        method: 'GET',
+      }),
+      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }
+    }),
     createProfile: builder.mutation<IProfile, IFormWithIdParams>({
       query: ({ id, formData }) => ({
         url: `/profile/create/${id}`,
@@ -56,6 +75,7 @@ export const profileApi = createApi({
       invalidatesTags: () => [
         { type: 'Profile', id: 'LIST' },
         { type: 'Profile', id: 'USERS-PROFILES' },
+        { type: 'Profile', id: 'PROFILES-STATS' },
       ],
     }),
     updateProfileById: builder.mutation<IProfile, IFormWithIdParams>({
@@ -77,6 +97,7 @@ export const profileApi = createApi({
       invalidatesTags: () => [
         { type: 'Profile', id: 'LIST' },
         { type: 'Profile', id: 'USERS-PROFILES' },
+        { type: 'Profile', id: 'PROFILES-STATS' },
       ],
     }),
   }),
@@ -88,6 +109,7 @@ export const {
   useSearchProfilesQuery,
   useLazyGetSuggestionsQuery,
   useLazyFilterProfilesQuery,
+  useProfilesStatsQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,
   useDeleteProfileByIdMutation,

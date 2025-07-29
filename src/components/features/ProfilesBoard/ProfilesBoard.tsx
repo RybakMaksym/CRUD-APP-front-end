@@ -3,8 +3,9 @@
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
+import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButto;
 import FilterInput from '@/components/features/FilterInput/FilterInput';
+import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
 import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
 import Headline from '@/components/ui/Headline/Headline';
@@ -14,10 +15,13 @@ import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
 import { FilterOption } from '@/enums/filter.enums';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
+import { useSearch } from '@/hooks/use-search';
+import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
 import {
   useMyProfilesQuery,
   useSearchProfilesQuery,
 } from '@/redux/profile/profile-api';
+import type { IProfile } from '@/types/profile';
 
 function ProfilesBoard() {
   const {
@@ -32,17 +36,15 @@ function ProfilesBoard() {
     suggestions,
   } = useProfileFilter();
 
+  const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
+    useSearch();
+  
+  const [page, setPage] = useState(1);
+  const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState(false);
-
-  const {
-    data: allProfiles,
-    isLoading: isAllProfilesLoading,
-    isError: isAllProfilesError,
-  } = useMyProfilesQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    skip: activeSearch || filter !== FilterOption.DEFAULT,
-  });
 
   const {
     data: searchedProfiles,
@@ -50,17 +52,14 @@ function ProfilesBoard() {
     isError: isErrorSearch,
   } = useSearchProfilesQuery({ query: searchQuery }, { skip: !activeSearch });
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setActiveSearch(!!searchQuery.trim());
-    }
-  };
-
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setActiveSearch(false);
-    }
-  }, [searchQuery]);
+  const {
+    data: paginatedData,
+    isLoading: isAllProfilesLoading,
+    isError: isAllProfilesError,
+  } = useMyProfilesQuery(
+    { page, limit: PROFILES_PAGE_LIMIT },
+    { skip: activeSearch || filter !== FilterOption.DEFAULT },
+  );
 
   const profiles = activeSearch
     ? searchedProfiles
@@ -79,21 +78,57 @@ function ProfilesBoard() {
     : filter === FilterOption.DEFAULT
       ? isAllProfilesError
       : isFilterError;
+  
+  const isInitialLoading = isAllProfilesLoading && page === 1;
 
-  if (isLoading) return <Loader />;
+  useEffect(() => {
+    if (!paginatedData || isAllProfilesLoading || activeSearch) return;
+
+    setAllProfiles((prev) => {
+      const existingIds = new Set(prev.map((p) => p.id));
+      const unique = paginatedData.data.filter((p) => !existingIds.has(p.id));
+
+      return [...prev, ...unique];
+    });
+
+    setIsFetchingMore(false);
+  }, [paginatedData, isAllProfilesLoading, activeSearch]);
+
+  const onProfileChanged = () => {
+    setAllProfiles([]);
+    setPage(1);
+    setIsFetchingMore(true);
+  };
+
+  const profiles = activeSearch ? (searchedProfiles ?? []) : allProfiles;
+  const isLastPage = !paginatedData?.nextPage;
+  const canLoadMore = !activeSearch && !isAllProfilesLoading && !isLastPage;
 
   if (isError) {
-    return <Paragraph color="error">Could not find any profiles</Paragraph>;
+    return (
+      <div className={styles.board}>
+        <Paragraph color="error">Could not find any profiles</Paragraph>
+      </div>
+    );
+  }
+
+  if (isInitialLoading || isLoading) {
+    return (
+      <div className={styles.board}>
+        <Loader />
+      </div>
+    );
   }
 
   return (
     <div className={styles.board}>
       <Headline color="dark">Profiles</Headline>
+
       <div className={styles.search}>
         <SearchInput
           placeholder="Search"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
 
@@ -116,14 +151,28 @@ function ProfilesBoard() {
           }}
         />
       </div>
-      <div className={styles.profiles}>
-        {profiles?.map((profile) => (
-          <ProfileCard key={profile.id} profile={profile} />
-        ))}
-        {!activeSearch && filter === FilterOption.DEFAULT && (
-          <CreateProfileButton />
-        )}
-      </div>
+      <InfinityScrollWrapper
+        onLoadMore={() => {
+          if (isFetchingMore) return;
+
+          setIsFetchingMore(true);
+          setPage((prev) => prev + 1);
+        }}
+        additionalConditions={canLoadMore}
+      >
+        <div className={styles.profiles}>
+          {profiles.map((profile) => (
+            <ProfileCard
+              key={profile.id}
+              profile={profile}
+              actionSuccess={onProfileChanged}
+            />
+          ))}
+          {!activeSearch && (
+            <CreateProfileButton onConfirm={onProfileChanged} />
+          )}
+        </div>
+      </InfinityScrollWrapper>
     </div>
   );
 }
