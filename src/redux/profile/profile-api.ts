@@ -12,6 +12,7 @@ import type {
   IFormWithIdParams,
   IPaginationWithIdParams,
 } from '@/types/request';
+import type { IStatsResponse } from '@/types/response';
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -41,6 +42,13 @@ export const profileApi = createApi({
         method: 'GET',
       }),
     }),
+    profilesStats: builder.query<IStatsResponse, void>({
+      query: () => ({
+        url: `/profile/stats`,
+        method: 'GET',
+      }),
+      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }],
+    }),
     createProfile: builder.mutation<IProfile, IFormWithIdParams>({
       query: ({ id, formData }) => ({
         url: `/profile/create/${id}`,
@@ -50,6 +58,7 @@ export const profileApi = createApi({
       invalidatesTags: () => [
         { type: 'Profile', id: 'LIST' },
         { type: 'Profile', id: 'USERS-PROFILES' },
+        { type: 'Profile', id: 'PROFILES-STATS' },
       ],
     }),
     updateProfileById: builder.mutation<IProfile, IFormWithIdParams>({
@@ -71,6 +80,7 @@ export const profileApi = createApi({
       invalidatesTags: () => [
         { type: 'Profile', id: 'LIST' },
         { type: 'Profile', id: 'USERS-PROFILES' },
+        { type: 'Profile', id: 'PROFILES-STATS' },
       ],
     }),
   }),
@@ -80,6 +90,7 @@ export const {
   useMyProfilesQuery,
   useGetProfilesByUserIdQuery,
   useSearchProfilesQuery,
+  useProfilesStatsQuery,
   useCreateProfileMutation,
   useUpdateProfileByIdMutation,
   useDeleteProfileByIdMutation,
