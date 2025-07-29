@@ -3,7 +3,7 @@
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButto;
+import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import FilterInput from '@/components/features/FilterInput/FilterInput';
 import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
@@ -38,13 +38,10 @@ function ProfilesBoard() {
 
   const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
     useSearch();
-  
+
   const [page, setPage] = useState(1);
   const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeSearch, setActiveSearch] = useState(false);
 
   const {
     data: searchedProfiles,
@@ -60,26 +57,6 @@ function ProfilesBoard() {
     { page, limit: PROFILES_PAGE_LIMIT },
     { skip: activeSearch || filter !== FilterOption.DEFAULT },
   );
-
-  const profiles = activeSearch
-    ? searchedProfiles
-    : filter === FilterOption.DEFAULT
-      ? allProfiles
-      : filteredProfiles;
-
-  const isLoading = activeSearch
-    ? isLoadingSearch
-    : filter === FilterOption.DEFAULT
-      ? isAllProfilesLoading
-      : isFiltering;
-
-  const isError = activeSearch
-    ? isErrorSearch
-    : filter === FilterOption.DEFAULT
-      ? isAllProfilesError
-      : isFilterError;
-  
-  const isInitialLoading = isAllProfilesLoading && page === 1;
 
   useEffect(() => {
     if (!paginatedData || isAllProfilesLoading || activeSearch) return;
@@ -100,7 +77,25 @@ function ProfilesBoard() {
     setIsFetchingMore(true);
   };
 
-  const profiles = activeSearch ? (searchedProfiles ?? []) : allProfiles;
+  const profiles = activeSearch
+    ? searchedProfiles
+    : filter === FilterOption.DEFAULT
+      ? allProfiles
+      : filteredProfiles;
+
+  const isLoading = activeSearch
+    ? isLoadingSearch
+    : filter === FilterOption.DEFAULT
+      ? isAllProfilesLoading
+      : isFiltering;
+
+  const isError = activeSearch
+    ? isErrorSearch
+    : filter === FilterOption.DEFAULT
+      ? isAllProfilesError
+      : isFilterError;
+
+  const isInitialLoading = isAllProfilesLoading && page === 1;
   const isLastPage = !paginatedData?.nextPage;
   const canLoadMore = !activeSearch && !isAllProfilesLoading && !isLastPage;
 
@@ -161,14 +156,14 @@ function ProfilesBoard() {
         additionalConditions={canLoadMore}
       >
         <div className={styles.profiles}>
-          {profiles.map((profile) => (
+          {profiles?.map((profile) => (
             <ProfileCard
               key={profile.id}
               profile={profile}
               actionSuccess={onProfileChanged}
             />
           ))}
-          {!activeSearch && (
+          {!activeSearch && filter === FilterOption.DEFAULT && (
             <CreateProfileButton onConfirm={onProfileChanged} />
           )}
         </div>

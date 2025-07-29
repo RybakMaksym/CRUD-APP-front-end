@@ -10,9 +10,9 @@ import type {
 } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
 import type {
+  IFieldQueryParams,
   IFormWithIdParams,
   IPaginationWithIdParams,
-  IFieldQueryParams,
 } from '@/types/request';
 import type { IStatsResponse } from '@/types/response';
 
@@ -64,7 +64,7 @@ export const profileApi = createApi({
         url: `/profile/stats`,
         method: 'GET',
       }),
-      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }
+      providesTags: [{ type: 'Profile', id: 'PROFILES-STATS' }],
     }),
     createProfile: builder.mutation<IProfile, IFormWithIdParams>({
       query: ({ id, formData }) => ({
