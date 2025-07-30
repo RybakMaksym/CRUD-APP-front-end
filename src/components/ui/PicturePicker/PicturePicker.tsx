@@ -55,6 +55,7 @@ function PicturePicker({
           accept={ALLOWED_IMAGE_TYPES}
           className={styles.input}
           onChange={handleChange}
+          data-testid="avatar-upload"
         />
       </label>
       <Paragraph color={labalColor}>Choose picture</Paragraph>

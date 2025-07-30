@@ -20,6 +20,7 @@ function CustomPopper(props: PopperProps) {
         borderRadius: '8px',
         zIndex: 1300,
       }}
+      data-testId="popper-content"
     />
   );
 }
