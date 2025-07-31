@@ -13,16 +13,18 @@ import {
 
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  prewiew?: string;
+  preview?: string;
   labalColor?: 'white' | 'dark';
 };
 
 function PicturePicker({
   onChange,
-  prewiew,
+  preview,
   labalColor = 'white',
 }: PictureInputProps) {
-  const [preview, setPreview] = useState<string | undefined>(prewiew);
+  const [avatarPreview, setAvatarPreview] = useState<string | undefined>(
+    preview,
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -34,7 +36,7 @@ function PicturePicker({
         return;
       }
 
-      setPreview(URL.createObjectURL(file));
+      setAvatarPreview(URL.createObjectURL(file));
     }
 
     onChange(event);
@@ -44,7 +46,7 @@ function PicturePicker({
     <div className={styles.wrapper}>
       <label className={styles.label}>
         <Image
-          src={preview || DEFAULT_AVATAR}
+          src={avatarPreview || DEFAULT_AVATAR}
           alt="Avatar preview"
           width={100}
           height={100}

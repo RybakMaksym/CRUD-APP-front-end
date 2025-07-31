@@ -4,6 +4,10 @@ import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { DEFAULT_AVATAR, MAX_FILE_SIZE_MB } from '@/lib/constants/avatar';
 
 describe('PicturePicker', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should render default avatar when no preview is provided', () => {
     render(<PicturePicker onChange={jest.fn()} />);
     const avatar = screen.getByAltText('Avatar preview') as HTMLImageElement;
@@ -15,7 +19,7 @@ describe('PicturePicker', () => {
   it('should render preview avatar if provided', () => {
     const previewUrl = '/avatars/john.png';
 
-    render(<PicturePicker onChange={jest.fn()} prewiew={previewUrl} />);
+    render(<PicturePicker onChange={jest.fn()} preview={previewUrl} />);
     const avatar = screen.getByAltText('Avatar preview') as HTMLImageElement;
 
     expect(avatar).toBeInTheDocument();
@@ -24,14 +28,17 @@ describe('PicturePicker', () => {
 
   it('should call onChange and updates preview when valid image is selected', () => {
     const mockOnChange = jest.fn();
-    const content = new Array(2048).fill('a').join('');
-    const file = new File([content], 'avatar.png', { type: 'image/png' });
+    const file = new File(['dummy'], 'avatar.png', { type: 'image/png' });
+    const fakeUrl = 'blob:http://localhost/fake-url';
+    global.URL.createObjectURL = jest.fn(() => fakeUrl);
 
     render(<PicturePicker onChange={mockOnChange} />);
     const input = screen.getByTestId('avatar-upload') as HTMLInputElement;
-    fireEvent.change(input, { target: { FileSystem: [file] } });
+    fireEvent.change(input, { target: { files: [file] } });
+    const avatar = screen.getByAltText('Avatar preview') as HTMLImageElement;
 
     expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(avatar.src).toBe(fakeUrl);
   });
 
   it('should show alert if image exceeds max size and does not call onChange', () => {
