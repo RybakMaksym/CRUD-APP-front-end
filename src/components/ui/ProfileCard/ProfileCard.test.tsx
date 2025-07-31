@@ -40,8 +40,9 @@ function renderWithRedux(ui: React.ReactElement) {
 }
 
 describe('ProfileCard', () => {
-  it('renders profile data correctly', () => {
+  it('should render profile data correctly', () => {
     renderWithRedux(<ProfileCard profile={mockProfile} />);
+    const avatar = screen.getByAltText('Profile avatar') as HTMLImageElement;
 
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('male')).toBeInTheDocument();
@@ -50,13 +51,11 @@ describe('ProfileCard', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('USA')).toBeInTheDocument();
     expect(screen.getByText('New York')).toBeInTheDocument();
-
-    const avatar = screen.getByAltText('Profile avatar') as HTMLImageElement;
     expect(avatar).toBeInTheDocument();
     expect(decodeURIComponent(avatar.src)).toContain(DEFAULT_AVATAR);
   });
 
-  it('renders buttons', () => {
+  it('should render buttons', () => {
     renderWithRedux(<ProfileCard profile={mockProfile} />);
 
     expect(screen.getByText(/edit/i)).toBeInTheDocument();

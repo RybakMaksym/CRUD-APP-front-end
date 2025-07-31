@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import CustomModal from '@/components/ui/CustomModal/CustomModal';
 
 describe('CustomModal', () => {
-  it('renders children when open', () => {
+  it('should render children when open', () => {
     render(
       <CustomModal isOpen={true}>
         <div>Test Content</div>
@@ -13,7 +13,7 @@ describe('CustomModal', () => {
     expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
-  it('does not render content when closed', () => {
+  it('should not render content when closed', () => {
     render(
       <CustomModal isOpen={false}>
         <div>Hidden Content</div>

@@ -9,12 +9,12 @@ describe('StatsBar', () => {
     count: 42,
   };
 
-  it('renders the statistics bar', () => {
+  it('should render the statistics bar', () => {
     render(<StatsBar {...defaultProps} />);
-
     const icon = screen.getByAltText('Profiles icon') as HTMLImageElement;
     const label = screen.getByText('Profiles');
     const count = screen.getByText('42');
+
     expect(icon).toBeInTheDocument();
     expect(icon.getAttribute('src')).toContain('/icon.svg');
     expect(label).toBeInTheDocument();

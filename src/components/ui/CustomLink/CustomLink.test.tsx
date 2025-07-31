@@ -7,14 +7,14 @@ describe('CustomLink', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the correct href', () => {
+  it('should render the correct href', () => {
     render(<CustomLink href="/dashboard">Dashboard</CustomLink>);
 
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByRole('link')).toHaveAttribute('href', '/dashboard');
   });
 
-  it('renders the red link when variant is not provided', () => {
+  it('should render the red link when variant is not provided', () => {
     render(<CustomLink href="/dashboard">Dashboard</CustomLink>);
 
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('CustomLink', () => {
     expect(screen.getByText('Dashboard')).toHaveClass('red');
   });
 
-  it('renders the white link when variant is provided', () => {
+  it('should render the white link when variant is provided', () => {
     render(
       <CustomLink href="/dashboard" linkVariant="white">
         Dashboard

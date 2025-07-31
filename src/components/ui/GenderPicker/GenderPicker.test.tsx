@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Form, Formik } from 'formik';
 
 import GenderPicker from '@/components/ui/GenderPicker/GenderPicker';
 
 describe('GenderPicker', () => {
-  it('renders gender radio buttons with labels', () => {
+  it('should render gender radio buttons with labels', () => {
     render(
       <Formik initialValues={{ gender: '' }} onSubmit={() => {}}>
         <Form>
@@ -12,17 +13,17 @@ describe('GenderPicker', () => {
         </Form>
       </Formik>,
     );
-
-    expect(screen.getByText('Gender:')).toBeInTheDocument();
     const maleRadio = screen.getByDisplayValue('male');
     const femaleRadio = screen.getByDisplayValue('female');
+
+    expect(screen.getByText('Gender:')).toBeInTheDocument();
     expect(maleRadio).toBeInTheDocument();
     expect(femaleRadio).toBeInTheDocument();
     expect(maleRadio).not.toBeChecked();
     expect(femaleRadio).not.toBeChecked();
   });
 
-  it('allows selecting male and female radios', async () => {
+  it('should allow selecting male and female radios', async () => {
     render(
       <Formik initialValues={{ gender: '' }} onSubmit={() => {}}>
         <Form>
@@ -30,15 +31,13 @@ describe('GenderPicker', () => {
         </Form>
       </Formik>,
     );
-
     const maleRadio = screen.getByDisplayValue('male');
     const femaleRadio = screen.getByDisplayValue('female');
 
-    fireEvent.click(maleRadio);
+    await userEvent.click(maleRadio);
     expect(maleRadio).toBeChecked();
     expect(femaleRadio).not.toBeChecked();
-
-    fireEvent.click(femaleRadio);
+    await userEvent.click(femaleRadio);
     expect(femaleRadio).toBeChecked();
     expect(maleRadio).not.toBeChecked();
   });

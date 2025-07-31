@@ -28,13 +28,13 @@ describe('UserCard', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the card correctly', () => {
+  it('should render the card correctly', () => {
     render(<UserCard user={mockUser} />);
-
     const avatar = screen.getByAltText('User avatar') as HTMLImageElement;
     const username = screen.getByText('Jane Doe');
     const email = screen.getByText('jane@example.com');
     const profilesCount = screen.getByText('2 profiles');
+
     expect(avatar).toBeInTheDocument();
     expect(decodeURIComponent(avatar.src)).toContain(DEFAULT_AVATAR);
     expect(username).toBeInTheDocument();
@@ -42,9 +42,8 @@ describe('UserCard', () => {
     expect(profilesCount).toBeInTheDocument();
   });
 
-  it('navigates to user detail page on click', () => {
+  it('should navigate to user detail page on click', () => {
     render(<UserCard user={mockUser} />);
-
     const card = screen.getByText('Jane Doe').closest('div')!;
     fireEvent.click(card);
 

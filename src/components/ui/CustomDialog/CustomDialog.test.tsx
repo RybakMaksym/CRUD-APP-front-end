@@ -11,7 +11,7 @@ describe('CustomDialog', () => {
     jest.clearAllMocks();
   });
 
-  it('renders dialog with title when open', () => {
+  it('should render dialog with title when open', () => {
     render(
       <CustomDialog
         title={title}
@@ -26,7 +26,7 @@ describe('CustomDialog', () => {
     expect(screen.getByText('No')).toBeInTheDocument();
   });
 
-  it('does not render when isOpen is false', () => {
+  it('should not render when isOpen is false', () => {
     render(
       <CustomDialog
         title={title}
@@ -39,7 +39,7 @@ describe('CustomDialog', () => {
     expect(screen.queryByText(title)).not.toBeInTheDocument();
   });
 
-  it('calls onConfirm when Yes is clicked', () => {
+  it('should call onConfirm when Yes is clicked', () => {
     render(
       <CustomDialog
         title={title}
@@ -48,13 +48,13 @@ describe('CustomDialog', () => {
         onConfirm={onConfirm}
       />,
     );
-
     fireEvent.click(screen.getByText('Yes'));
+
     expect(onConfirm).toHaveBeenCalledTimes(1);
     expect(onClose).not.toHaveBeenCalled();
   });
 
-  it('calls onClose when No is clicked', () => {
+  it('should call onClose when No is clicked', () => {
     render(
       <CustomDialog
         title={title}
@@ -63,8 +63,8 @@ describe('CustomDialog', () => {
         onConfirm={onConfirm}
       />,
     );
-
     fireEvent.click(screen.getByText('No'));
+
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(onConfirm).not.toHaveBeenCalled();
   });

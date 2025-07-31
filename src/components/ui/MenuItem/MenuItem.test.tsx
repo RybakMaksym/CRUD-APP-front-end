@@ -12,7 +12,7 @@ describe('MenuItem', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the label and icon when iconUrl is provided', () => {
+  it('should render the label and icon when iconUrl is provided', () => {
     (usePathname as jest.Mock).mockReturnValue('/dashboard');
 
     render(
@@ -27,7 +27,7 @@ describe('MenuItem', () => {
     expect(screen.getByAltText('Dashboard icon')).toBeInTheDocument();
   });
 
-  it('renders only the label when iconUrl is not provided', () => {
+  it('should render only the label when iconUrl is not provided', () => {
     (usePathname as jest.Mock).mockReturnValue('/dashboard');
 
     render(<MenuItem label="Dashboard" path="/dashboard" />);
@@ -36,7 +36,7 @@ describe('MenuItem', () => {
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
-  it('applies active class when pathname matches the path', () => {
+  it('should applie active class when pathname matches the path', () => {
     (usePathname as jest.Mock).mockReturnValue('/dashboard');
 
     const { container } = render(
@@ -46,7 +46,7 @@ describe('MenuItem', () => {
     expect(container.firstChild).toHaveClass('active');
   });
 
-  it('does not applies active class when pathname matches the path', () => {
+  it('should not applies active class when pathname matches the path', () => {
     (usePathname as jest.Mock).mockReturnValue('/dashboard');
 
     const { container } = render(

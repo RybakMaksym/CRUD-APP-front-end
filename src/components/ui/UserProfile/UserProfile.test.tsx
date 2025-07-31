@@ -13,7 +13,7 @@ describe('UserProfile', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the avatar and username', () => {
+  it('should render the avatar and username', () => {
     (useAppSelector as jest.Mock).mockReturnValue({
       username: 'John',
       avatarUrl: '/avatars/john.png',
@@ -28,7 +28,7 @@ describe('UserProfile', () => {
     expect(decodeURIComponent(avatar.src)).toContain('/avatars/john.png');
   });
 
-  it('renders default avatar if avatarUrl is null', () => {
+  it('should render default avatar if avatarUrl is null', () => {
     (useAppSelector as jest.Mock).mockReturnValue({
       username: 'John',
       avatarUrl: null,
@@ -41,7 +41,7 @@ describe('UserProfile', () => {
     expect(decodeURIComponent(avatar.src)).toContain(DEFAULT_AVATAR);
   });
 
-  it('returns null if user has no username', () => {
+  it('should render nothing if user has no username', () => {
     (useAppSelector as jest.Mock).mockReturnValue({
       username: '',
       avatarUrl: null,

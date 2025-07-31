@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Form, Formik } from 'formik';
 
 import CustomInput from '@/components/ui/CustomInput/CustomInput';
@@ -7,7 +8,7 @@ describe('CustomInput', () => {
   const initialValues = { email: '' };
   const onSubmit = jest.fn();
 
-  it('renders input with correct class and default value', () => {
+  it('should render input with correct class and default value', () => {
     render(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form>
@@ -15,15 +16,15 @@ describe('CustomInput', () => {
         </Form>
       </Formik>,
     );
-
     const input = screen.getByPlaceholderText(
       'Enter email',
     ) as HTMLInputElement;
+
     expect(input).toBeInTheDocument();
     expect(input.value).toBe('');
   });
 
-  it('updates value on change', () => {
+  it('should update value on change', async () => {
     render(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form>
@@ -31,15 +32,15 @@ describe('CustomInput', () => {
         </Form>
       </Formik>,
     );
-
     const input = screen.getByPlaceholderText(
       'Enter email',
     ) as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 'test@example.com' } });
+    await userEvent.type(input, 'test@example.com');
+
     expect(input.value).toBe('test@example.com');
   });
 
-  it('shows error message when input is blurred and validation fails', async () => {
+  it('should show error message when input is blurred and validation fails', async () => {
     const validate = (values: typeof initialValues) => {
       const errors: { email?: string } = {};
 
@@ -59,9 +60,10 @@ describe('CustomInput', () => {
         </Form>
       </Formik>,
     );
-
     const input = screen.getByPlaceholderText('Enter email');
-    fireEvent.blur(input);
+    const user = userEvent.setup();
+    await user.click(input);
+    await user.tab();
 
     expect(await screen.findByText('Email is required')).toBeInTheDocument();
   });
