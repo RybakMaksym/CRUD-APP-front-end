@@ -10,7 +10,7 @@ import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import { PAGES_URL } from '@/enums/pages-url';
-import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import {
   LOG_IN_FORM_DEFAULT_VALUES,
   LOG_IN_FORM_SCHEMA,

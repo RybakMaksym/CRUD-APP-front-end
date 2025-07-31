@@ -11,7 +11,7 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { PAGES_URL } from '@/enums/pages-url';
 import { Role } from '@/enums/role';
-import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
 import { UPDATE_USER_FORM_SCHEMA } from '@/lib/constants/forms-validation';
@@ -86,7 +86,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
             onChange={(event) =>
               setFieldValue('avatar', event.target.files?.[0])
             }
-            prewiew={user.avatarUrl ?? DEFAULT_AVATAR}
+            preview={user.avatarUrl ?? DEFAULT_AVATAR}
             labalColor="dark"
           />
 

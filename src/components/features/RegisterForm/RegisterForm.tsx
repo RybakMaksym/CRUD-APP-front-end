@@ -12,7 +12,7 @@ import Headline from '@/components/ui/Headline/Headline';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { PAGES_URL } from '@/enums/pages-url';
-import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import {
   REGISTER_FORM_DEFAULT_VALUES,
   REGISTER_FORM_SCHEMA,

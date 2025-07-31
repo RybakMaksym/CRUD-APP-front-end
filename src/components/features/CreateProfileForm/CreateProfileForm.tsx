@@ -72,7 +72,7 @@ function CreateProfileForm({
                 setFieldValue('avatarUrl', event.target.files[0]);
               }
             }}
-            prewiew={
+            preview={
               typeof values.avatarUrl === 'string'
                 ? values.avatarUrl
                 : DEFAULT_AVATAR

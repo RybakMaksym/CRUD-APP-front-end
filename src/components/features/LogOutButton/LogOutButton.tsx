@@ -2,7 +2,7 @@
 
 import styles from '@/components/features/LogOutButton/LogOutButton.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { fullLogOut } from '@/redux/actions/full-log-out';
 import { useLogOutMutation } from '@/redux/auth/log-out-api';
 
