@@ -6,7 +6,7 @@ import { useState } from 'react';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
 import { PAGES_URL } from '@/enums/pages-url';
-import { useAppDispatch } from '@/hooks/use-app-dipatch';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { fullLogOut } from '@/redux/actions/full-log-out';
 import { useDeleteUserByIdMutation } from '@/redux/user/user-api';

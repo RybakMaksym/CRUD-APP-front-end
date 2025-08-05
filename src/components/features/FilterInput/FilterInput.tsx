@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from '@mui/material';
 import type { SyntheticEvent } from 'react';
 
-import CustomPopper from '@/components/ui/PopperComponent/PopperComponent';
+import CustomPopper from '@/components/ui/CustomPopper/CustomPopper';
 
 type FilterInputProps = {
   options: string[];

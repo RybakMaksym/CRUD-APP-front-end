@@ -15,8 +15,7 @@ const sizeMap = {
 } as const;
 
 function Headline({ children, size = '45px', color = 'white' }: HeadlineProps) {
-  const sizeClass = sizeMap[size] ?? styles.size45;
-  const classes = `${styles.headline} ${sizeClass} ${styles[color]}`;
+  const classes = `${styles.headline} ${sizeMap[size]} ${styles[color]}`;
 
   return <h1 className={classes}>{children}</h1>;
 }

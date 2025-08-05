@@ -1,8 +1,8 @@
 import type { SelectChangeEvent } from '@mui/material';
 import { MenuItem, Select } from '@mui/material';
 
+import type { FilterOption } from '@/enums/filter.enums';
 import { FILTERS } from '@/lib/constants/filters';
-import type { FilterOption } from '@/types/filter.type';
 
 type FilterSelectProps = {
   value: FilterOption;

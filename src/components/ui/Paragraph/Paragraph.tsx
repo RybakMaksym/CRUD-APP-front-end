@@ -18,7 +18,7 @@ function Paragraph({
   color = 'white',
   size = '21px',
 }: ParagraphProps) {
-  const sizeClass = sizeMap[size] ?? styles.size21;
+  const sizeClass = sizeMap[size];
   const classes = `${styles.paragraph} ${styles[color]} ${sizeClass}`;
 
   return <h1 className={classes}>{children}</h1>;

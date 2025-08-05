@@ -81,7 +81,7 @@ function UpdateProfileForm({
                 setFieldValue('avatarUrl', event.target.files[0]);
               }
             }}
-            prewiew={profile.avatarUrl ?? DEFAULT_AVATAR}
+            preview={profile.avatarUrl ?? DEFAULT_AVATAR}
             labalColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
