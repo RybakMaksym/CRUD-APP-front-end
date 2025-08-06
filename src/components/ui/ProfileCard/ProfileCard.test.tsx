@@ -6,7 +6,7 @@ import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import { Gender } from '@/enums/gender';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { formatDate } from '@/lib/helpers/format-date';
+import { formatDateToDots } from '@/lib/helpers/format-date';
 import { userReducer } from '@/redux/user/user-slice';
 import type { IProfile } from '@/types/profile';
 
@@ -47,7 +47,7 @@ describe('ProfileCard', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('male')).toBeInTheDocument();
     expect(
-      screen.getByText(formatDate(mockProfile.birthDate)),
+      screen.getByText(formatDateToDots(mockProfile.birthDate)),
     ).toBeInTheDocument();
     expect(screen.getByText('USA')).toBeInTheDocument();
     expect(screen.getByText('New York')).toBeInTheDocument();

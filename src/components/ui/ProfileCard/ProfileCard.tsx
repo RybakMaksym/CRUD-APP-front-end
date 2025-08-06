@@ -6,7 +6,7 @@ import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/ProfileCard/ProfileCard.module.scss';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { formatDate } from '@/lib/helpers/format-date';
+import { formatDateToDots } from '@/lib/helpers/format-date';
 import type { IProfile } from '@/types/profile';
 
 type ProfileCardProps = {
@@ -44,7 +44,7 @@ function ProfileCard(props: ProfileCardProps) {
         <div className={styles['card-column']}>
           <Paragraph size="18px">{props.profile.gender}</Paragraph>
           <Paragraph size="18px">
-            {formatDate(props.profile.birthDate)}
+            {formatDateToDots(props.profile.birthDate)}
           </Paragraph>
           <Paragraph size="18px">{props.profile.country}</Paragraph>
           <Paragraph size="18px">{props.profile.city}</Paragraph>

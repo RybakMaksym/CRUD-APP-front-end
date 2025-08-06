@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FilterOption } from '@/enums/filter.enums';
+import { FilterOption } from '@/enums/filter';
 import {
   useLazyFilterProfilesQuery,
   useLazyGetSuggestionsQuery,

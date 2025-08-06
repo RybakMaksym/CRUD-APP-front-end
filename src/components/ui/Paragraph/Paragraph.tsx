@@ -4,13 +4,14 @@ import styles from '@/components/ui/Paragraph/Paragraph.module.scss';
 
 type ParagraphProps = {
   children: ReactNode;
-  color?: 'white' | 'dark' | 'error';
-  size?: '21px' | '18px';
+  color?: 'white' | 'dark' | 'blue' | 'error';
+  size?: '21px' | '18px' | '14px';
 };
 
 const sizeMap = {
   '21px': styles.size21,
   '18px': styles.size18,
+  '14px': styles.size14,
 } as const;
 
 function Paragraph({

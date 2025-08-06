@@ -1,4 +1,4 @@
-import { FilterOption } from '@/enums/filter.enums';
+import { FilterOption } from '@/enums/filter';
 
 export const FILTERS = [
   {

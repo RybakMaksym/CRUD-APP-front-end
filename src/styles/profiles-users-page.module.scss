@@ -1,7 +1,14 @@
 .container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-image: url('/assets/backgrounds/users-background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.notifications {
+  align-self: flex-end;
+  padding: 25px 39px 0px 0px;
 }
