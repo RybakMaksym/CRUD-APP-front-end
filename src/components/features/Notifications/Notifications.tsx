@@ -8,11 +8,20 @@ import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
 import Notification from '@/components/ui/Notification/Notification';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 import { DEFAULT_NOTIFICATIONS_PAGE_LIMIT } from '@/lib/constants/notification';
 import { useMyNotificationsQuery } from '@/redux/notification/notification-api';
+import notificationSelectors from '@/redux/notification/notification-selectors';
+import { setHasNewNotification } from '@/redux/notification/notification-slice';
 import type { INotification } from '@/types/notification';
 
-function Notifications() {
+type NotificationsProps = {
+  shouldRefetch: boolean;
+};
+
+function Notifications(props: NotificationsProps) {
+  const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const [allNotifications, setAllNotifications] = useState<INotification[]>([]);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -21,10 +30,18 @@ function Notifications() {
     data: paginatedData,
     isLoading: isAllNotificationsLoading,
     isError: isAllNotificationsError,
+    refetch,
   } = useMyNotificationsQuery({
     page,
     limit: DEFAULT_NOTIFICATIONS_PAGE_LIMIT,
   });
+
+  useEffect(() => {
+    if (props.shouldRefetch) {
+      refetch();
+      dispatch(setHasNewNotification(false));
+    }
+  }, [props.shouldRefetch, refetch, dispatch]);
 
   useEffect(() => {
     if (!paginatedData || isAllNotificationsLoading) return;
@@ -38,6 +55,23 @@ function Notifications() {
 
     setIsFetchingMore(false);
   }, [paginatedData, isAllNotificationsLoading]);
+
+  const newNotifications = useAppSelector(
+    notificationSelectors.getNewNotifications,
+  );
+
+  useEffect(() => {
+    if (!newNotifications.length) return;
+
+    setAllNotifications((prev) => {
+      const existingIds = new Set(prev.map((n) => n.id));
+      const newOnes = newNotifications.filter((n) => !existingIds.has(n.id));
+
+      if (!newOnes.length) return prev;
+
+      return [...newOnes, ...prev];
+    });
+  }, [newNotifications]);
 
   const isInitialLoading = isAllNotificationsLoading && page === 1;
   const isLastPage = !paginatedData?.nextPage;

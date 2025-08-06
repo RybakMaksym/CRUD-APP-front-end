@@ -1,30 +1,73 @@
 'use client';
 
-import { Menu } from '@mui/material';
-import { useState } from 'react';
+import { Badge, Menu } from '@mui/material';
+import { useEffect, useState } from 'react';
+import type { Socket } from 'socket.io-client';
 
 import Notifications from '@/components/features/Notifications/Notifications';
 import CustomIconButton from '@/components/ui/CustomIconButton/CustomIconButton';
+import { NotificationEvents } from '@/enums/notification';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getSocket } from '@/lib/web-sockets/socket';
+import authSelectors from '@/redux/auth/auth-selectors';
+import notificationSelectors from '@/redux/notification/notification-selectors';
+import { addNotification } from '@/redux/notification/notification-slice';
+import userSelectors from '@/redux/user/user-selectors';
+import type { INotification } from '@/types/notification';
 
 function NotificationButton() {
+  const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
+  const hasNew = useAppSelector(notificationSelectors.getHasNewNotifications);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    setShouldRefetch(false);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setShouldRefetch(true);
   };
 
   const open = Boolean(anchorEl);
 
+  const token = useAppSelector(authSelectors.getRefreshToken);
+  const userId = useAppSelector(userSelectors.getUserId);
+
+  useEffect(() => {
+    if (!token || !userId) return;
+
+    const socket: Socket | undefined = getSocket();
+
+    socket?.on(
+      NotificationEvents.NOTIFICATION,
+      (notification: INotification) => {
+        dispatch(addNotification(notification));
+      },
+    );
+
+    return () => {
+      socket?.off(NotificationEvents.NOTIFICATION);
+    };
+  }, [token, userId, dispatch]);
+
   return (
     <>
-      <CustomIconButton
-        onClick={handleOpen}
-        icon="/assets/icons/notifications.png"
-      />
+      <Badge
+        color="error"
+        variant="dot"
+        invisible={!hasNew}
+        overlap="circular"
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <CustomIconButton
+          onClick={handleOpen}
+          icon="/assets/icons/notifications.png"
+        />
+      </Badge>
 
       <Menu
         anchorEl={anchorEl}
@@ -49,7 +92,7 @@ function NotificationButton() {
           horizontal: 'right',
         }}
       >
-        <Notifications />
+        <Notifications shouldRefetch={shouldRefetch} />
       </Menu>
     </>
   );

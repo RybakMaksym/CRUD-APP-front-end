@@ -6,4 +6,10 @@ export interface INotification {
   message: string;
   createdAt: Date;
   ownerId: string;
+  isNew?: boolean;
 }
+
+export type INotificationState = {
+  hasNew: boolean;
+  notifications: INotification[];
+};

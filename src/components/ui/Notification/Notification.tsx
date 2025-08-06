@@ -16,8 +16,10 @@ const ICONS = {
 };
 
 function Notification(props: NotificationProps) {
+  const classes = `${styles.notification} ${props.notification.isNew && styles.new}`;
+
   return (
-    <div className={styles.notification}>
+    <div className={classes}>
       <Image
         src={ICONS[props.notification.type]}
         alt="create profile icon"
