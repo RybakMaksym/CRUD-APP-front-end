@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 
 import ClientProviders from '@/providers/ClientProviders';
-import SocketProvider from '@/providers/SocketProvider';
 
 const primaryFont = Open_Sans({
   subsets: ['latin'],
@@ -24,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${primaryFont.variable}`}>
-        <ClientProviders>
-          <SocketProvider>{children}</SocketProvider>
-        </ClientProviders>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

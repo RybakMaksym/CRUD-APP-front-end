@@ -1,39 +1,40 @@
-/**
- * Formats a given date into a string with the format "DD.MM.YYYY".
- *
- * @param {Date | string} date - The date to format. Can be a Date object or a date string.
- * @returns {string} A formatted date string in "DD.MM.YYYY" format.
- *
- * @example
- * formatDateToDots(new Date(2024, 0, 5)) // "05.01.2024"
- * formatDateToDots("2025-07-17")         // "17.07.2025"
- */
-export function formatDateToDots(date: Date | string): string {
-  const d = new Date(date);
+type DateFormat = 'DD.MM.YYYY' | 'D Mon YYYY';
 
-  const day = d.getDate().toString().padStart(2, '0');
-  const month = (d.getMonth() + 1).toString().padStart(2, '0');
-  const year = d.getFullYear();
-
-  return `${day}.${month}.${year}`;
+interface FormatDateOptions {
+  format?: DateFormat;
 }
 
 /**
- * Formats a given date into a string with the format "D Mon YYYY", e.g. "12 Jan 2024".
+ * Formats a given date into a string based on the provided format.
  *
  * @param {Date | string} date - The date to format. Can be a Date object or a date string.
- * @returns {string} A formatted date string in "D Mon YYYY" format.
+ * @param {FormatDateOptions} options - Optional formatting options.
+ * @returns {string} A formatted date string.
  *
  * @example
- * formatDateToText(new Date(2024, 0, 12)) // "12 Jan 2024"
- * formatDateToText("2025-07-17")          // "17 Jul 2025"
+ * formatDate("2025-07-17")                            // "17.07.2025"
+ * formatDate("2025-07-17", { format: 'DD.MM.YYYY' })  // "17.07.2025"
+ * formatDate("2025-07-17", { format: 'D Mon YYYY' })  // "17 Jul 2025"
  */
-export function formatDateToText(date: Date | string): string {
+export function formatDate(
+  date: Date | string,
+  options?: FormatDateOptions,
+): string {
   const d = new Date(date);
+  const format = options?.format ?? 'DD.MM.YYYY';
 
   const day = d.getDate();
-  const month = d.toLocaleString('en-US', { month: 'short' });
+  const month = d.getMonth() + 1;
   const year = d.getFullYear();
 
-  return `${day} ${month} ${year}`;
+  if (format === 'D Mon YYYY') {
+    const shortMonth = d.toLocaleString('en-US', { month: 'short' });
+
+    return `${day} ${shortMonth} ${year}`;
+  }
+
+  const paddedDay = day.toString().padStart(2, '0');
+  const paddedMonth = month.toString().padStart(2, '0');
+
+  return `${paddedDay}.${paddedMonth}.${year}`;
 }

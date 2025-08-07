@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import styles from '@/components/ui/Notification/Notification.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
-import { formatDateToText } from '@/lib/helpers/format-date';
+import { formatDate } from '@/lib/helpers/format-date';
 import type { INotification } from '@/types/notification';
 
 type NotificationProps = {
@@ -33,7 +33,7 @@ function Notification(props: NotificationProps) {
       </div>
       <div className={styles.devider}></div>
       <Paragraph size="14px" color="blue">
-        {formatDateToText(props.notification.createdAt)}
+        {formatDate(props.notification.createdAt, { format: 'D Mon YYYY' })}
       </Paragraph>
     </div>
   );

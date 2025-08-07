@@ -9,11 +9,9 @@ import CustomIconButton from '@/components/ui/CustomIconButton/CustomIconButton'
 import { NotificationEvents } from '@/enums/notification';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
-import { getSocket } from '@/lib/web-sockets/socket';
-import authSelectors from '@/redux/auth/auth-selectors';
+import { getSocket } from '@/lib/sockets/socket';
 import notificationSelectors from '@/redux/notification/notification-selectors';
 import { addNotification } from '@/redux/notification/notification-slice';
-import userSelectors from '@/redux/user/user-selectors';
 import type { INotification } from '@/types/notification';
 
 function NotificationButton() {
@@ -34,12 +32,7 @@ function NotificationButton() {
 
   const open = Boolean(anchorEl);
 
-  const token = useAppSelector(authSelectors.getRefreshToken);
-  const userId = useAppSelector(userSelectors.getUserId);
-
   useEffect(() => {
-    if (!token || !userId) return;
-
     const socket: Socket | undefined = getSocket();
 
     socket?.on(
@@ -52,7 +45,7 @@ function NotificationButton() {
     return () => {
       socket?.off(NotificationEvents.NOTIFICATION);
     };
-  }, [token, userId, dispatch]);
+  }, [dispatch]);
 
   return (
     <>
