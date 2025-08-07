@@ -11,7 +11,10 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getSocket } from '@/lib/sockets/socket';
 import notificationSelectors from '@/redux/notification/notification-selectors';
-import { addNotification } from '@/redux/notification/notification-slice';
+import {
+  addNotification,
+  clearSocketNotifications,
+} from '@/redux/notification/notification-slice';
 import socketSelectors from '@/redux/socket/socket-selectors';
 import type { INotification } from '@/types/notification';
 
@@ -29,6 +32,7 @@ function NotificationButton() {
   const handleClose = () => {
     setAnchorEl(null);
     setShouldRefetch(true);
+    dispatch(clearSocketNotifications());
   };
 
   const open = Boolean(anchorEl);
