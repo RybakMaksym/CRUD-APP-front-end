@@ -12,6 +12,7 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 import { getSocket } from '@/lib/sockets/socket';
 import notificationSelectors from '@/redux/notification/notification-selectors';
 import { addNotification } from '@/redux/notification/notification-slice';
+import socketSelectors from '@/redux/socket/socket-selectors';
 import type { INotification } from '@/types/notification';
 
 function NotificationButton() {
@@ -32,7 +33,13 @@ function NotificationButton() {
 
   const open = Boolean(anchorEl);
 
+  const isSocketConnected = useAppSelector(
+    socketSelectors.getIsSocketConnected,
+  );
+
   useEffect(() => {
+    if (!isSocketConnected) return;
+
     const socket: Socket | undefined = getSocket();
 
     socket?.on(
@@ -45,7 +52,7 @@ function NotificationButton() {
     return () => {
       socket?.off(NotificationEvents.NOTIFICATION);
     };
-  }, [dispatch]);
+  }, [dispatch, isSocketConnected]);
 
   return (
     <>
