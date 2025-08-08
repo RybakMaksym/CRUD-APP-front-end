@@ -1,4 +1,4 @@
-import type { FilterOption } from '@/enums/filter.enums';
+import type { FilterOption } from '@/enums/filter';
 
 export type FilterFields = Omit<FilterOption, FilterOption.DEFAULT>;
 

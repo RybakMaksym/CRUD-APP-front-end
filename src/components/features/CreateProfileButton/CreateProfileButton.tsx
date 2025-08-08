@@ -38,7 +38,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
             props.onConfirm?.();
             closeForm();
           }}
-          userId={ownerId ?? ''}
+          userId={ownerId!}
           onClose={closeForm}
         />
       </CustomModal>

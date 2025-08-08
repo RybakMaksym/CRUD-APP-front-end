@@ -8,6 +8,10 @@
   color: var(--color-black);
 }
 
+.blue {
+  color: var(--color-blue);
+}
+
 .error {
   color: var(--color-red);
 }
@@ -18,4 +22,8 @@
 
 .size18 {
   font-size: var(--font-sub-body);
+}
+
+.size14 {
+  font-size: var(--font-caption);
 }

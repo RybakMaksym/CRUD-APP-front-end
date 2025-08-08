@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import { FilterOption } from '@/enums/filter.enums';
+import { FilterOption } from '@/enums/filter';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
 import {
   useLazyFilterProfilesQuery,

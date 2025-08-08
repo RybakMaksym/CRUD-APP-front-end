@@ -2,7 +2,7 @@ import type { SelectChangeEvent } from '@mui/material';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
-import { FilterOption } from '@/enums/filter.enums';
+import { FilterOption } from '@/enums/filter';
 import { FILTERS } from '@/lib/constants/filters';
 
 describe('FilterSelect', () => {

@@ -14,17 +14,23 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from '@/redux/auth/auth-slice';
 import { authorizationApi } from '@/redux/auth/authorization-api';
 import { logOutApi } from '@/redux/auth/log-out-api';
+import { notificationApi } from '@/redux/notification/notification-api';
+import { notificationReducer } from '@/redux/notification/notification-slice';
 import { profileApi } from '@/redux/profile/profile-api';
+import { socketReducer } from '@/redux/socket/socket-slice';
 import { userApi } from '@/redux/user/user-api';
 import { userReducer } from '@/redux/user/user-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
+  socket: socketReducer,
+  notification: notificationReducer,
   [authorizationApi.reducerPath]: authorizationApi.reducer,
   [logOutApi.reducerPath]: logOutApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
+  [notificationApi.reducerPath]: notificationApi.reducer,
 });
 
 const persistConfig = {
@@ -46,7 +52,8 @@ export const store = configureStore({
       .concat(authorizationApi.middleware)
       .concat(logOutApi.middleware)
       .concat(userApi.middleware)
-      .concat(profileApi.middleware),
+      .concat(profileApi.middleware)
+      .concat(notificationApi.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

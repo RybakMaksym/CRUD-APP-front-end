@@ -3,7 +3,7 @@
   font-weight: 700;
 }
 
-.white { 
+.white {
   color: var(--color-white);
 }
 
@@ -12,13 +12,17 @@
 }
 
 .size45 {
-  font-size: 45px;
+  font-size: var(--font-headline);
 }
 
 .size35 {
-  font-size: 35px;
+  font-size: var(--font-sub-headline);
 }
 
 .size32 {
-  font-size: 32px;
+  font-size: var(--font-body);
+}
+
+.size18 {
+  font-size: var(--font-sub-body);
 }

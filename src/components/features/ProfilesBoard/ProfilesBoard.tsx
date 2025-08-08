@@ -13,7 +13,7 @@ import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
-import { FilterOption } from '@/enums/filter.enums';
+import { FilterOption } from '@/enums/filter';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
 import { useSearch } from '@/hooks/use-search';
 import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
