@@ -10,9 +10,9 @@ type NotificationProps = {
 };
 
 const ICONS = {
-  madeAdmin: '/assets/icons/diamond.png',
-  profileEdit: '/assets/icons/edit-profile.png',
-  profileDelete: '/assets/icons/delete-profile.png',
+  madeAdmin: '/assets/icons/diamond.svg',
+  profileEdit: '/assets/icons/edit-profile.svg',
+  profileDelete: '/assets/icons/delete-profile.svg',
 };
 
 function Notification(props: NotificationProps) {

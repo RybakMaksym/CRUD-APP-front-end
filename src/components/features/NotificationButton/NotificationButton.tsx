@@ -69,7 +69,7 @@ function NotificationButton() {
       >
         <CustomIconButton
           onClick={handleOpen}
-          icon="/assets/icons/notifications.png"
+          icon="/assets/icons/notifications.svg"
         />
       </Badge>
 

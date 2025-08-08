@@ -8,7 +8,7 @@ function SearchInput({ ...props }: InputProps) {
   return (
     <div className={styles['input-wrapper']}>
       <Image
-        src={'/assets/icons/search.png'}
+        src={'/assets/icons/search.svg'}
         alt="search icon"
         width={16}
         height={15}

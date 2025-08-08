@@ -24,7 +24,7 @@ describe('Notification', () => {
     render(<Notification notification={baseNotification} />);
     const icon = screen.getByRole('img');
 
-    expect(icon).toHaveAttribute('src', expect.stringContaining('diamond.png'));
+    expect(icon).toHaveAttribute('src', expect.stringContaining('diamond.svg'));
   });
 
   it('should render correct icon for type "profileEdit"', () => {
@@ -38,7 +38,7 @@ describe('Notification', () => {
 
     expect(icon).toHaveAttribute(
       'src',
-      expect.stringContaining('edit-profile.png'),
+      expect.stringContaining('edit-profile.svg'),
     );
   });
 
@@ -53,7 +53,7 @@ describe('Notification', () => {
 
     expect(icon).toHaveAttribute(
       'src',
-      expect.stringContaining('delete-profile.png'),
+      expect.stringContaining('delete-profile.svg'),
     );
   });
 
