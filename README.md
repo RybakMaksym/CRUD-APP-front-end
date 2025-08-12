@@ -14,6 +14,20 @@ pnpm dev
 bun dev
 ```
 
+## Run with Docker
+
+```bash
+
+# build Docker image
+docker build -t next-app .
+
+# start container
+docker docker run -d --name next-container -p 3000:3000 next-app
+
+# stop container
+docker docker stop next-container
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
