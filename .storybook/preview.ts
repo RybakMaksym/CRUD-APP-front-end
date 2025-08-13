@@ -4,6 +4,8 @@ import type { Preview } from '@storybook/nextjs-vite';
 import '../src/styles/variables.scss';
 // eslint-disable-next-line no-restricted-imports
 import '../src/styles/globals.scss';
+// eslint-disable-next-line no-restricted-imports
+import './fonts.scss';
 
 const preview: Preview = {
   parameters: {

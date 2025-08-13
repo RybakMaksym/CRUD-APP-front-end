@@ -1,5 +1,6 @@
-import StatsBar from '@/components/ui/StatsBar/StatsBar';
 import type { Meta, StoryObj } from '@storybook/react';
+
+import StatsBar from '@/components/ui/StatsBar/StatsBar';
 
 const mockIcons = {
   users: '/assets/icons/users-group.svg',
@@ -22,16 +23,6 @@ const meta: Meta<typeof StatsBar> = {
     },
     count: {
       control: 'number',
-    },
-  },
-  parameters: {
-    layout: 'centered',
-    backgrounds: {
-      default: 'dark',
-      values: [
-        { name: 'dark', value: 'var(--color-black)' },
-        { name: 'light', value: 'var(--color-white)' },
-      ],
     },
   },
 };
@@ -67,9 +58,6 @@ export const UserStats: Story = {
     icon: mockIcons.users,
     label: 'Total Users',
     count: 125000,
-  },
-  parameters: {
-    backgrounds: { default: 'light' },
   },
 };
 

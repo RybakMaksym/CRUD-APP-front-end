@@ -25,7 +25,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
         <Image
-          src={'/assets/icons/profile icon.png'}
+          src={'/assets/icons/profile icon.svg'}
           alt="create profile icon"
           width={84}
           height={83}

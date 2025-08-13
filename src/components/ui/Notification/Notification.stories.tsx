@@ -1,7 +1,8 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Notification from '@/components/ui/Notification/Notification';
 import { NotificationType } from '@/enums/notification';
 import type { INotification } from '@/types/notification';
-import type { Meta, StoryObj } from '@storybook/react';
-import Notification from './Notification';
 
 const meta: Meta<typeof Notification> = {
   title: 'UI/Notification',

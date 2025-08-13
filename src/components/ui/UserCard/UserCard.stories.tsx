@@ -1,6 +1,7 @@
-import { Role } from '@/enums/role';
 import type { Meta, StoryObj } from '@storybook/react';
-import UserCard from './UserCard';
+
+import UserCard from '@/components/ui/UserCard/UserCard';
+import { Role } from '@/enums/role';
 
 const mockUser = {
   id: '123',

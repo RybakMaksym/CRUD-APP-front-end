@@ -64,7 +64,7 @@ describe('PicturePicker', () => {
   });
 
   it('should render paragraph with correct color', () => {
-    render(<PicturePicker onChange={jest.fn()} labalColor="dark" />);
+    render(<PicturePicker onChange={jest.fn()} labelColor="dark" />);
 
     expect(screen.getByText(/choose picture/i)).toBeInTheDocument();
   });

@@ -77,7 +77,7 @@ function CreateProfileForm({
                 ? values.avatarUrl
                 : DEFAULT_AVATAR
             }
-            labalColor="dark"
+            labelColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
 
