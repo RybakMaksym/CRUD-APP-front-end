@@ -1,14 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import LogInForm from '@/components/features/LogInForm/LogInForm';
+import UsersPage from '@/app/(dashboard)/users/page';
 
-const meta: Meta<typeof LogInForm> = {
-  title: 'Forms/LogInForm',
-  component: LogInForm,
+const meta: Meta<typeof UsersPage> = {
+  title: 'Pages/UsersPage',
+  component: UsersPage,
   tags: ['autodocs'],
-  args: {
-    title: 'Log In',
-  },
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -20,6 +17,6 @@ const meta: Meta<typeof LogInForm> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof LogInForm>;
+type Story = StoryObj<typeof UsersPage>;
 
 export const Default: Story = {};

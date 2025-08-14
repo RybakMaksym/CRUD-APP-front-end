@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import RegisterForm from '@/components/features/RegisterForm/RegisterForm';
+import DeleteUserButton from '@/components/features/DeleteUserButton/DeleteUserButton';
 
-const meta: Meta<typeof RegisterForm> = {
-  title: 'Forms/RegisterForm',
-  component: RegisterForm,
+const meta: Meta<typeof DeleteUserButton> = {
+  title: 'Features/DeleteUserButton',
+  component: DeleteUserButton,
   tags: ['autodocs'],
+  argTypes: {
+    userId: { control: 'text' },
+  },
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -17,10 +20,10 @@ const meta: Meta<typeof RegisterForm> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof RegisterForm>;
+type Story = StoryObj<typeof DeleteUserButton>;
 
 export const Default: Story = {
   args: {
-    title: 'Register',
+    userId: '123',
   },
 };

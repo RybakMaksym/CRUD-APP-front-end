@@ -6,6 +6,11 @@ const meta: Meta<typeof CustomPagination> = {
   title: 'UI/CustomPagination',
   component: CustomPagination,
   tags: ['autodocs'],
+  argTypes: {
+    totalPages: { control: 'number' },
+    page: { control: 'number' },
+    onChange: { action: 'clicked' },
+  },
 };
 
 export default meta;

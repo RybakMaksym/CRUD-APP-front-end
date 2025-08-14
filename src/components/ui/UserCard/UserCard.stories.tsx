@@ -16,6 +16,9 @@ const meta: Meta<typeof UserCard> = {
   title: 'UI/UserCard',
   component: UserCard,
   tags: ['autodocs'],
+  argTypes: {
+    user: { control: 'object' },
+  },
   parameters: {
     nextjs: {
       appDirectory: true,

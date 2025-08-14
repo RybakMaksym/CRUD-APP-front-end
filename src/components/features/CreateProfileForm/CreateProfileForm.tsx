@@ -19,8 +19,8 @@ import type { CreateProfileFormValues } from '@/types/profile';
 
 type CreateProfileFormProps = {
   userId: string;
-  onClose: () => void;
   onConfirm: () => void;
+  onClose: () => void;
 };
 
 function CreateProfileForm({

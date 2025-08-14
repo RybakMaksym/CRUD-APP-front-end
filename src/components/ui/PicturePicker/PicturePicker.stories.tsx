@@ -16,9 +16,6 @@ const meta: Meta<typeof PicturePicker> = {
     },
     onChange: { action: 'changed' },
   },
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export default meta;

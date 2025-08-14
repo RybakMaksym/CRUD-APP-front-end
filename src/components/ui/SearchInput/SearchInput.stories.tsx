@@ -18,9 +18,6 @@ const meta: Meta<typeof SearchInput> = {
       control: 'boolean',
     },
   },
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export default meta;

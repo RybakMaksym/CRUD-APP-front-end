@@ -1,23 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Provider } from 'react-redux';
 
 import UpdateProfileButton from '@/components/features/UpdateProfileButton/UpdateProfileButton';
 import { Gender } from '@/enums/gender';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { store } from '@/redux/store';
 import type { IProfile } from '@/types/profile';
 
 const meta: Meta<typeof UpdateProfileButton> = {
   title: 'Features/UpdateProfileButton',
   component: UpdateProfileButton,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <Provider store={store}>
-        <Story />
-      </Provider>
-    ),
-  ],
+  argTypes: {
+    profile: { control: 'object' },
+    onConfirm: { action: 'ocnfirmed' },
+  },
 };
 
 export default meta;
@@ -37,6 +32,5 @@ const mockProfile: IProfile = {
 export const Default: Story = {
   args: {
     profile: mockProfile,
-    onConfirm: () => alert('Profile updated'),
   },
 };

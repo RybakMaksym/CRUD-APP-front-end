@@ -9,6 +9,10 @@ const meta: Meta<typeof FilterSelect> = {
   title: 'UI/FilterSelect',
   component: FilterSelect,
   tags: ['autodocs'],
+  argTypes: {
+    value: { control: 'object' },
+    onChange: { action: 'selected' },
+  },
 };
 
 export default meta;

@@ -8,9 +8,6 @@ const meta: Meta<typeof FilterInput> = {
   title: 'Features/FilterInput',
   component: FilterInput,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export default meta;

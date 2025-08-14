@@ -1,25 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Provider } from 'react-redux';
 
 import UserDetails from '@/components/features/UserDetails/UserDetails';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { store } from '@/redux/store';
 import type { IUser } from '@/types/user';
 
 const meta: Meta<typeof UserDetails> = {
   title: 'Features/UserDetails',
   component: UserDetails,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <Provider store={store}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <Story />
-        </div>
-      </Provider>
-    ),
-  ],
+  argTypes: {
+    user: { control: 'object' },
+  },
   parameters: {
     nextjs: {
       appDirectory: true,

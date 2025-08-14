@@ -7,6 +7,10 @@ import type { INotification } from '@/types/notification';
 const meta: Meta<typeof Notification> = {
   title: 'UI/Notification',
   component: Notification,
+  tags: ['autodocs'],
+  argTypes: {
+    notification: { control: 'object' },
+  },
 };
 
 export default meta;

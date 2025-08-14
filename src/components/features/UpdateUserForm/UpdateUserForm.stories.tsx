@@ -1,23 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Provider } from 'react-redux';
 
 import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
-import { store } from '@/redux/store';
 import type { IUser } from '@/types/user';
 
 const meta: Meta<typeof UpdateUserForm> = {
   title: 'Forms/UpdateUserForm',
   component: UpdateUserForm,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <Provider store={store}>
-        <Story />
-      </Provider>
-    ),
-  ],
+  argTypes: {
+    user: { control: 'object' },
+    onConfirm: { action: 'ocnfirmed' },
+    onClose: { action: 'closed' },
+  },
   parameters: {
     nextjs: {
       appDirectory: true,

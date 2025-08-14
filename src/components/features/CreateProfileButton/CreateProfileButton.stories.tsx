@@ -1,7 +1,5 @@
-import { store } from '@/redux/store';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Provider } from 'react-redux';
 
 import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 
@@ -22,15 +20,13 @@ const Template = (args: any) => {
   const [openCount, setOpenCount] = useState(0);
 
   return (
-    <Provider store={store}>
-      <CreateProfileButton
-        {...args}
-        onConfirm={() => {
-          args.onConfirm?.();
-          setOpenCount(openCount + 1);
-        }}
-      />
-    </Provider>
+    <CreateProfileButton
+      {...args}
+      onConfirm={() => {
+        args.onConfirm?.();
+        setOpenCount(openCount + 1);
+      }}
+    />
   );
 };
 

@@ -7,6 +7,11 @@ export default {
   title: 'Forms/CreateProfileForm',
   component: CreateProfileForm,
   tags: ['autodocs'],
+  argTypes: {
+    userId: { control: 'text' },
+    onConfirm: { action: 'ocnfirmed' },
+    onClose: { action: 'closed' },
+  },
 };
 
 export const Default = () => (
