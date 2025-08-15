@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/nextjs-vite';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import { Provider } from 'react-redux';
 import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
@@ -9,6 +10,8 @@ import '../src/styles/globals.scss';
 // eslint-disable-next-line no-restricted-imports
 import { store } from '@/redux/store';
 import './fonts.scss';
+
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -43,6 +46,7 @@ const preview: Preview = {
       </Provider>
     ),
   ],
+  loaders: [mswLoader],
 };
 
 export default preview;
