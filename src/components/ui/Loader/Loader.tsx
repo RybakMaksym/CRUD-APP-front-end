@@ -1,7 +1,13 @@
+'use client';
+
+import { useTranslation } from 'react-i18next';
+
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 function Loader() {
-  return <Paragraph color="dark">Loading...</Paragraph>;
+  const { t } = useTranslation();
+
+  return <Paragraph color="dark">{t('loading')}</Paragraph>;
 }
 
 export default Loader;

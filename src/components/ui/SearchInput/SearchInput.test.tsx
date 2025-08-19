@@ -2,6 +2,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 describe('SearchInput', () => {
   it('should render input element', () => {
     render(<SearchInput />);

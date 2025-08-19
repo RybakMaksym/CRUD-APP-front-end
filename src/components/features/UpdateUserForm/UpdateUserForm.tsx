@@ -1,7 +1,10 @@
+'use client';
+
 import { DialogActions } from '@mui/material';
 import type { FormikHelpers } from 'formik';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomCheckbox from '@/components/ui/CustomCheckbox/CustomCheckbox';
@@ -28,6 +31,7 @@ type UpdateUserFormProps = {
 };
 
 function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
+  const { t } = useTranslation();
   const [updateUser] = useUpdateUserByIdMutation();
   const router = useRouter();
 
@@ -81,7 +85,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">Edit</Headline>
+          <Headline color="dark">{t('edit')}</Headline>
           <PicturePicker
             onChange={(event) =>
               setFieldValue('avatar', event.target.files?.[0])
@@ -93,27 +97,31 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
           <CustomInput
             background="dark"
             name="username"
-            placeholder="username"
+            placeholder={t('name')}
           />
           <CustomInput
             background="dark"
             name="email"
             type="email"
-            placeholder="email"
+            placeholder={t('email')}
           />
 
           <div className={styles['checkbox-wrapper']}>
-            <CustomCheckbox label="Is admin" labelColor="dark" name="isAdmin" />
+            <CustomCheckbox
+              label={t('is-admin')}
+              labelColor="dark"
+              name="isAdmin"
+            />
           </div>
 
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
             <CustomButton type="submit" background="green">
-              Save
+              {t('save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>
-              Close
+              {t('close')}
             </CustomButton>
           </DialogActions>
         </Form>

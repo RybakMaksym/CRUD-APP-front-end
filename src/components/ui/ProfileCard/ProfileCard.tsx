@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import DeleteProfileButton from '@/components/features/DeleteProfileButton/DeleteProfileButton';
 import UpdateProfileButton from '@/components/features/UpdateProfileButton/UpdateProfileButton';
 import Avatar from '@/components/ui/Avatar/Avatar';
@@ -15,6 +17,8 @@ type ProfileCardProps = {
 };
 
 function ProfileCard(props: ProfileCardProps) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.card}>
       <div className={styles['card-header']}>
@@ -29,20 +33,20 @@ function ProfileCard(props: ProfileCardProps) {
       <div className={styles['card-body']}>
         <div className={styles['card-column']}>
           <Paragraph color="error" size="18px">
-            Gender:
+            {t('gender')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            Birthdate:
+            {t('profile-birth')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            Country:
+            {t('profile-country')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            City:
+            {t('profile-city')}
           </Paragraph>
         </div>
         <div className={styles['card-column']}>
-          <Paragraph size="18px">{props.profile.gender}</Paragraph>
+          <Paragraph size="18px">{t(props.profile.gender)}</Paragraph>
           <Paragraph size="18px">
             {formatDate(props.profile.birthDate)}
           </Paragraph>

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
@@ -17,6 +18,7 @@ type DeleteUserButtonProps = {
 };
 
 function DeleteUserButton({ userId }: DeleteUserButtonProps) {
+  const { t } = useTranslation();
   const [deleteUser] = useDeleteUserByIdMutation();
   const router = useRouter();
   const adminId = useAppSelector(userSelectors.getUserId);
@@ -41,11 +43,11 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
   return (
     <>
       <CustomButton background="red" onClick={() => setIsOpen(true)}>
-        Delete
+        {t('delete')}
       </CustomButton>
 
       <CustomDialog
-        title="Are you sure you want to delete user?"
+        title={t('delete-user')}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}

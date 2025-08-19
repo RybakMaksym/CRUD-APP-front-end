@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from '@/components/features/CreateProfileButton/CreateProfileButton.module.scss';
 import CreateProfileForm from '@/components/features/CreateProfileForm/CreateProfileForm';
@@ -14,6 +17,8 @@ type CreateProfileButtonProps = {
 };
 
 function CreateProfileButton(props: CreateProfileButtonProps) {
+  const { t } = useTranslation();
+
   let ownerId = useAppSelector(userSelectors.getUserId);
   ownerId = props.userId ?? ownerId;
 
@@ -30,7 +35,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
           width={84}
           height={83}
         />
-        <Paragraph>Create new profile</Paragraph>
+        <Paragraph>{t(`create-profile`)}</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
         <CreateProfileForm

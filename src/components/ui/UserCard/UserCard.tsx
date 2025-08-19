@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
@@ -14,6 +15,7 @@ type UserCardProps = {
 };
 
 function UserCard({ user }: UserCardProps) {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const handleClick = () => {
@@ -31,7 +33,7 @@ function UserCard({ user }: UserCardProps) {
       <Paragraph size="18px">{user.username}</Paragraph>
       <Paragraph size="18px">{user.email}</Paragraph>
       <Paragraph size="18px" color="error">
-        {user.profiles.length} profiles
+        {user.profiles.length} {t('profiles-count')}
       </Paragraph>
     </div>
   );

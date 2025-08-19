@@ -14,6 +14,12 @@ let mockUseSearch: () => {
   handleKeyDown: jest.Mock;
 };
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 jest.mock('@/redux/user/user-api', () => ({
   useSearchUsersQuery: (...args: any[]) => mockUseSearchUsersQuery(...args),
   useUsersListQuery: (...args: any[]) => mockUseUsersListQuery(...args),

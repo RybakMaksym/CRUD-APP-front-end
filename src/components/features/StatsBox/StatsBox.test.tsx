@@ -4,6 +4,12 @@ import StatsBox from '@/components/features/StatsBox/StatsBox';
 import { STATS } from '@/lib/constants/dashboard';
 import { useProfilesStatsQuery } from '@/redux/profile/profile-api';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 jest.mock('@/redux/profile/profile-api', () => ({
   useProfilesStatsQuery: jest.fn(),
 }));
@@ -46,7 +52,7 @@ describe('StatsBox', () => {
 
     render(<StatsBox />);
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('loading')).toBeInTheDocument();
   });
 
   it('should show error message when query fails', () => {

@@ -1,15 +1,14 @@
 import type { SelectChangeEvent } from '@mui/material';
-import { MenuItem, Select } from '@mui/material';
+import { Select } from '@mui/material';
+import type { ReactNode } from 'react';
 
-import type { FilterOption } from '@/enums/filter';
-import { FILTERS } from '@/lib/constants/filters';
-
-type FilterSelectProps = {
-  value: FilterOption;
+type CustomSelectProps = {
+  value: string;
+  children: ReactNode;
   onChange: (e: SelectChangeEvent) => void;
 };
 
-function FilterSelect(props: FilterSelectProps) {
+function CustomSelect(props: CustomSelectProps) {
   return (
     <Select
       value={props.value}
@@ -62,13 +61,9 @@ function FilterSelect(props: FilterSelectProps) {
         },
       }}
     >
-      {FILTERS.map((filter) => (
-        <MenuItem key={filter.value} value={filter.value}>
-          {filter.label}
-        </MenuItem>
-      ))}
+      {props.children}
     </Select>
   );
 }
 
-export default FilterSelect;
+export default CustomSelect;

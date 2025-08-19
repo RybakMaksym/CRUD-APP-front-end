@@ -1,11 +1,11 @@
-import type { SelectChangeEvent } from '@mui/material';
+import { MenuItem, type SelectChangeEvent } from '@mui/material';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
+import CustomSelect from '@/components/ui/CustomSelect/CustomSelect';
 import { FilterOption } from '@/enums/filter';
 import { FILTERS } from '@/lib/constants/filters';
 
-describe('FilterSelect', () => {
+describe('CustomSelect', () => {
   const mockOnChange = jest.fn();
 
   beforeEach(() => {
@@ -13,7 +13,15 @@ describe('FilterSelect', () => {
   });
 
   it('should render with the correct selected value', () => {
-    render(<FilterSelect value={FilterOption.CITY} onChange={mockOnChange} />);
+    render(
+      <CustomSelect value={FilterOption.CITY} onChange={mockOnChange}>
+        {FILTERS.map((filter) => (
+          <MenuItem key={filter.value} value={filter.value}>
+            {filter.label}
+          </MenuItem>
+        ))}
+      </CustomSelect>,
+    );
     const select = screen.getByRole('combobox');
 
     expect(select).toHaveTextContent(
@@ -23,7 +31,13 @@ describe('FilterSelect', () => {
 
   it('should render all filter options in the dropdown', () => {
     render(
-      <FilterSelect value={FilterOption.DEFAULT} onChange={mockOnChange} />,
+      <CustomSelect value={FilterOption.DEFAULT} onChange={mockOnChange}>
+        {FILTERS.map((filter) => (
+          <MenuItem key={filter.value} value={filter.value}>
+            {filter.label}
+          </MenuItem>
+        ))}
+      </CustomSelect>,
     );
     fireEvent.mouseDown(screen.getByRole('combobox'));
 
@@ -34,7 +48,13 @@ describe('FilterSelect', () => {
 
   it('should call onChange when an option is selected', () => {
     render(
-      <FilterSelect value={FilterOption.DEFAULT} onChange={mockOnChange} />,
+      <CustomSelect value={FilterOption.DEFAULT} onChange={mockOnChange}>
+        {FILTERS.map((filter) => (
+          <MenuItem key={filter.value} value={filter.value}>
+            {filter.label}
+          </MenuItem>
+        ))}
+      </CustomSelect>,
     );
     fireEvent.mouseDown(screen.getByRole('combobox'));
     const cityOption = screen.getByText(

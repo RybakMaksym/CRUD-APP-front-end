@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from '@/components/features/DeleteProfileButton/DeleteProfileButton.module.scss';
 import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
@@ -13,6 +14,8 @@ type DeleteProfileButtonProps = {
 };
 
 function DeleteProfileButton(props: DeleteProfileButtonProps) {
+  const { t } = useTranslation();
+
   const [deleteProfile] = useDeleteProfileByIdMutation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,11 +31,11 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
   return (
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
-        <Paragraph>Delete</Paragraph>
+        <Paragraph>{t('delete')}</Paragraph>
       </div>
 
       <CustomDialog
-        title="Are you sure you want to delete profile?"
+        title={t('delete-profile')}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}

@@ -1,6 +1,7 @@
 'use client';
 
 import { Dialog, DialogActions } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import styles from '@/components/ui/CustomDialog/CustomDialog.module.scss';
@@ -19,6 +20,8 @@ function CustomDialog({
   onClose,
   onConfirm,
 }: CustomDialogProps) {
+  const { t } = useTranslation();
+
   return (
     <Dialog
       open={isOpen}
@@ -30,10 +33,10 @@ function CustomDialog({
       <Paragraph color="dark">{title}</Paragraph>
       <DialogActions className={styles.actions}>
         <CustomButton background="green" onClick={onConfirm}>
-          Yes
+          {t('yes')}
         </CustomButton>
         <CustomButton background="red" onClick={onClose}>
-          No
+          {t('no')}
         </CustomButton>
       </DialogActions>
     </Dialog>

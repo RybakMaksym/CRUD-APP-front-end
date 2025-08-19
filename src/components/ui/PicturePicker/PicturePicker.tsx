@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import styles from '@/components/ui/PicturePicker/PicturePicker.module.scss';
@@ -22,6 +23,8 @@ function PicturePicker({
   preview,
   labalColor = 'white',
 }: PictureInputProps) {
+  const { t } = useTranslation();
+
   const [avatarPreview, setAvatarPreview] = useState<string | undefined>(
     preview,
   );
@@ -60,7 +63,7 @@ function PicturePicker({
           data-testid="avatar-upload"
         />
       </label>
-      <Paragraph color={labalColor}>Choose picture</Paragraph>
+      <Paragraph color={labalColor}>{t('choose-picture')}</Paragraph>
     </div>
   );
 }

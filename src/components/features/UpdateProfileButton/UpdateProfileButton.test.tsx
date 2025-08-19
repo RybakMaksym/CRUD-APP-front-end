@@ -4,6 +4,12 @@ import UpdateProfileButton from '@/components/features/UpdateProfileButton/Updat
 import { Gender } from '@/enums/gender';
 import type { IProfile } from '@/types/profile';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 jest.mock('@/components/features/UpdateProfileForm/UpdateProfileForm', () => ({
   __esModule: true,
   default: ({ onConfirm, onClose }: any) => (

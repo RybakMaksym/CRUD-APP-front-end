@@ -2,6 +2,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import CustomDialog from '@/components/ui/CustomDialog/CustomDialog';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 describe('CustomDialog', () => {
   const title = 'Are you sure?';
   const onClose = jest.fn();
@@ -22,8 +28,8 @@ describe('CustomDialog', () => {
     );
 
     expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText('Yes')).toBeInTheDocument();
-    expect(screen.getByText('No')).toBeInTheDocument();
+    expect(screen.getByText('yes')).toBeInTheDocument();
+    expect(screen.getByText('no')).toBeInTheDocument();
   });
 
   it('should not render when isOpen is false', () => {
@@ -48,7 +54,7 @@ describe('CustomDialog', () => {
         onConfirm={onConfirm}
       />,
     );
-    fireEvent.click(screen.getByText('Yes'));
+    fireEvent.click(screen.getByText('yes'));
 
     expect(onConfirm).toHaveBeenCalledTimes(1);
     expect(onClose).not.toHaveBeenCalled();
@@ -63,7 +69,7 @@ describe('CustomDialog', () => {
         onConfirm={onConfirm}
       />,
     );
-    fireEvent.click(screen.getByText('No'));
+    fireEvent.click(screen.getByText('no'));
 
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(onConfirm).not.toHaveBeenCalled();

@@ -3,7 +3,14 @@ import Image from 'next/image';
 
 import UserDetails from '@/components/features/UserDetails/UserDetails';
 import { Role } from '@/enums/role';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
 
 jest.mock('@/components/features/UpdateUserButton/UpdateUserButton', () => {
   const Component = () => <div data-testid="UpdateUserButton" />;
@@ -48,6 +55,7 @@ describe('UserDetails', () => {
     email: 'john@example.com',
     role: Role.USER,
     profiles: [],
+    language: Languages.ENGLISH,
   };
 
   it('should render user info and action buttons', () => {

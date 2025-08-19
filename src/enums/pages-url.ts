@@ -5,6 +5,7 @@ export enum PAGES_URL {
   PROFILES = '/profiles',
   USERS = '/users',
   DASHBOARD = '/dashboard',
+  SETTINGS = '/settings',
 
   NOT_FROUND = '/not-found',
 }

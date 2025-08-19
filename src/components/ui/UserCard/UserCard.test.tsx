@@ -4,9 +4,16 @@ import UserCard from '@/components/ui/UserCard/UserCard';
 import { PAGES_URL } from '@/enums/pages-url';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
 
 const pushMock = jest.fn();
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -21,6 +28,7 @@ const mockUser: IUser = {
   role: Role.USER,
   avatarUrl: undefined,
   profiles: ['p1', 'p2'],
+  language: Languages.ENGLISH,
 };
 
 describe('UserCard', () => {
@@ -33,7 +41,7 @@ describe('UserCard', () => {
     const avatar = screen.getByAltText('User avatar') as HTMLImageElement;
     const username = screen.getByText('Jane Doe');
     const email = screen.getByText('jane@example.com');
-    const profilesCount = screen.getByText('2 profiles');
+    const profilesCount = screen.getByText('2 profiles-count');
 
     expect(avatar).toBeInTheDocument();
     expect(decodeURIComponent(avatar.src)).toContain(DEFAULT_AVATAR);

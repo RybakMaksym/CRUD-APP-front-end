@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from '@/components/features/UpdateProfileButton/UpdateProfileButton.module.scss';
 import UpdateProfileForm from '@/components/features/UpdateProfileForm/UpdateProfileForm';
@@ -14,13 +15,15 @@ type UpdateProfileButtonProps = {
 };
 
 function UpdateProfileButton(props: UpdateProfileButtonProps) {
+  const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
   const closeForm = () => setIsOpen(false);
 
   return (
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
-        <Paragraph>Edit</Paragraph>
+        <Paragraph>{t('edit')}</Paragraph>
       </div>
 
       <CustomModal isOpen={isOpen}>
