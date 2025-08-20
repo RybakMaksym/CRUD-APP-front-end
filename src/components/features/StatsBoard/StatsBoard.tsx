@@ -11,7 +11,7 @@ function StatsBoard() {
 
   return (
     <div className={styles.board}>
-      <Headline color="dark">{t('dashboard')}</Headline>
+      <Headline color="dark">{t('dashboardPage.dashboard')}</Headline>
 
       <StatsBox />
     </div>

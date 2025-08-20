@@ -43,7 +43,7 @@ function LanguageSelect() {
     <CustomSelect value={selectedLanguage} onChange={handleChange}>
       {LANGUAGES.map((language) => (
         <MenuItem key={language.value} value={language.value}>
-          {t(language.label)}
+          {t(`settingsPage.${language.label}`)}
         </MenuItem>
       ))}
     </CustomSelect>

@@ -84,7 +84,7 @@ function Notifications(props: NotificationsProps) {
     <div className={styles.notifications}>
       <div className={styles.headline}>
         <Headline color="dark" size="18px">
-          {t('notifications')}
+          {t('profilesPage.notifications')}
         </Headline>
       </div>
 

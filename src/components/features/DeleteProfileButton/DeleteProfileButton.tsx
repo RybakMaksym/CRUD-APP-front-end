@@ -31,11 +31,11 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
   return (
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
-        <Paragraph>{t('delete')}</Paragraph>
+        <Paragraph>{t('general.delete')}</Paragraph>
       </div>
 
       <CustomDialog
-        title={t('delete-profile')}
+        title={t('profilesPage.deleteProfile')}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}

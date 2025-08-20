@@ -33,7 +33,9 @@ function UserCard({ user }: UserCardProps) {
       <Paragraph size="18px">{user.username}</Paragraph>
       <Paragraph size="18px">{user.email}</Paragraph>
       <Paragraph size="18px" color="error">
-        {user.profiles.length} {t('profiles-count')}
+        {t('profilesPage.profilesCount', {
+          profilesCount: user.profiles.length,
+        })}
       </Paragraph>
     </div>
   );

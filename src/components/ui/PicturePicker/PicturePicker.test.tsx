@@ -5,7 +5,7 @@ import { DEFAULT_AVATAR, MAX_FILE_SIZE_MB } from '@/lib/constants/avatar';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 
@@ -72,6 +72,6 @@ describe('PicturePicker', () => {
   it('should render paragraph with correct color', () => {
     render(<PicturePicker onChange={jest.fn()} labalColor="dark" />);
 
-    expect(screen.getByText(/choose-picture/i)).toBeInTheDocument();
+    expect(screen.getByText('choosePicture')).toBeInTheDocument();
   });
 });

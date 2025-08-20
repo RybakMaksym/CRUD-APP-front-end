@@ -35,7 +35,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
           width={84}
           height={83}
         />
-        <Paragraph>{t(`create-profile`)}</Paragraph>
+        <Paragraph>{t('profilesPage.createProfile')}</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
         <CreateProfileForm

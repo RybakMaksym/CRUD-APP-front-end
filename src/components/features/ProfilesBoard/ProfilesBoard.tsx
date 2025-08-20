@@ -121,7 +121,7 @@ function ProfilesBoard() {
 
   return (
     <div className={styles.board}>
-      <Headline color="dark">{t('profiles')}</Headline>
+      <Headline color="dark">{t('profilesPage.profiles')}</Headline>
 
       <div className={styles.search}>
         <SearchInput
@@ -150,7 +150,7 @@ function ProfilesBoard() {
         >
           {FILTERS.map((filter) => (
             <MenuItem key={filter.value} value={filter.value}>
-              {t(filter.label)}
+              {t(`profilesPage.${filter.label}`)}
             </MenuItem>
           ))}
         </CustomSelect>

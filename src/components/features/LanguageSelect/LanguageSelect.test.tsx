@@ -5,7 +5,7 @@ import LanguageSelect from '@/components/features/LanguageSelect/LanguageSelect'
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     i18n: { changeLanguage: jest.fn() },
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 

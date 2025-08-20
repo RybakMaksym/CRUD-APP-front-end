@@ -4,7 +4,7 @@ import Settings from '@/components/features/Settings/Settings';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 

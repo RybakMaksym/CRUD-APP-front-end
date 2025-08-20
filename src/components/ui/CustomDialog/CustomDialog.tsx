@@ -33,10 +33,10 @@ function CustomDialog({
       <Paragraph color="dark">{title}</Paragraph>
       <DialogActions className={styles.actions}>
         <CustomButton background="green" onClick={onConfirm}>
-          {t('yes')}
+          {t('general.yes')}
         </CustomButton>
         <CustomButton background="red" onClick={onClose}>
-          {t('no')}
+          {t('general.no')}
         </CustomButton>
       </DialogActions>
     </Dialog>

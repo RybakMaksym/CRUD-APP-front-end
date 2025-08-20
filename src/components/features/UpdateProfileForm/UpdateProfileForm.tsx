@@ -77,7 +77,7 @@ function UpdateProfileForm({
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">{t('edit-profile')}</Headline>
+          <Headline color="dark">{t('profilesPage.editProfile')}</Headline>
 
           <PicturePicker
             onChange={(event) => {
@@ -88,7 +88,11 @@ function UpdateProfileForm({
             preview={profile.avatarUrl ?? DEFAULT_AVATAR}
             labalColor="dark"
           />
-          <CustomInput background="dark" name="name" placeholder={t('name')} />
+          <CustomInput
+            background="dark"
+            name="name"
+            placeholder={t('profilesPage.name')}
+          />
 
           <GenderPicker />
 
@@ -96,18 +100,22 @@ function UpdateProfileForm({
           <CustomInput
             background="dark"
             name="country"
-            placeholder={t('country')}
+            placeholder={t('profilesPage.country')}
           />
-          <CustomInput background="dark" name="city" placeholder={t('city')} />
+          <CustomInput
+            background="dark"
+            name="city"
+            placeholder={t('profilesPage.city')}
+          />
 
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
             <CustomButton type="submit" background="green">
-              {t('save')}
+              {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>
-              {t('close')}
+              {t('general.close')}
             </CustomButton>
           </DialogActions>
         </Form>

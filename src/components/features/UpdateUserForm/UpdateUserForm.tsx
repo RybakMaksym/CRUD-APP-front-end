@@ -85,7 +85,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">{t('edit')}</Headline>
+          <Headline color="dark">{t('general.edit')}</Headline>
           <PicturePicker
             onChange={(event) =>
               setFieldValue('avatar', event.target.files?.[0])
@@ -97,18 +97,18 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
           <CustomInput
             background="dark"
             name="username"
-            placeholder={t('name')}
+            placeholder={t('usersPage.name')}
           />
           <CustomInput
             background="dark"
             name="email"
             type="email"
-            placeholder={t('email')}
+            placeholder={t('usersPage.email')}
           />
 
           <div className={styles['checkbox-wrapper']}>
             <CustomCheckbox
-              label={t('is-admin')}
+              label={t('usersPage.isAdmin')}
               labelColor="dark"
               name="isAdmin"
             />
@@ -118,10 +118,10 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
 
           <DialogActions className={styles.actions}>
             <CustomButton type="submit" background="green">
-              {t('save')}
+              {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>
-              {t('close')}
+              {t('general.close')}
             </CustomButton>
           </DialogActions>
         </Form>

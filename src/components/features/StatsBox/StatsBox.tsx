@@ -41,7 +41,7 @@ function StatsBox() {
         FILLED_STATS.map((elem) => (
           <StatsBar
             key={elem.label}
-            label={t(elem.label)}
+            label={t(`dashboardPage.${elem.label}`)}
             icon={elem.iconUrl}
             count={elem.count ?? 0}
           />

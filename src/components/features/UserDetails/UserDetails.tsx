@@ -39,7 +39,7 @@ function UserDetails({ user }: UserDetailsProps) {
         </div>
       </div>
       <div className={styles['profiles-block']}>
-        <Headline color="dark">{t('profiles')}</Headline>
+        <Headline color="dark">{t('profilesPage.profiles')}</Headline>
         <UsersProfiles userId={user.id} />
       </div>
     </>

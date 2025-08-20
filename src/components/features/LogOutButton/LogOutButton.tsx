@@ -24,7 +24,7 @@ function LogOutButton() {
 
   return (
     <div className={styles.button} onClick={logOutHandler}>
-      <Paragraph>{t('log-out')}</Paragraph>
+      <Paragraph>{t('general.logOut')}</Paragraph>
     </div>
   );
 }

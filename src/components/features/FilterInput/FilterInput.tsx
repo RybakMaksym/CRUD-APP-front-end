@@ -52,7 +52,7 @@ function FilterInput({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder={t('type-to-filter')}
+          placeholder={t('profilesPage.typeToFilter')}
           variant="outlined"
           InputProps={{
             ...params.InputProps,

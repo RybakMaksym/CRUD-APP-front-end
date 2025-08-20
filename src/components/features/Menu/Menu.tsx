@@ -17,7 +17,11 @@ const Menu = () => {
   return (
     <nav>
       {links.map((link) => (
-        <MenuItem key={link.path} {...link} label={t(link.label)} />
+        <MenuItem
+          key={link.path}
+          {...link}
+          label={t(`sidebar.${link.label}`)}
+        />
       ))}
     </nav>
   );

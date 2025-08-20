@@ -63,7 +63,7 @@ function PicturePicker({
           data-testid="avatar-upload"
         />
       </label>
-      <Paragraph color={labalColor}>{t('choose-picture')}</Paragraph>
+      <Paragraph color={labalColor}>{t('general.choosePicture')}</Paragraph>
     </div>
   );
 }

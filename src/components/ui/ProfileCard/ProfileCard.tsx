@@ -33,20 +33,22 @@ function ProfileCard(props: ProfileCardProps) {
       <div className={styles['card-body']}>
         <div className={styles['card-column']}>
           <Paragraph color="error" size="18px">
-            {t('gender')}
+            {t('profilesPage.gender')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            {t('profile-birth')}
+            {t('profilesPage.profileBirth')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            {t('profile-country')}
+            {t('profilesPage.profileCountry')}
           </Paragraph>
           <Paragraph color="error" size="18px">
-            {t('profile-city')}
+            {t('profilesPage.profileCity')}
           </Paragraph>
         </div>
         <div className={styles['card-column']}>
-          <Paragraph size="18px">{t(props.profile.gender)}</Paragraph>
+          <Paragraph size="18px">
+            {t(`profilesPage.${props.profile.gender}`)}
+          </Paragraph>
           <Paragraph size="18px">
             {formatDate(props.profile.birthDate)}
           </Paragraph>

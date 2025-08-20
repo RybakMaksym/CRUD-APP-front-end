@@ -23,7 +23,7 @@ function SearchInput({ ...props }: InputProps) {
         disableUnderline
         className={styles.input}
         {...props}
-        placeholder={t('search')}
+        placeholder={t('general.search')}
       />
     </div>
   );

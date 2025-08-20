@@ -7,7 +7,7 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 function Loader() {
   const { t } = useTranslation();
 
-  return <Paragraph color="dark">{t('loading')}</Paragraph>;
+  return <Paragraph color="dark">{t('general.loading')}</Paragraph>;
 }
 
 export default Loader;

@@ -43,11 +43,11 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
   return (
     <>
       <CustomButton background="red" onClick={() => setIsOpen(true)}>
-        {t('delete')}
+        {t('general.delete')}
       </CustomButton>
 
       <CustomDialog
-        title={t('delete-user')}
+        title={t('usersPage.deleteUser')}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}

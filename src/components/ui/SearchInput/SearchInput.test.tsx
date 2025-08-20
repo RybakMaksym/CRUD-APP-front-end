@@ -4,7 +4,7 @@ import SearchInput from '@/components/ui/SearchInput/SearchInput';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 

@@ -6,7 +6,7 @@ import GenderPicker from '@/components/ui/GenderPicker/GenderPicker';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 

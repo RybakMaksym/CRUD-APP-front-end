@@ -70,7 +70,7 @@ function UsersBoard() {
 
   return (
     <div className={styles.board}>
-      <Headline color="dark">{t(`users`)}</Headline>
+      <Headline color="dark">{t('usersPage.users')}</Headline>
       <div className={styles.search}>
         <SearchInput
           value={searchQuery}

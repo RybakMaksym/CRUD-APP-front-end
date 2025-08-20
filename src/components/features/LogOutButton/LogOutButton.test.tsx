@@ -7,7 +7,7 @@ const logOutMock = jest.fn().mockResolvedValue(true);
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string) => key.split('.')[1],
   }),
 }));
 
@@ -31,12 +31,12 @@ describe('LogOutButton', () => {
   it('should render button with "Log out" text', () => {
     render(<LogOutButton />);
 
-    expect(screen.getByText(/log-out/i)).toBeInTheDocument();
+    expect(screen.getByText(/logOut/i)).toBeInTheDocument();
   });
 
   it('should call logOut and dispatch fullLogOut on click', async () => {
     render(<LogOutButton />);
-    fireEvent.click(screen.getByText(/log-out/i));
+    fireEvent.click(screen.getByText(/logOut/i));
 
     await waitFor(() => {
       expect(logOutMock).toHaveBeenCalledTimes(1);

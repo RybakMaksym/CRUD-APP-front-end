@@ -23,7 +23,7 @@ function UpdateProfileButton(props: UpdateProfileButtonProps) {
   return (
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
-        <Paragraph>{t('edit')}</Paragraph>
+        <Paragraph>{t('general.edit')}</Paragraph>
       </div>
 
       <CustomModal isOpen={isOpen}>

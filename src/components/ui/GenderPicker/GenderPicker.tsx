@@ -11,18 +11,18 @@ function GenderPicker() {
 
   return (
     <div role="group" aria-labelledby="radio-group" className={styles.picker}>
-      <Paragraph color="dark">{t('gender')}</Paragraph>
+      <Paragraph color="dark">{t('profilesPage.gender')}</Paragraph>
       <div className={styles.labels}>
         <label>
           <Field type="radio" name="gender" value="male" />
           <Paragraph size="18px" color="dark">
-            {t('male')}
+            {t('profilesPage.male')}
           </Paragraph>
         </label>
         <label>
           <Field type="radio" name="gender" value="female" />
           <Paragraph size="18px" color="dark">
-            {t('female')}
+            {t('profilesPage.female')}
           </Paragraph>
         </label>
       </div>

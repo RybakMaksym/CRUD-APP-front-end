@@ -12,9 +12,9 @@ function Settings() {
 
   return (
     <div className={styles.settings}>
-      <Headline color="dark">{t('settings')}</Headline>
+      <Headline color="dark">{t('settingsPage.settings')}</Headline>
       <div className={styles.setting}>
-        <Paragraph color="dark">{t('language')}</Paragraph>
+        <Paragraph color="dark">{t('settingsPage.language')}</Paragraph>
         <LanguageSelect />
       </div>
     </div>

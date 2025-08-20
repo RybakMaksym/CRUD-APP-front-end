@@ -11,7 +11,15 @@ const pushMock = jest.fn();
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string, options?: { [key: string]: any }) => {
+      const resKey = key.split('.')[1];
+
+      if (options?.profilesCount !== undefined) {
+        return `${options.profilesCount} ${resKey}`;
+      }
+
+      return resKey;
+    },
   }),
 }));
 
@@ -41,7 +49,7 @@ describe('UserCard', () => {
     const avatar = screen.getByAltText('User avatar') as HTMLImageElement;
     const username = screen.getByText('Jane Doe');
     const email = screen.getByText('jane@example.com');
-    const profilesCount = screen.getByText('2 profiles-count');
+    const profilesCount = screen.getByText('2 profilesCount');
 
     expect(avatar).toBeInTheDocument();
     expect(decodeURIComponent(avatar.src)).toContain(DEFAULT_AVATAR);
