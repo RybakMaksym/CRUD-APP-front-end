@@ -1,6 +1,6 @@
 ## GRUD-APP (Front-End)
 
-A full-featured web application built with **NestJS** and **NestJS**, supporting multi-language (English/Ukrainian) interface. The app allows users to register, create and manage profiles, receive notifications, and interact with different roles (regular users and admins).
+A full-featured web application built with **NextJS** and **NestJS**, supporting multi-language (English/Ukrainian) interface. The app allows users to register, create and manage profiles, receive notifications, and interact with different roles (regular users and admins).
 
 ## Features
 
@@ -13,7 +13,7 @@ A full-featured web application built with **NestJS** and **NestJS**, supporting
 
 ## Technologies
 
-- **Frontend:** NextJS, TypeScript, Material-UI Storybook i18n ESLint Stylelin Husky Jest
+- **Frontend:** NextJS, TypeScript, Material-UI Storybook i18n ESLint Stylelint Husky Jest
 - **Backend:** Node.js, NestJS, MongoDB
 - **Authentication:** JWT Access & Refresh tokens
 - **Real-time Updates:** WebSockets
