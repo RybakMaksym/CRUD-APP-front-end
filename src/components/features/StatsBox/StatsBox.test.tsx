@@ -64,9 +64,7 @@ describe('StatsBox', () => {
 
     render(<StatsBox />);
 
-    expect(
-      screen.getByText('Could not find any information'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('couldNotFindAnyInformation')).toBeInTheDocument();
   });
 
   it('should render stats bars when data is available', () => {

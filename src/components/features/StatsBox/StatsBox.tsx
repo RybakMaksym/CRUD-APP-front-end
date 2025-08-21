@@ -32,7 +32,11 @@ function StatsBox() {
   if (isLoading) return <Loader />;
 
   if (isError) {
-    return <Paragraph color="error">Could not find any information</Paragraph>;
+    return (
+      <Paragraph color="error">
+        {t('dashboardPage.couldNotFindAnyInformation')}
+      </Paragraph>
+    );
   }
 
   return (

@@ -106,11 +106,13 @@ function Notifications(props: NotificationsProps) {
 
       {(isInitialLoading || isAllNotificationsLoading) && <Loader />}
       {isAllNotificationsError && (
-        <Paragraph color="error">Could not find any notifications</Paragraph>
+        <Paragraph color="error">
+          {t('profilesPage.couldNotFindAnyNotifications')}
+        </Paragraph>
       )}
       {!allNotifications && (
         <Paragraph color="dark" size="14px">
-          You have no notifications
+          {t('profilesPage.youHaveNoNotifications')}
         </Paragraph>
       )}
     </div>

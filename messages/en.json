@@ -16,14 +16,18 @@
     "profileBirth": "Date of birth:",
     "profileCountry": "Country:",
     "profileCity": "City:",
-    "profilesCount": "{{profilesCount}} profiles"
+    "profilesCount": "{{profilesCount}} profiles",
+    "couldNotFindAnyProfiles": "Could not find any profiles",
+    "couldNotFindAnyNotifications": "Could not find any notifications",
+    "youHaveNoNotifications": "You have no notifications"
   },
   "usersPage": {
     "users": "Users",
     "name": "Name",
     "email": "Email",
     "is-admin": "Is admin",
-    "deleteUser": "Are you sure you want to delete user?"
+    "deleteUser": "Are you sure you want to delete user?",
+    "couldNotFindAnyUsers": "Could not find any users"
   },
   "settingsPage": {
     "settings": "Settings",
@@ -35,7 +39,8 @@
     "dashboard": "Dashboard",
     "users": "Users",
     "profiles": "Profiles",
-    "adults": "Users 18+"
+    "adults": "Users 18+",
+    "couldNotFindAnyInformation": "Could not find any information"
   },
   "sidebar": {
     "profiles": "Profiles",

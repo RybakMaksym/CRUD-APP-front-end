@@ -120,7 +120,7 @@ describe('UsersBoard', () => {
     });
 
     render(<UsersBoard />);
-    expect(screen.getByText('Could not find any users')).toBeInTheDocument();
+    expect(screen.getByText('couldNotFindAnyUsers')).toBeInTheDocument();
   });
 
   it('should show users and pagination', () => {

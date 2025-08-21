@@ -63,7 +63,10 @@ function UsersBoard() {
   if (isError) {
     return (
       <div className={styles.board}>
-        <Paragraph color="error">Could not find any users</Paragraph>;
+        <Paragraph color="error">
+          {t('usersPage.couldNotFindAnyUsers')}
+        </Paragraph>
+        ;
       </div>
     );
   }

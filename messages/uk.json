@@ -16,14 +16,18 @@
     "profileBirth": "Дата народження:",
     "profileCountry": "Країна:",
     "profileCity": "Місто:",
-    "profilesCount": "{{profilesCount}} профайлів"
+    "profilesCount": "{{profilesCount}} профайлів",
+    "couldNotFindAnyProfiles": "Не вдалося знайти жодного профілю",
+    "couldNotFindAnyNotifications": "Не вдалося знайти жодного сповіщення",
+    "youHaveNoNotifications": "У вас немає сповіщень"
   },
   "usersPage": {
     "users": "Користувачі",
     "name": "Ім'я",
     "email": "Пошта",
     "isAdmin": "Чи адмін",
-    "deleteUser": "Ви впевнені що ви хочите видалити юзера?"
+    "deleteUser": "Ви впевнені що ви хочите видалити юзера?",
+    "couldNotFindAnyUsers": "Не вдалося знайти жодного користувача"
   },
   "settingsPage": {
     "settings": "Налаштування",
@@ -35,7 +39,8 @@
     "dashboard": "Панель керування",
     "users": "Користувачі",
     "profiles": "Профілі",
-    "adults": "Користувачі 18+"
+    "adults": "Користувачі 18+",
+    "couldNotFindAnyInformation": "Не вдалося знайти жодної інформації"
   },
   "sidebar": {
     "profiles": "Профілі",

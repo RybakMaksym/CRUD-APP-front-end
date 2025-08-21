@@ -106,7 +106,9 @@ function ProfilesBoard() {
   if (isError) {
     return (
       <div className={styles.board}>
-        <Paragraph color="error">Could not find any profiles</Paragraph>
+        <Paragraph color="error">
+          {t('profilesPage.couldNotFindAnyProfiles')}
+        </Paragraph>
       </div>
     );
   }
