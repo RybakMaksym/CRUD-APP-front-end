@@ -71,7 +71,7 @@ function RegisterForm(props: AuthFormProps) {
           <CustomInput name="email" type="email" placeholder="email" />
           <CustomInput name="password" type="password" placeholder="password" />
 
-          <div className={styles.checkboxWrapper}>
+          <div className={styles['checkbox-wrapper']}>
             <CustomCheckbox label="Is admin" name="isAdmin" />
           </div>
 

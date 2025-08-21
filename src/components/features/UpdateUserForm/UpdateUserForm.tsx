@@ -102,7 +102,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
             placeholder="email"
           />
 
-          <div className={styles.checkboxWrapper}>
+          <div className={styles['checkbox-wrapper']}>
             <CustomCheckbox label="Is admin" labelColor="dark" name="isAdmin" />
           </div>
 
