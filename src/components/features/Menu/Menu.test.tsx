@@ -5,6 +5,12 @@ import { Role } from '@/enums/role';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { ADMIN_LINKS, USER_LINKS } from '@/lib/constants/menu';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/hooks/use-app-selector', () => ({
   useAppSelector: jest.fn(),
 }));

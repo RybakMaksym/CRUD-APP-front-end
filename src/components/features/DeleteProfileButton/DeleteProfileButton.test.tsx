@@ -2,6 +2,12 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import DeleteProfileButton from '@/components/features/DeleteProfileButton/DeleteProfileButton';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/redux/profile/profile-api', () => ({
   useDeleteProfileByIdMutation: () => [
     jest.fn().mockResolvedValue({ data: true }),

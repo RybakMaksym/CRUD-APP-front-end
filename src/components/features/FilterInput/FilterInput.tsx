@@ -1,5 +1,8 @@
+'use client';
+
 import { Autocomplete, TextField } from '@mui/material';
 import type { SyntheticEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CustomPopper from '@/components/ui/CustomPopper/CustomPopper';
 
@@ -16,6 +19,8 @@ function FilterInput({
   onInputChange,
   onChange,
 }: FilterInputProps) {
+  const { t } = useTranslation();
+
   return (
     <Autocomplete
       freeSolo
@@ -47,7 +52,7 @@ function FilterInput({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Type to filter..."
+          placeholder={t('profilesPage.typeToFilter')}
           variant="outlined"
           InputProps={{
             ...params.InputProps,

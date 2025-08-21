@@ -14,6 +14,12 @@ let mockUseSearch: () => {
   handleKeyDown: jest.Mock;
 };
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/redux/user/user-api', () => ({
   useSearchUsersQuery: (...args: any[]) => mockUseSearchUsersQuery(...args),
   useUsersListQuery: (...args: any[]) => mockUseUsersListQuery(...args),
@@ -114,7 +120,7 @@ describe('UsersBoard', () => {
     });
 
     render(<UsersBoard />);
-    expect(screen.getByText('Could not find any users')).toBeInTheDocument();
+    expect(screen.getByText('couldNotFindAnyUsers')).toBeInTheDocument();
   });
 
   it('should show users and pagination', () => {

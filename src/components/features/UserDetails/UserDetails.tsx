@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslation } from 'react-i18next';
+
 import DeleteUserButton from '@/components/features/DeleteUserButton/DeleteUserButton';
 import UpdateUserButton from '@/components/features/UpdateUserButton/UpdateUserButton';
 import styles from '@/components/features/UserDetails/UserDetails.module.scss';
@@ -13,6 +17,8 @@ type UserDetailsProps = {
 };
 
 function UserDetails({ user }: UserDetailsProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className={styles.details}>
@@ -33,7 +39,7 @@ function UserDetails({ user }: UserDetailsProps) {
         </div>
       </div>
       <div className={styles['profiles-block']}>
-        <Headline color="dark">Profiles</Headline>
+        <Headline color="dark">{t('profilesPage.profiles')}</Headline>
         <UsersProfiles userId={user.id} />
       </div>
     </>

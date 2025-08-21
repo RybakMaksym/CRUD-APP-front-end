@@ -2,7 +2,14 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import UpdateUserButton from '@/components/features/UpdateUserButton/UpdateUserButton';
 import { Role } from '@/enums/role';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
 
 jest.mock('@/components/features/UpdateUserForm/UpdateUserForm', () => ({
   __esModule: true,
@@ -26,6 +33,7 @@ const mockUser: IUser = {
   email: 'alice@example.com',
   role: Role.USER,
   profiles: [],
+  language: Languages.ENGLISH,
 };
 
 describe('UpdateUserButton', () => {

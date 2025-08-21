@@ -1,5 +1,6 @@
-import CustomIconButton from '@/components/ui/CustomIconButton/CustomIconButton';
 import { fireEvent, render, screen } from '@testing-library/react';
+
+import CustomIconButton from '@/components/ui/CustomIconButton/CustomIconButton';
 
 describe('CustomIconButton', () => {
   const icon = '/icons/test-icon.png';

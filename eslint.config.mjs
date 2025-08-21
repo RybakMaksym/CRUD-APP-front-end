@@ -39,6 +39,14 @@ const eslintConfig = [
             ['internal'],
             ['parent', 'sibling', 'index'],
           ],
+          pathGroups: [
+            {
+              pattern: 'next/font/**',
+              group: 'external',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',

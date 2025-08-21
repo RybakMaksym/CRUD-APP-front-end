@@ -1,7 +1,8 @@
+import { render, screen } from '@testing-library/react';
+
 import Notification from '@/components/ui/Notification/Notification';
 import { NotificationType } from '@/enums/notification';
 import type { INotification } from '@/types/notification';
-import { render, screen } from '@testing-library/react';
 
 describe('Notification', () => {
   const baseNotification: INotification = {

@@ -3,6 +3,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import { useAppSelector } from '@/hooks/use-app-selector';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/hooks/use-app-selector', () => ({
   useAppSelector: jest.fn(),
 }));
@@ -31,13 +37,13 @@ describe('CreateProfileButton', () => {
   it('should render the button with image and label', () => {
     render(<CreateProfileButton />);
 
-    expect(screen.getByText(/create new profile/i)).toBeInTheDocument();
+    expect(screen.getByText(/createProfile/i)).toBeInTheDocument();
     expect(screen.getByAltText('create profile icon')).toBeInTheDocument();
   });
 
   it('should open modal on click', () => {
     render(<CreateProfileButton />);
-    fireEvent.click(screen.getByText(/create new profile/i));
+    fireEvent.click(screen.getByText(/createProfile/i));
 
     expect(screen.getByTestId('form')).toBeInTheDocument();
   });
@@ -46,7 +52,7 @@ describe('CreateProfileButton', () => {
     const onConfirm = jest.fn();
 
     render(<CreateProfileButton onConfirm={onConfirm} />);
-    fireEvent.click(screen.getByText(/create new profile/i));
+    fireEvent.click(screen.getByText(/createProfile/i));
     fireEvent.click(screen.getByText('Confirm'));
 
     expect(onConfirm).toHaveBeenCalledTimes(1);
@@ -58,7 +64,7 @@ describe('CreateProfileButton', () => {
     render(
       <CreateProfileButton userId="custom-user-id" onConfirm={onConfirm} />,
     );
-    fireEvent.click(screen.getByText(/create new profile/i));
+    fireEvent.click(screen.getByText(/createProfile/i));
     fireEvent.click(screen.getByText('Confirm'));
 
     expect(onConfirm).toHaveBeenCalled();
@@ -66,7 +72,7 @@ describe('CreateProfileButton', () => {
 
   it('should close modal when close button is clicked', () => {
     render(<CreateProfileButton />);
-    fireEvent.click(screen.getByText(/create new profile/i));
+    fireEvent.click(screen.getByText(/createProfile/i));
     expect(screen.getByTestId('form')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Close'));

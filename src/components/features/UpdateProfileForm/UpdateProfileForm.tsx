@@ -1,6 +1,9 @@
+'use client';
+
 import { DialogActions } from '@mui/material';
 import type { FormikHelpers } from 'formik';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomInput from '@/components/ui/CustomInput/CustomInput';
@@ -25,6 +28,7 @@ function UpdateProfileForm({
   onConfirm,
   onClose,
 }: UpdateProfileFormProps) {
+  const { t } = useTranslation();
   const [updateProfile] = useUpdateProfileByIdMutation();
 
   const initialValues: UpdateProfileFormValues = {
@@ -73,7 +77,7 @@ function UpdateProfileForm({
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">Create profile</Headline>
+          <Headline color="dark">{t('profilesPage.editProfile')}</Headline>
 
           <PicturePicker
             onChange={(event) => {
@@ -84,22 +88,34 @@ function UpdateProfileForm({
             preview={profile.avatarUrl ?? DEFAULT_AVATAR}
             labalColor="dark"
           />
-          <CustomInput background="dark" name="name" placeholder="Name" />
+          <CustomInput
+            background="dark"
+            name="name"
+            placeholder={t('profilesPage.name')}
+          />
 
           <GenderPicker />
 
           <CustomInput background="dark" name="birthDate" type="date" />
-          <CustomInput background="dark" name="country" placeholder="Country" />
-          <CustomInput background="dark" name="city" placeholder="City" />
+          <CustomInput
+            background="dark"
+            name="country"
+            placeholder={t('profilesPage.country')}
+          />
+          <CustomInput
+            background="dark"
+            name="city"
+            placeholder={t('profilesPage.city')}
+          />
 
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
             <CustomButton type="submit" background="green">
-              Save
+              {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>
-              Close
+              {t('general.close')}
             </CustomButton>
           </DialogActions>
         </Form>

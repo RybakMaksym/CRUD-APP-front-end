@@ -3,18 +3,18 @@ import { FilterOption } from '@/enums/filter';
 export const FILTERS = [
   {
     value: FilterOption.DEFAULT,
-    label: 'Filter',
+    label: 'filter',
   },
   {
     value: FilterOption.COUNRTY,
-    label: 'Country',
+    label: 'country',
   },
   {
     value: FilterOption.CITY,
-    label: 'City',
+    label: 'city',
   },
   {
     value: FilterOption.AGE,
-    label: 'Users 18+',
+    label: 'adults',
   },
 ];
