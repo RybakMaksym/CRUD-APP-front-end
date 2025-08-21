@@ -14,13 +14,13 @@ import {
 type PictureInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   preview?: string;
-  labalColor?: 'white' | 'dark';
+  labelColor?: 'white' | 'dark';
 };
 
 function PicturePicker({
   onChange,
   preview,
-  labalColor = 'white',
+  labelColor = 'white',
 }: PictureInputProps) {
   const [avatarPreview, setAvatarPreview] = useState<string | undefined>(
     preview,
@@ -60,7 +60,7 @@ function PicturePicker({
           data-testid="avatar-upload"
         />
       </label>
-      <Paragraph color={labalColor}>Choose picture</Paragraph>
+      <Paragraph color={labelColor}>Choose picture</Paragraph>
     </div>
   );
 }

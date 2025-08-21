@@ -87,7 +87,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
               setFieldValue('avatar', event.target.files?.[0])
             }
             preview={user.avatarUrl ?? DEFAULT_AVATAR}
-            labalColor="dark"
+            labelColor="dark"
           />
 
           <CustomInput

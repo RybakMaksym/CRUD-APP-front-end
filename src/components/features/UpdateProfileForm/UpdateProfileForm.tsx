@@ -73,7 +73,7 @@ function UpdateProfileForm({
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">Create profile</Headline>
+          <Headline color="dark">Edit profile</Headline>
 
           <PicturePicker
             onChange={(event) => {
@@ -82,7 +82,7 @@ function UpdateProfileForm({
               }
             }}
             preview={profile.avatarUrl ?? DEFAULT_AVATAR}
-            labalColor="dark"
+            labelColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
 

@@ -19,8 +19,8 @@ import type { CreateProfileFormValues } from '@/types/profile';
 
 type CreateProfileFormProps = {
   userId: string;
-  onClose: () => void;
   onConfirm: () => void;
+  onClose: () => void;
 };
 
 function CreateProfileForm({
@@ -77,7 +77,7 @@ function CreateProfileForm({
                 ? values.avatarUrl
                 : DEFAULT_AVATAR
             }
-            labalColor="dark"
+            labelColor="dark"
           />
           <CustomInput background="dark" name="name" placeholder="Name" />
 
