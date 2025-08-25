@@ -1,4 +1,5 @@
 .board {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +9,13 @@
 
 .search {
   align-self: start;
+}
+
+.users-pagination {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .users {

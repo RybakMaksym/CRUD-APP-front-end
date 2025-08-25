@@ -27,6 +27,7 @@ jest.mock('@/redux/user/user-api', () => ({
   __esModule: true,
   useDeleteUserByIdMutation: () => [
     jest.fn().mockResolvedValue({ data: true }),
+    { isLoading: false },
   ],
 }));
 

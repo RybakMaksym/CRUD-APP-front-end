@@ -11,7 +11,7 @@ const mockOnConfirm = jest.fn();
 const mockUpdateProfile = jest.fn();
 
 jest.mock('@/redux/profile/profile-api', () => ({
-  useUpdateProfileByIdMutation: () => [mockUpdateProfile],
+  useUpdateProfileByIdMutation: () => [mockUpdateProfile, { isLoading: false }],
 }));
 
 const profile: IProfile = {

@@ -1,5 +1,8 @@
+'use client';
+
 import type { SelectChangeEvent } from '@mui/material';
 import { MenuItem, Select } from '@mui/material';
+import { useState } from 'react';
 
 import type { FilterOption } from '@/enums/filter';
 import { FILTERS } from '@/lib/constants/filters';
@@ -10,52 +13,56 @@ type FilterSelectProps = {
 };
 
 function FilterSelect(props: FilterSelectProps) {
+  const [open, setOpen] = useState(false);
+
   return (
     <Select
       value={props.value}
       onChange={props.onChange}
+      open={open}
+      onOpen={() => setOpen(true)}
+      onClose={() => setOpen(false)}
       displayEmpty
       size="small"
       sx={{
+        minWidth: '140px',
         color: 'var(--color-white)',
-        backgroundColor: 'var(--color-black)',
+        backgroundColor: 'var(--color-black-90)',
         fontSize: 'var(--font-sub-body)',
-        padding: 0,
-        opacity: 0.9,
-        borderRadius: '15px',
+        borderRadius: open ? '15px 15px 0 0' : '15px',
         '& .MuiSelect-select': {
           padding: '6px 12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
-        '& .MuiOutlinedInput-notchedOutline': {
-          border: 'none',
+        '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '15px 15px 0 0',
+          '& fieldset': {
+            border: 'none !important',
+          },
         },
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          border: 'none',
-        },
-        '& .MuiSelect-icon': {
+        '& .MuiSvgIcon-root': {
           color: 'var(--color-white)',
-        },
-        '& .MuiSelect-select.MuiSelect-select': {
-          backgroundColor: 'var(--color-black)',
+          right: '8px',
+          position: 'absolute',
         },
       }}
       MenuProps={{
         PaperProps: {
           sx: {
-            backgroundColor: 'var(--color-black)',
+            minWidth: '140px',
+            backgroundColor: 'var(--color-black-90)',
+            borderRadius: '0 0 15px 15px',
             '& .MuiMenuItem-root': {
               color: 'var(--color-white)',
-              backgroundColor: 'var(--color-black)',
               fontSize: 'var(--font-sub-body)',
-              padding: '6px 12px',
               '&:hover': {
-                backgroundColor: 'rgba(255,255,255,0.1)',
+                backgroundColor: 'var(--color-black-90)',
               },
               '&.Mui-selected': {
-                backgroundColor: 'var(--color-black)',
-              },
-              '&.Mui-selected:hover': {
-                backgroundColor: 'rgba(255,255,255,0.1)',
+                backgroundColor: 'var(--color-black-90)',
               },
             },
           },

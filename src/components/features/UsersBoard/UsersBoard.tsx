@@ -49,14 +49,6 @@ function UsersBoard() {
   const isLoading = activeSearch ? isLoadingSearch : isLoadingAll;
   const isError = activeSearch ? isErrorSearch : isErrorAll;
 
-  if (isLoading) {
-    return (
-      <div className={styles.board}>
-        <Loader />
-      </div>
-    );
-  }
-
   if (isError) {
     return (
       <div className={styles.board}>
@@ -76,18 +68,21 @@ function UsersBoard() {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div className={styles.users}>
-        {users?.map((user) => (
-          <UserCard key={user.id} user={user} />
-        ))}
+      {isLoading && <Loader />}
+      <div className={styles['users-pagination']}>
+        <div className={styles.users}>
+          {users?.map((user) => (
+            <UserCard key={user.id} user={user} />
+          ))}
+        </div>
+        {!activeSearch && totalPages > 1 && (
+          <CustomPagination
+            totalPages={totalPages}
+            page={page}
+            onChange={(_, value) => setPage(value)}
+          />
+        )}
       </div>
-      {!activeSearch && totalPages > 1 && (
-        <CustomPagination
-          totalPages={totalPages}
-          page={page}
-          onChange={(_, value) => setPage(value)}
-        />
-      )}
     </div>
   );
 }

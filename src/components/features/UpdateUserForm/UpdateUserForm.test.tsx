@@ -41,7 +41,10 @@ describe('UpdateUserForm', () => {
   });
 
   it('should render all form fields and buttons', () => {
-    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([jest.fn()]);
+    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([
+      jest.fn(),
+      { isLoading: false },
+    ]);
 
     render(
       <UpdateUserForm
@@ -68,7 +71,10 @@ describe('UpdateUserForm', () => {
           role: Role.ADMIN,
         }),
     });
-    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([mockUpdateUser]);
+    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([
+      mockUpdateUser,
+      { isLoading: false },
+    ]);
 
     render(
       <UpdateUserForm
@@ -97,7 +103,10 @@ describe('UpdateUserForm', () => {
     const mockUpdateUser = jest.fn().mockReturnValue({
       unwrap: () => Promise.reject({ data: { message: 'Update failed' } }),
     });
-    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([mockUpdateUser]);
+    (useUpdateUserByIdMutation as jest.Mock).mockReturnValue([
+      mockUpdateUser,
+      { isLoading: false },
+    ]);
 
     render(
       <UpdateUserForm

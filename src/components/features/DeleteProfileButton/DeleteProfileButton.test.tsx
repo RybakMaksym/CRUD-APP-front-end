@@ -5,6 +5,7 @@ import DeleteProfileButton from '@/components/features/DeleteProfileButton/Delet
 jest.mock('@/redux/profile/profile-api', () => ({
   useDeleteProfileByIdMutation: () => [
     jest.fn().mockResolvedValue({ data: true }),
+    { isLoading: false },
   ],
 }));
 

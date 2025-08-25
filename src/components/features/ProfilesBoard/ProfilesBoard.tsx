@@ -14,13 +14,17 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import ProfileCard from '@/components/ui/ProfileCard/ProfileCard';
 import SearchInput from '@/components/ui/SearchInput/SearchInput';
 import { FilterOption } from '@/enums/filter';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
 import { useSearch } from '@/hooks/use-search';
 import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
 import {
+  profileApi,
   useMyProfilesQuery,
   useSearchProfilesQuery,
 } from '@/redux/profile/profile-api';
+import userSelectors from '@/redux/user/user-selectors';
 import type { IProfile } from '@/types/profile';
 
 function ProfilesBoard() {
@@ -47,7 +51,10 @@ function ProfilesBoard() {
     data: searchedProfiles,
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
-  } = useSearchProfilesQuery({ query: searchQuery }, { skip: !activeSearch });
+  } = useSearchProfilesQuery(
+    { query: searchQuery },
+    { skip: !activeSearch, refetchOnMountOrArgChange: true },
+  );
 
   const {
     data: paginatedData,
@@ -55,7 +62,10 @@ function ProfilesBoard() {
     isError: isAllProfilesError,
   } = useMyProfilesQuery(
     { page, limit: PROFILES_PAGE_LIMIT },
-    { skip: activeSearch || filter !== FilterOption.DEFAULT },
+    {
+      skip: activeSearch || filter !== FilterOption.DEFAULT,
+      refetchOnMountOrArgChange: true,
+    },
   );
 
   useEffect(() => {
@@ -77,11 +87,25 @@ function ProfilesBoard() {
     setIsFetchingMore(true);
   };
 
-  const profiles = activeSearch
-    ? searchedProfiles
-    : filter === FilterOption.DEFAULT
-      ? allProfiles
-      : filteredProfiles;
+  const [displayedProfiles, setDisplayedProfiles] = useState<IProfile[]>([]);
+  const userId = useAppSelector(userSelectors.getUserId);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setAllProfiles([]);
+    setDisplayedProfiles([]);
+    dispatch(profileApi.util.resetApiState());
+  }, [userId, dispatch]);
+
+  useEffect(() => {
+    if (activeSearch && searchedProfiles) {
+      setDisplayedProfiles(searchedProfiles);
+    } else if (filter === FilterOption.DEFAULT) {
+      setDisplayedProfiles(allProfiles);
+    } else if (filteredProfiles) {
+      setDisplayedProfiles(filteredProfiles);
+    }
+  }, [activeSearch, searchedProfiles, filter, allProfiles, filteredProfiles]);
 
   const isLoading = activeSearch
     ? isLoadingSearch
@@ -103,14 +127,6 @@ function ProfilesBoard() {
     return (
       <div className={styles.board}>
         <Paragraph color="error">Could not find any profiles</Paragraph>
-      </div>
-    );
-  }
-
-  if (isInitialLoading || isLoading) {
-    return (
-      <div className={styles.board}>
-        <Loader />
       </div>
     );
   }
@@ -156,16 +172,17 @@ function ProfilesBoard() {
         additionalConditions={canLoadMore}
       >
         <div className={styles.profiles}>
-          {profiles?.map((profile) => (
+          {displayedProfiles.map((profile) => (
             <ProfileCard
               key={profile.id}
               profile={profile}
               actionSuccess={onProfileChanged}
             />
           ))}
-          {!activeSearch && filter === FilterOption.DEFAULT && (
+          {!activeSearch && filter === FilterOption.DEFAULT && !isLoading && (
             <CreateProfileButton onConfirm={onProfileChanged} />
           )}
+          {(isInitialLoading || isLoading) && <Loader />}
         </div>
       </InfinityScrollWrapper>
     </div>

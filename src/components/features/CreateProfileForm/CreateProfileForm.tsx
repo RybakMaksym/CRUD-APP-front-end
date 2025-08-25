@@ -28,7 +28,7 @@ function CreateProfileForm({
   onClose,
   onConfirm,
 }: CreateProfileFormProps) {
-  const [createProfile] = useCreateProfileMutation();
+  const [createProfile, { isLoading }] = useCreateProfileMutation();
 
   const handleSubmit = async (
     values: CreateProfileFormValues,
@@ -64,7 +64,7 @@ function CreateProfileForm({
     >
       {({ status, setFieldValue, values }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">Create profile</Headline>
+          <Headline color="dark">Add new profile</Headline>
 
           <PicturePicker
             onChange={(event) => {
@@ -90,7 +90,11 @@ function CreateProfileForm({
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
-            <CustomButton type="submit" background="green">
+            <CustomButton
+              type="submit"
+              isLoading={isLoading}
+              background="green"
+            >
               Save
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>

@@ -60,6 +60,7 @@ function RegisterForm(props: AuthFormProps) {
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.dark}`}>
           <Headline>{props.title}</Headline>
+          {status && <Paragraph color="error">{status}</Paragraph>}
 
           <PicturePicker
             onChange={(event) =>
@@ -67,17 +68,15 @@ function RegisterForm(props: AuthFormProps) {
             }
           />
 
-          <CustomInput name="username" placeholder="username" />
-          <CustomInput name="email" type="email" placeholder="email" />
-          <CustomInput name="password" type="password" placeholder="password" />
+          <CustomInput name="username" placeholder="Username" />
+          <CustomInput name="email" type="email" placeholder="Email" />
+          <CustomInput name="password" type="password" placeholder="Password" />
 
           <div className={styles['checkbox-wrapper']}>
             <CustomCheckbox label="Is admin" name="isAdmin" />
           </div>
 
-          {status && <Paragraph color="error">{status}</Paragraph>}
-
-          <CustomButton type="submit">Submit</CustomButton>
+          <CustomButton type="submit">Sign Up</CustomButton>
 
           <Paragraph>
             <div className={styles.link}>

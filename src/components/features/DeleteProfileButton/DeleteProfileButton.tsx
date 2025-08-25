@@ -13,7 +13,7 @@ type DeleteProfileButtonProps = {
 };
 
 function DeleteProfileButton(props: DeleteProfileButtonProps) {
-  const [deleteProfile] = useDeleteProfileByIdMutation();
+  const [deleteProfile, { isLoading }] = useDeleteProfileByIdMutation();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
@@ -28,7 +28,7 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
   return (
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
-        <Paragraph>Delete</Paragraph>
+        <Paragraph color="dark">Delete</Paragraph>
       </div>
 
       <CustomDialog
@@ -36,6 +36,7 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
+        isLoading={isLoading}
       />
     </>
   );
