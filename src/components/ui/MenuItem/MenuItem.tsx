@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import CustomLink from '@/components/ui/CustomLink/CustomLink';
 import styles from '@/components/ui/MenuItem/MenuItem.module.scss';
+import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 type MenuItemProps = {
   path: string;
@@ -14,11 +14,12 @@ type MenuItemProps = {
 
 const MenuItem = (props: MenuItemProps) => {
   const pathname = usePathname();
+  const router = useRouter();
   const isActive = pathname === props.path;
   const classes = `${styles.item} ${isActive ? styles.active : null}`;
 
   return (
-    <div className={classes}>
+    <div className={classes} onClick={() => router.push(props.path)}>
       {props.iconUrl ? (
         <Image
           src={props.iconUrl}
@@ -27,9 +28,7 @@ const MenuItem = (props: MenuItemProps) => {
           height={30}
         />
       ) : null}
-      <CustomLink href={props.path} linkVariant="white">
-        {props.label}
-      </CustomLink>
+      <Paragraph size="21px">{props.label}</Paragraph>
     </div>
   );
 };

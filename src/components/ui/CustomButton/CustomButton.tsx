@@ -2,17 +2,25 @@ import type { ButtonProps } from '@mui/material';
 import { Button } from '@mui/material';
 import type { ReactNode } from 'react';
 
+import Loader from '@/components/ui/Loader/Loader';
+
 type CustomButtonProps = ButtonProps & {
   children: ReactNode;
   background?: 'red' | 'green';
+  isLoading?: boolean;
 };
 
-function CustomButton({ children, background, ...props }: CustomButtonProps) {
+function CustomButton({
+  children,
+  background,
+  isLoading,
+  ...props
+}: CustomButtonProps) {
   return (
     <Button
       sx={{
         width: 'fit-content',
-        padding: '16px 94px 25px 94px',
+        padding: '12px 83px 20px',
         fontFamily: 'var(--primary-font), sans-serif',
         fontWeight: 700,
         fontSize: 'var(--font-body)',
@@ -31,7 +39,7 @@ function CustomButton({ children, background, ...props }: CustomButtonProps) {
       }}
       {...props}
     >
-      {children}
+      {!isLoading ? children : <Loader />}
     </Button>
   );
 }

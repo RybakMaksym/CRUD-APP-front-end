@@ -5,6 +5,7 @@ import MenuItem from '@/components/ui/MenuItem/MenuItem';
 
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
+  useRouter: jest.fn(),
 }));
 
 describe('MenuItem', () => {

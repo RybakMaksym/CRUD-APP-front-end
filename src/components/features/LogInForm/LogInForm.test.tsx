@@ -31,9 +31,11 @@ describe('LogInForm', () => {
   it('should render email, password inputs and submit button', () => {
     render(<LogInForm title="Log In" />);
 
-    expect(screen.getByPlaceholderText('email')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('password')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /Sign In/i }),
+    ).toBeInTheDocument();
   });
 
   it('should display error message on failed login', async () => {
@@ -43,13 +45,13 @@ describe('LogInForm', () => {
     });
 
     render(<LogInForm title="Log In" />);
-    fireEvent.change(screen.getByPlaceholderText('email'), {
+    fireEvent.change(screen.getByPlaceholderText('Email'), {
       target: { value: 'test@mail.com' },
     });
-    fireEvent.change(screen.getByPlaceholderText('password'), {
+    fireEvent.change(screen.getByPlaceholderText('Password'), {
       target: { value: 'wrongpass' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Sign In/i }));
 
     expect(await screen.findByText('Invalid credentials')).toBeInTheDocument();
   });
@@ -61,13 +63,13 @@ describe('LogInForm', () => {
     });
 
     render(<LogInForm title="Log In" />);
-    fireEvent.change(screen.getByPlaceholderText('email'), {
+    fireEvent.change(screen.getByPlaceholderText('Email'), {
       target: { value: 'test@mail.com' },
     });
-    fireEvent.change(screen.getByPlaceholderText('password'), {
+    fireEvent.change(screen.getByPlaceholderText('Password'), {
       target: { value: '12345678' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Sign In/i }));
 
     await waitFor(() => {
       expect(mockLogIn).toHaveBeenCalledWith({
