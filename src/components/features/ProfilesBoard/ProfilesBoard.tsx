@@ -182,7 +182,8 @@ function ProfilesBoard() {
           {!activeSearch && filter === FilterOption.DEFAULT && !isLoading && (
             <CreateProfileButton onConfirm={onProfileChanged} />
           )}
-          {(isInitialLoading || isLoading) && <Loader />}
+          {(isInitialLoading || isLoading) &&
+            filter === FilterOption.DEFAULT && <Loader />}
         </div>
       </InfinityScrollWrapper>
     </div>
