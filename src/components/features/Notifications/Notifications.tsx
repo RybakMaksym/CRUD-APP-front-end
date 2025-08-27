@@ -13,6 +13,7 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 import { DEFAULT_NOTIFICATIONS_PAGE_LIMIT } from '@/lib/constants/notification';
 import {
   notificationApi,
+  useMakeNotificationsWatchedMutation,
   useMyNotificationsQuery,
 } from '@/redux/notification/notification-api';
 import notificationSelectors from '@/redux/notification/notification-selectors';
@@ -45,12 +46,28 @@ function Notifications(props: NotificationsProps) {
     },
   );
 
+  const [makeNotificationsWatchedMutation] =
+    useMakeNotificationsWatchedMutation();
+
   useEffect(() => {
     if (props.shouldRefetch) {
+      const ids = allNotifications.reduce<string[]>((acc, n) => {
+        if (n.isNew) acc.push(n.id);
+
+        return acc;
+      }, []);
+
+      makeNotificationsWatchedMutation(ids);
       refetch();
       dispatch(setHasNewNotification(false));
     }
-  }, [props.shouldRefetch, refetch, dispatch]);
+  }, [
+    props.shouldRefetch,
+    refetch,
+    dispatch,
+    allNotifications,
+    makeNotificationsWatchedMutation,
+  ]);
 
   useEffect(() => {
     if (!paginatedData || isAllNotificationsLoading) return;
@@ -124,6 +141,7 @@ function Notifications(props: NotificationsProps) {
       )}
       {!isInitialLoading &&
         !isAllNotificationsLoading &&
+        !isAllNotificationsError &&
         !paginatedData?.data.length && (
           <Paragraph color="dark" size="14px">
             You have no notifications

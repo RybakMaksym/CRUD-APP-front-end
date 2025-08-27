@@ -21,7 +21,7 @@ const notificationSlice = createSlice({
       );
 
       if (!exists) {
-        state.notifications.unshift({ ...action.payload, isNew: true });
+        state.notifications.unshift({ ...action.payload });
         state.hasNew = true;
       }
     },
