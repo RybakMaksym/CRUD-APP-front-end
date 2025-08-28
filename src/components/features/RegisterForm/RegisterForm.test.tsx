@@ -31,16 +31,18 @@ describe('RegisterForm', () => {
   it('should render email, password inputs, checkbox and submit button', () => {
     render(<RegisterForm title="Register" />);
 
-    expect(screen.getByPlaceholderText('username')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('email')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('password')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /Sign Up/i }),
+    ).toBeInTheDocument();
   });
 
   it('should show required validation errors on empty submit', async () => {
     render(<RegisterForm title="Register" />);
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
 
     expect(await screen.findAllByText('Required')).toHaveLength(3);
   });
@@ -52,17 +54,17 @@ describe('RegisterForm', () => {
     });
 
     render(<RegisterForm title="Register" />);
-    fireEvent.change(screen.getByPlaceholderText('username'), {
+    fireEvent.change(screen.getByPlaceholderText('Username'), {
       target: { value: 'test' },
     });
-    fireEvent.change(screen.getByPlaceholderText('email'), {
+    fireEvent.change(screen.getByPlaceholderText('Email'), {
       target: { value: 'test@mail.com' },
     });
-    fireEvent.change(screen.getByPlaceholderText('password'), {
+    fireEvent.change(screen.getByPlaceholderText('Password'), {
       target: { value: 'wrongpass' },
     });
     fireEvent.click(screen.getByRole('checkbox'));
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
 
     expect(await screen.findByText('Invalid credentials')).toBeInTheDocument();
   });
@@ -74,17 +76,17 @@ describe('RegisterForm', () => {
     });
 
     render(<RegisterForm title="Register" />);
-    fireEvent.change(screen.getByPlaceholderText('username'), {
+    fireEvent.change(screen.getByPlaceholderText('Username'), {
       target: { value: 'JohnDoe' },
     });
-    fireEvent.change(screen.getByPlaceholderText('email'), {
+    fireEvent.change(screen.getByPlaceholderText('Email'), {
       target: { value: 'john@example.com' },
     });
-    fireEvent.change(screen.getByPlaceholderText('password'), {
+    fireEvent.change(screen.getByPlaceholderText('Password'), {
       target: { value: '12345678' },
     });
     fireEvent.click(screen.getByRole('checkbox'));
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
 
     await waitFor(() => {
       expect(mockRegister).toHaveBeenCalled();

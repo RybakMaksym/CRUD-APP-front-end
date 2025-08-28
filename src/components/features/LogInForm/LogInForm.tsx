@@ -50,10 +50,10 @@ function LogInForm(props: AuthFormProps) {
           <Headline>{props.title}</Headline>
           {status && <Paragraph color="error">{status}</Paragraph>}
 
-          <CustomInput name="email" type="email" placeholder="email" />
-          <CustomInput name="password" type="password" placeholder="password" />
+          <CustomInput name="email" type="email" placeholder="Email" />
+          <CustomInput name="password" type="password" placeholder="Password" />
 
-          <CustomButton type="submit">Submit</CustomButton>
+          <CustomButton type="submit">Sign In</CustomButton>
 
           <Paragraph>
             <div className={styles.link}>

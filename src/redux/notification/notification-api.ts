@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/redux/queries/base-query';
+import type { IMessageResponse } from '@/types/messages';
 import type { IPaginatedResponse, IPagination } from '@/types/navigation';
 import type { INotification } from '@/types/notification';
 
@@ -18,7 +19,15 @@ export const notificationApi = createApi({
         method: 'GET',
       }),
     }),
+    makeNotificationsWatched: builder.mutation<IMessageResponse, string[]>({
+      query: (ids) => ({
+        url: `/notification`,
+        method: 'PATCH',
+        body: { ids },
+      }),
+    }),
   }),
 });
 
-export const { useMyNotificationsQuery } = notificationApi;
+export const { useMyNotificationsQuery, useMakeNotificationsWatchedMutation } =
+  notificationApi;

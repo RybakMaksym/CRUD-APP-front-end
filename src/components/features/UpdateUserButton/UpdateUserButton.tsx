@@ -19,7 +19,7 @@ function UpdateUserButton({ user }: UpdateUserButtonProps) {
   return (
     <>
       <CustomButton background="green" onClick={() => setIsOpen(true)}>
-        Update
+        Edit
       </CustomButton>
 
       <CustomModal isOpen={isOpen}>

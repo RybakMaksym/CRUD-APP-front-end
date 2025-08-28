@@ -17,7 +17,7 @@ type DeleteUserButtonProps = {
 };
 
 function DeleteUserButton({ userId }: DeleteUserButtonProps) {
-  const [deleteUser] = useDeleteUserByIdMutation();
+  const [deleteUser, { isLoading }] = useDeleteUserByIdMutation();
   const router = useRouter();
   const adminId = useAppSelector(userSelectors.getUserId);
   const dispatch = useAppDispatch();
@@ -49,6 +49,7 @@ function DeleteUserButton({ userId }: DeleteUserButtonProps) {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
+        isLoading={isLoading}
       />
     </>
   );

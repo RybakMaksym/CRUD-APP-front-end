@@ -25,7 +25,7 @@ function UpdateProfileForm({
   onConfirm,
   onClose,
 }: UpdateProfileFormProps) {
-  const [updateProfile] = useUpdateProfileByIdMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileByIdMutation();
 
   const initialValues: UpdateProfileFormValues = {
     name: profile.name,
@@ -95,7 +95,11 @@ function UpdateProfileForm({
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
-            <CustomButton type="submit" background="green">
+            <CustomButton
+              type="submit"
+              isLoading={isLoading}
+              background="green"
+            >
               Save
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>

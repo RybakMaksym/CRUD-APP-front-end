@@ -11,6 +11,7 @@ type CustomDialogProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  isLoading?: boolean;
 };
 
 function CustomDialog({
@@ -18,6 +19,7 @@ function CustomDialog({
   isOpen,
   onClose,
   onConfirm,
+  isLoading,
 }: CustomDialogProps) {
   return (
     <Dialog
@@ -29,7 +31,11 @@ function CustomDialog({
     >
       <Paragraph color="dark">{title}</Paragraph>
       <DialogActions className={styles.actions}>
-        <CustomButton background="green" onClick={onConfirm}>
+        <CustomButton
+          background="green"
+          onClick={onConfirm}
+          isLoading={isLoading}
+        >
           Yes
         </CustomButton>
         <CustomButton background="red" onClick={onClose}>
