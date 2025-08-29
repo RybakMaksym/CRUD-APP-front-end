@@ -19,10 +19,10 @@ type Story = StoryObj<typeof Notification>;
 const baseNotification: INotification = {
   id: '1',
   type: NotificationType.MADE_ADMIN,
-  message: 'You have been made an admin',
   createdAt: new Date(),
   ownerId: 'user-1',
   isNew: true,
+  admin: 'Admin',
 };
 
 export const MadeAdmin: Story = {
@@ -30,7 +30,6 @@ export const MadeAdmin: Story = {
     notification: {
       ...baseNotification,
       type: NotificationType.MADE_ADMIN,
-      message: 'You have been made an admin',
     },
   },
 };
@@ -40,7 +39,7 @@ export const ProfileEdit: Story = {
     notification: {
       ...baseNotification,
       type: NotificationType.PROFILE_EDIT,
-      message: 'Your profile has been updated',
+      profile: 'Profile',
     },
   },
 };
@@ -50,7 +49,7 @@ export const ProfileDelete: Story = {
     notification: {
       ...baseNotification,
       type: NotificationType.PROFILE_DELETE,
-      message: 'Your profile has been deleted',
+      profile: 'Profile',
     },
   },
 };
@@ -60,7 +59,7 @@ export const OldNotification: Story = {
     notification: {
       ...baseNotification,
       isNew: false,
-      message: 'This is an old notification',
+      profile: 'Profile',
     },
   },
 };
