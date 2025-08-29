@@ -3,7 +3,8 @@ import type { NotificationType } from '@/enums/notification';
 export interface INotification {
   id: string;
   type: NotificationType;
-  message: string;
+  admin: string;
+  profile?: string;
   createdAt: Date;
   ownerId: string;
   isNew: boolean;

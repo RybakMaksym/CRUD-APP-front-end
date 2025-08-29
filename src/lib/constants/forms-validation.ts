@@ -19,7 +19,7 @@ import type { CreateProfileFormValues } from '@/types/profile';
 
 const EMAIL_VALIDATION = Yup.string()
   .email('Invalid email')
-  .required('Required')
+  .required('Email is required')
   .test(
     'has-domain-dot',
     'Email must contain a dot in the domain part',
@@ -33,7 +33,7 @@ const EMAIL_VALIDATION = Yup.string()
   );
 
 const PASSWORD_VALIDATION = Yup.string()
-  .required('Required')
+  .required('Password is required')
   .min(
     MIN_PASSWORD_LENGTH,
     `Password must be at least ${MIN_PASSWORD_LENGTH} characters`,
@@ -55,7 +55,7 @@ const AUTH_SCHEMA = Yup.object({
 const USERNAME_VALIDATION = Yup.string()
   .min(MIN_FIELD_LENGTH, `Must be at least ${MIN_FIELD_LENGTH} characters`)
   .max(MAX_FIELD_LENGTH, `Must be at most ${MAX_FIELD_LENGTH} characters`)
-  .required('Required');
+  .required('Username is required');
 
 const IS_ADMIN_VALIDATION = Yup.boolean().default(false);
 
@@ -90,12 +90,12 @@ const COUNTRY_VALIDATION = Yup.string()
   )
   .min(MIN_FIELD_LENGTH, `Must be at least ${MIN_FIELD_LENGTH} characters`)
   .max(MAX_FIELD_LENGTH, `Must be at most ${MAX_FIELD_LENGTH} characters`)
-  .required('Required');
+  .required('Country is required');
 
 const CITY_VALIDATION = Yup.string()
   .min(MIN_FIELD_LENGTH, `Must be at least ${MIN_FIELD_LENGTH} characters`)
   .max(MAX_FIELD_LENGTH, `Must be at most ${MAX_FIELD_LENGTH} characters`)
-  .required('Required');
+  .required('City is required');
 
 export const CREATE_PROFILE_FORM_SCHEMA = Yup.object({
   name: USERNAME_VALIDATION,

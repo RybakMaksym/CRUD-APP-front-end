@@ -7,16 +7,21 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 
 type CustomInputProps = InputProps & {
   background?: 'white' | 'dark';
+  showError?: boolean;
 };
 
-function CustomInput({ background = 'white', ...props }: CustomInputProps) {
+function CustomInput({
+  background = 'white',
+  showError = true,
+  ...props
+}: CustomInputProps) {
   const [field, meta] = useField(props);
   const classes = `${styles.input} ${styles[background]}`;
 
   return (
     <div className={styles['input-wrapper']}>
       <Input disableUnderline className={classes} {...props} {...field} />
-      {meta.touched && meta.error ? (
+      {showError && meta.touched && meta.error ? (
         <Paragraph color="error">{meta.error}</Paragraph>
       ) : null}
     </div>

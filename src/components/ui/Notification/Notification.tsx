@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import styles from '@/components/ui/Notification/Notification.module.scss';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
+import { useNotificationMessage } from '@/hooks/use-notification-message';
 import { formatDate } from '@/lib/helpers/format-date';
 import type { INotification } from '@/types/notification';
 
@@ -16,6 +17,8 @@ const ICONS = {
 };
 
 function Notification(props: NotificationProps) {
+  const { translateMessage } = useNotificationMessage();
+
   const classes = `${styles.notification} ${props.notification.isNew && styles.new}`;
 
   return (
@@ -28,7 +31,11 @@ function Notification(props: NotificationProps) {
       />
       <div className={styles.message}>
         <Paragraph size="14px" color="dark">
-          {props.notification.message}
+          {translateMessage(
+            props.notification.type,
+            props.notification.admin,
+            props.notification.profile,
+          )}
         </Paragraph>
       </div>
       <div className={styles.devider}></div>

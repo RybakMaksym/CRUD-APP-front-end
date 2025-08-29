@@ -57,35 +57,63 @@ function RegisterForm(props: AuthFormProps) {
       validationSchema={REGISTER_FORM_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ status, setFieldValue }) => (
-        <Form className={`${styles.form} ${styles.dark}`}>
-          <Headline>{props.title}</Headline>
-          {status && <Paragraph color="error">{status}</Paragraph>}
+      {({ status, setFieldValue, errors }) => {
+        const validationErrors = Object.values(errors);
 
-          <PicturePicker
-            onChange={(event) =>
-              setFieldValue('avatar', event.target.files?.[0])
-            }
-          />
+        return (
+          <Form className={`${styles.form} ${styles.dark}`}>
+            <Headline>{props.title}</Headline>
 
-          <CustomInput name="username" placeholder="Username" />
-          <CustomInput name="email" type="email" placeholder="Email" />
-          <CustomInput name="password" type="password" placeholder="Password" />
+            {(status || validationErrors.length > 0) && (
+              <div>
+                {status && <Paragraph color="error">{status}</Paragraph>}
+                {validationErrors.map((err, idx) => (
+                  <Paragraph key={idx} color="error">
+                    {err}
+                  </Paragraph>
+                ))}
+              </div>
+            )}
 
-          <div className={styles['checkbox-wrapper']}>
-            <CustomCheckbox label="Is admin" name="isAdmin" />
-          </div>
+            <PicturePicker
+              onChange={(event) =>
+                setFieldValue('avatar', event.target.files?.[0])
+              }
+            />
 
-          <CustomButton type="submit">Sign Up</CustomButton>
+            <CustomInput
+              name="username"
+              placeholder="Username"
+              showError={false}
+            />
+            <CustomInput
+              name="email"
+              type="email"
+              placeholder="Email"
+              showError={false}
+            />
+            <CustomInput
+              name="password"
+              type="password"
+              placeholder="Password"
+              showError={false}
+            />
 
-          <Paragraph>
-            <div className={styles.link}>
-              Have an account?
-              <CustomLink href={PAGES_URL.LOG_IN}>Sign in</CustomLink>
+            <div className={styles['checkbox-wrapper']}>
+              <CustomCheckbox label="Is admin" name="isAdmin" />
             </div>
-          </Paragraph>
-        </Form>
-      )}
+
+            <CustomButton type="submit">Sign Up</CustomButton>
+
+            <Paragraph>
+              <div className={styles.link}>
+                Have an account?
+                <CustomLink href={PAGES_URL.LOG_IN}>Sign in</CustomLink>
+              </div>
+            </Paragraph>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

@@ -22,6 +22,11 @@
     "couldNotFindAnyNotifications": "Не вдалося знайти жодного сповіщення",
     "youHaveNoNotifications": "У вас немає сповіщень"
   },
+  "notifications": {
+    "madeAdmin": "{{admin}} адмін зробив вас адміном",
+    "profileEdit": "{{admin}} адмін відредагував ваш профайл {{profile}}",
+    "profileDelete": "{{admin}} адмін видалив ваш профайл {{profile}}"
+  },
   "usersPage": {
     "users": "Користувачі",
     "name": "Ім'я",

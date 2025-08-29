@@ -4,11 +4,17 @@ import Notification from '@/components/ui/Notification/Notification';
 import { NotificationType } from '@/enums/notification';
 import type { INotification } from '@/types/notification';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 describe('Notification', () => {
   const baseNotification: INotification = {
     id: '1',
     type: NotificationType.MADE_ADMIN,
-    message: 'You were made admin',
+    admin: 'admin',
     isNew: false,
     createdAt: new Date('2024-08-07T12:00:00.000Z'),
     ownerId: '1',
@@ -17,7 +23,7 @@ describe('Notification', () => {
   it('should render message and formatted date', () => {
     render(<Notification notification={baseNotification} />);
 
-    expect(screen.getByText('You were made admin')).toBeInTheDocument();
+    expect(screen.getByText('madeAdmin')).toBeInTheDocument();
     expect(screen.getByText('7 Aug 2024')).toBeInTheDocument();
   });
 

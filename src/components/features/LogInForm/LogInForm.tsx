@@ -45,24 +45,48 @@ function LogInForm(props: AuthFormProps) {
       validationSchema={LOG_IN_FORM_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ status }) => (
-        <Form className={`${styles.form} ${styles.dark}`}>
-          <Headline>{props.title}</Headline>
-          {status && <Paragraph color="error">{status}</Paragraph>}
+      {({ status, errors }) => {
+        const validationErrors = Object.values(errors);
 
-          <CustomInput name="email" type="email" placeholder="Email" />
-          <CustomInput name="password" type="password" placeholder="Password" />
+        return (
+          <Form className={`${styles.form} ${styles.dark}`}>
+            <Headline>{props.title}</Headline>
 
-          <CustomButton type="submit">Sign In</CustomButton>
+            {(status || validationErrors.length > 0) && (
+              <div>
+                {status && <Paragraph color="error">{status}</Paragraph>}
+                {validationErrors.map((err, idx) => (
+                  <Paragraph key={idx} color="error">
+                    {err}
+                  </Paragraph>
+                ))}
+              </div>
+            )}
 
-          <Paragraph>
-            <div className={styles.link}>
-              {"Don't have an account?"}
-              <CustomLink href={PAGES_URL.REGISTER}>Sign up</CustomLink>
-            </div>
-          </Paragraph>
-        </Form>
-      )}
+            <CustomInput
+              name="email"
+              type="email"
+              placeholder="Email"
+              showError={false}
+            />
+            <CustomInput
+              name="password"
+              type="password"
+              placeholder="Password"
+              showError={false}
+            />
+
+            <CustomButton type="submit">Sign In</CustomButton>
+
+            <Paragraph>
+              <div className={styles.link}>
+                {"Don't have an account?"}
+                <CustomLink href={PAGES_URL.REGISTER}>Sign up</CustomLink>
+              </div>
+            </Paragraph>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

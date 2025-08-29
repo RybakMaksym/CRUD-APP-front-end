@@ -22,6 +22,11 @@
     "couldNotFindAnyNotifications": "Could not find any notifications",
     "youHaveNoNotifications": "You have no notifications"
   },
+  "notifications": {
+    "madeAdmin": "You were made admin by {{admin}} admin",
+    "profileEdit": "Profile {{profile}} was edited by {{admin}} admin",
+    "profileDelete": "Profile {{profile}} was deleted by {{admin}} admin"
+  },
   "usersPage": {
     "users": "Users",
     "name": "Name",

@@ -50,7 +50,13 @@ describe('RegisterForm', () => {
     render(<RegisterForm title="Register" />);
     fireEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
 
-    expect(await screen.findAllByText('Required')).toHaveLength(3);
+    expect(
+      await screen.findByText(/Username is required/i),
+    ).toBeInTheDocument();
+    expect(await screen.findByText(/Email is required/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Password is required/i),
+    ).toBeInTheDocument();
   });
 
   it('should display error message on failed register', async () => {
