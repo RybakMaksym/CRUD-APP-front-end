@@ -10,10 +10,12 @@ import { NotificationEvents } from '@/enums/notification';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getSocket } from '@/lib/sockets/socket';
+import { useMyNotificationsQuery } from '@/redux/notification/notification-api';
 import notificationSelectors from '@/redux/notification/notification-selectors';
 import {
   addNotification,
   clearSocketNotifications,
+  setHasNewNotification,
 } from '@/redux/notification/notification-slice';
 import socketSelectors from '@/redux/socket/socket-selectors';
 import type { INotification } from '@/types/notification';
@@ -23,6 +25,17 @@ function NotificationButton() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const hasNew = useAppSelector(notificationSelectors.getHasNewNotifications);
+
+  const { data: paginatedData } = useMyNotificationsQuery({
+    page: 1,
+    limit: 1,
+  });
+
+  useEffect(() => {
+    if (paginatedData?.data[0].isNew) {
+      dispatch(setHasNewNotification(true));
+    }
+  }, [paginatedData, dispatch]);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

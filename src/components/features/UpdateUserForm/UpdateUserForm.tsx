@@ -32,7 +32,9 @@ type UpdateUserFormProps = {
 
 function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
   const { t } = useTranslation();
-  const [updateUser] = useUpdateUserByIdMutation();
+
+  const [updateUser, { isLoading }] = useUpdateUserByIdMutation();
+
   const router = useRouter();
 
   const dispatch = useAppDispatch();
@@ -91,7 +93,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
               setFieldValue('avatar', event.target.files?.[0])
             }
             preview={user.avatarUrl ?? DEFAULT_AVATAR}
-            labalColor="dark"
+            labelColor="dark"
           />
 
           <CustomInput
@@ -117,7 +119,11 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
-            <CustomButton type="submit" background="green">
+            <CustomButton
+              type="submit"
+              isLoading={isLoading}
+              background="green"
+            >
               {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>

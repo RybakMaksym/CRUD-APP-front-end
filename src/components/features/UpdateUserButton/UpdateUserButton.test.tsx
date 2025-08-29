@@ -40,19 +40,19 @@ describe('UpdateUserButton', () => {
   it('should render update button', () => {
     render(<UpdateUserButton user={mockUser} />);
 
-    expect(screen.getByText(/update/i)).toBeInTheDocument();
+    expect(screen.getByText(/edit/i)).toBeInTheDocument();
   });
 
   it('should open modal and show form after clicking update button', () => {
     render(<UpdateUserButton user={mockUser} />);
-    fireEvent.click(screen.getByText(/update/i));
+    fireEvent.click(screen.getByText(/edit/i));
 
     expect(screen.getByTestId('update-user-form')).toBeInTheDocument();
   });
 
   it('should close form after confirm', () => {
     render(<UpdateUserButton user={mockUser} />);
-    fireEvent.click(screen.getByText(/update/i));
+    fireEvent.click(screen.getByText(/edit/i));
     fireEvent.click(screen.getByText('Confirm'));
 
     expect(screen.queryByTestId('update-user-form')).not.toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('UpdateUserButton', () => {
 
   it('should close form after cancel/close', () => {
     render(<UpdateUserButton user={mockUser} />);
-    fireEvent.click(screen.getByText(/update/i));
+    fireEvent.click(screen.getByText(/edit/i));
     fireEvent.click(screen.getByText('Close'));
 
     expect(screen.queryByTestId('update-user-form')).not.toBeInTheDocument();

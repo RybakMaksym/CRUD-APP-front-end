@@ -1,8 +1,13 @@
+.input-wrapper {
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 10px;
+}
+
 .input {
   min-width: 489px;
   width: 100%;
   padding: 19px 19px 22px 21px;
-  margin-bottom: 10px;
   font-family: var(--primary-font), sans-serif;
   font-weight: 400;
   font-size: var(--font-body);

@@ -29,7 +29,8 @@ function UpdateProfileForm({
   onClose,
 }: UpdateProfileFormProps) {
   const { t } = useTranslation();
-  const [updateProfile] = useUpdateProfileByIdMutation();
+
+  const [updateProfile, { isLoading }] = useUpdateProfileByIdMutation();
 
   const initialValues: UpdateProfileFormValues = {
     name: profile.name,
@@ -86,7 +87,7 @@ function UpdateProfileForm({
               }
             }}
             preview={profile.avatarUrl ?? DEFAULT_AVATAR}
-            labalColor="dark"
+            labelColor="dark"
           />
           <CustomInput
             background="dark"
@@ -111,7 +112,11 @@ function UpdateProfileForm({
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
-            <CustomButton type="submit" background="green">
+            <CustomButton
+              type="submit"
+              isLoading={isLoading}
+              background="green"
+            >
               {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>

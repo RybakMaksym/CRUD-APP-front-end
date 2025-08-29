@@ -16,7 +16,8 @@ type DeleteProfileButtonProps = {
 function DeleteProfileButton(props: DeleteProfileButtonProps) {
   const { t } = useTranslation();
 
-  const [deleteProfile] = useDeleteProfileByIdMutation();
+  const [deleteProfile, { isLoading }] = useDeleteProfileByIdMutation();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
@@ -39,6 +40,7 @@ function DeleteProfileButton(props: DeleteProfileButtonProps) {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
+        isLoading={isLoading}
       />
     </>
   );

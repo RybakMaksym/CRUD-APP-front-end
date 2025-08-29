@@ -12,6 +12,7 @@ type CustomDialogProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  isLoading?: boolean;
 };
 
 function CustomDialog({
@@ -19,6 +20,7 @@ function CustomDialog({
   isOpen,
   onClose,
   onConfirm,
+  isLoading,
 }: CustomDialogProps) {
   const { t } = useTranslation();
 
@@ -32,7 +34,11 @@ function CustomDialog({
     >
       <Paragraph color="dark">{title}</Paragraph>
       <DialogActions className={styles.actions}>
-        <CustomButton background="green" onClick={onConfirm}>
+        <CustomButton
+          background="green"
+          onClick={onConfirm}
+          isLoading={isLoading}
+        >
           {t('general.yes')}
         </CustomButton>
         <CustomButton background="red" onClick={onClose}>

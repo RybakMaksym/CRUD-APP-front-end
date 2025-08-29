@@ -1,3 +1,5 @@
+import storybook from 'eslint-plugin-storybook';
+
 import { FlatCompat } from '@eslint/eslintrc';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -16,7 +18,7 @@ const eslintConfig = [
     'plugin:prettier/recommended',
     'plugin:import/typescript',
   ),
-
+  ...storybook.configs['flat/recommended'],
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -83,6 +85,7 @@ const eslintConfig = [
           disallowTypeAnnotations: false,
         },
       ],
+      'storybook/no-renderer-packages': 'off',
     },
   },
 ];

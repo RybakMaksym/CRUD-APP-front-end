@@ -22,7 +22,7 @@ function UpdateUserButton({ user }: UpdateUserButtonProps) {
   return (
     <>
       <CustomButton background="green" onClick={() => setIsOpen(true)}>
-        {t('general.update')}
+        {t('general.edit')}
       </CustomButton>
 
       <CustomModal isOpen={isOpen}>

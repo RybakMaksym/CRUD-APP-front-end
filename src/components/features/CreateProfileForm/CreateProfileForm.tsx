@@ -22,8 +22,8 @@ import type { CreateProfileFormValues } from '@/types/profile';
 
 type CreateProfileFormProps = {
   userId: string;
-  onClose: () => void;
   onConfirm: () => void;
+  onClose: () => void;
 };
 
 function CreateProfileForm({
@@ -33,7 +33,7 @@ function CreateProfileForm({
 }: CreateProfileFormProps) {
   const { t } = useTranslation();
 
-  const [createProfile] = useCreateProfileMutation();
+  const [createProfile, { isLoading }] = useCreateProfileMutation();
 
   const handleSubmit = async (
     values: CreateProfileFormValues,
@@ -69,7 +69,7 @@ function CreateProfileForm({
     >
       {({ status, setFieldValue, values }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">{t('profilesPage.createProfile')}</Headline>
+          <Headline color="dark">{t('profilesPage.addProfile')}</Headline>
 
           <PicturePicker
             onChange={(event) => {
@@ -82,7 +82,7 @@ function CreateProfileForm({
                 ? values.avatarUrl
                 : DEFAULT_AVATAR
             }
-            labalColor="dark"
+            labelColor="dark"
           />
           <CustomInput
             background="dark"
@@ -107,7 +107,11 @@ function CreateProfileForm({
           {status && <Paragraph color="error">{status}</Paragraph>}
 
           <DialogActions className={styles.actions}>
-            <CustomButton type="submit" background="green">
+            <CustomButton
+              type="submit"
+              isLoading={isLoading}
+              background="green"
+            >
               {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>

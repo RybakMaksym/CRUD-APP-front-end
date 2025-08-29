@@ -12,9 +12,14 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { DEFAULT_NOTIFICATIONS_PAGE_LIMIT } from '@/lib/constants/notification';
-import { useMyNotificationsQuery } from '@/redux/notification/notification-api';
+import {
+  notificationApi,
+  useMakeNotificationsWatchedMutation,
+  useMyNotificationsQuery,
+} from '@/redux/notification/notification-api';
 import notificationSelectors from '@/redux/notification/notification-selectors';
 import { setHasNewNotification } from '@/redux/notification/notification-slice';
+import userSelectors from '@/redux/user/user-selectors';
 import type { INotification } from '@/types/notification';
 
 type NotificationsProps = {
@@ -34,17 +39,38 @@ function Notifications(props: NotificationsProps) {
     isLoading: isAllNotificationsLoading,
     isError: isAllNotificationsError,
     refetch,
-  } = useMyNotificationsQuery({
-    page,
-    limit: DEFAULT_NOTIFICATIONS_PAGE_LIMIT,
-  });
+  } = useMyNotificationsQuery(
+    {
+      page,
+      limit: DEFAULT_NOTIFICATIONS_PAGE_LIMIT,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
+
+  const [makeNotificationsWatchedMutation] =
+    useMakeNotificationsWatchedMutation();
 
   useEffect(() => {
     if (props.shouldRefetch) {
+      const ids = allNotifications.reduce<string[]>((acc, n) => {
+        if (n.isNew) acc.push(n.id);
+
+        return acc;
+      }, []);
+
+      makeNotificationsWatchedMutation(ids);
       refetch();
       dispatch(setHasNewNotification(false));
     }
-  }, [props.shouldRefetch, refetch, dispatch]);
+  }, [
+    props.shouldRefetch,
+    refetch,
+    dispatch,
+    allNotifications,
+    makeNotificationsWatchedMutation,
+  ]);
 
   useEffect(() => {
     if (!paginatedData || isAllNotificationsLoading) return;
@@ -58,6 +84,14 @@ function Notifications(props: NotificationsProps) {
 
     setIsFetchingMore(false);
   }, [paginatedData, isAllNotificationsLoading]);
+
+  const userId = useAppSelector(userSelectors.getUserId);
+
+  useEffect(() => {
+    setAllNotifications([]);
+    refetch();
+    dispatch(notificationApi.util.resetApiState());
+  }, [userId, dispatch, refetch]);
 
   const newNotifications = useAppSelector(
     notificationSelectors.getNewNotifications,
@@ -110,11 +144,14 @@ function Notifications(props: NotificationsProps) {
           {t('profilesPage.couldNotFindAnyNotifications')}
         </Paragraph>
       )}
-      {!allNotifications && (
-        <Paragraph color="dark" size="14px">
-          {t('profilesPage.youHaveNoNotifications')}
-        </Paragraph>
-      )}
+      {!isInitialLoading &&
+        !isAllNotificationsLoading &&
+        !isAllNotificationsError &&
+        !paginatedData?.data.length && (
+          <Paragraph color="dark" size="14px">
+            {t('profilesPage.youHaveNoNotifications')}
+          </Paragraph>
+        )}
     </div>
   );
 }

@@ -41,6 +41,7 @@ const customJestConfig: Config = {
     '<rootDir>/src/redux/socket',
     '<rootDir>/src/redux/notification',
     '<rootDir>/src/redux/settings',
+    '\\.stories\\.tsx?$',
   ],
 };
 

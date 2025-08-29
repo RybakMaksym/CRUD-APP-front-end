@@ -6,7 +6,7 @@ export const FILTERS = [
     label: 'filter',
   },
   {
-    value: FilterOption.COUNRTY,
+    value: FilterOption.COUNTRY,
     label: 'country',
   },
   {

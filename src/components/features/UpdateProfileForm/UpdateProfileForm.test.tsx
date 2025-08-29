@@ -17,7 +17,7 @@ jest.mock('react-i18next', () => ({
 }));
 
 jest.mock('@/redux/profile/profile-api', () => ({
-  useUpdateProfileByIdMutation: () => [mockUpdateProfile],
+  useUpdateProfileByIdMutation: () => [mockUpdateProfile, { isLoading: false }],
 }));
 
 const profile: IProfile = {

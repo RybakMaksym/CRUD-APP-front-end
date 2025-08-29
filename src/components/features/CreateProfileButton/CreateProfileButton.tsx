@@ -20,7 +20,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
   const { t } = useTranslation();
 
   let ownerId = useAppSelector(userSelectors.getUserId);
-  ownerId = props.userId ?? ownerId;
+  ownerId ||= props.userId;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,12 +30,12 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
     <>
       <div className={styles.button} onClick={() => setIsOpen(true)}>
         <Image
-          src={'/assets/icons/profile icon.png'}
+          src={'/assets/icons/profile icon.svg'}
           alt="create profile icon"
           width={84}
           height={83}
         />
-        <Paragraph>{t('profilesPage.createProfile')}</Paragraph>
+        <Paragraph size="18px">{t('profilesPage.createProfile')}</Paragraph>
       </div>
       <CustomModal isOpen={isOpen}>
         <CreateProfileForm
