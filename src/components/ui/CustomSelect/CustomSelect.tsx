@@ -24,7 +24,7 @@ function CustomSelect(props: CustomSelectProps) {
       displayEmpty
       size="small"
       sx={{
-        minWidth: '140px',
+        minWidth: '190px',
         color: 'var(--color-white)',
         backgroundColor: 'var(--color-black-90)',
         fontSize: 'var(--font-sub-body)',
@@ -51,7 +51,7 @@ function CustomSelect(props: CustomSelectProps) {
       MenuProps={{
         PaperProps: {
           sx: {
-            minWidth: '140px',
+            minWidth: '190px',
             backgroundColor: 'var(--color-black-90)',
             borderRadius: '0 0 15px 15px',
             '& .MuiMenuItem-root': {

@@ -32,28 +32,34 @@ function ProfileCard(props: ProfileCardProps) {
       </div>
       <div className={styles['card-body']}>
         <div className={styles['card-column']}>
-          <Paragraph color="error" size="18px">
-            {t('profilesPage.gender')}
-          </Paragraph>
-          <Paragraph color="error" size="18px">
-            {t('profilesPage.profileBirth')}
-          </Paragraph>
-          <Paragraph color="error" size="18px">
-            {t('profilesPage.profileCountry')}
-          </Paragraph>
-          <Paragraph color="error" size="18px">
-            {t('profilesPage.profileCity')}
-          </Paragraph>
-        </div>
-        <div className={styles['card-column']}>
-          <Paragraph size="18px">
-            {t(`profilesPage.${props.profile.gender}`)}
-          </Paragraph>
-          <Paragraph size="18px">
-            {formatDate(props.profile.birthDate)}
-          </Paragraph>
-          <Paragraph size="18px">{props.profile.country}</Paragraph>
-          <Paragraph size="18px">{props.profile.city}</Paragraph>
+          <div className={styles['card-row']}>
+            <Paragraph color="error" size="18px">
+              {t('profilesPage.gender')}
+            </Paragraph>
+            <Paragraph size="18px">
+              {t(`profilesPage.${props.profile.gender}`)}
+            </Paragraph>
+          </div>
+          <div className={styles['card-row']}>
+            <Paragraph color="error" size="18px">
+              {t('profilesPage.profileBirth')}
+            </Paragraph>
+            <Paragraph size="18px">
+              {formatDate(props.profile.birthDate)}
+            </Paragraph>
+          </div>
+          <div className={styles['card-row']}>
+            <Paragraph color="error" size="18px">
+              {t('profilesPage.profileCountry')}
+            </Paragraph>
+            <Paragraph size="18px">{props.profile.country}</Paragraph>
+          </div>
+          <div className={styles['card-row']}>
+            <Paragraph color="error" size="18px">
+              {t('profilesPage.profileCity')}
+            </Paragraph>
+            <Paragraph size="18px">{props.profile.city}</Paragraph>
+          </div>
         </div>
       </div>
       <div className={styles['card-actions']}>

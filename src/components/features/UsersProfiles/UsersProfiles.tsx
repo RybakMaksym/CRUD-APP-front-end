@@ -56,7 +56,7 @@ function UsersProfiles(props: UsersProfilesProps) {
   const isLastPage = !paginatedData?.nextPage;
   const canLoadMore = !isAllProfilesLoading && !isLastPage;
 
-  if (isAllProfilesLoading) {
+  if (isAllProfilesError) {
     return (
       <Paragraph color="error">
         {t('profilesPage.couldNotFindAnyProfiles')}
