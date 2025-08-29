@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
 import styles from '@/components/features/Notifications/Notifications.module.scss';
@@ -26,6 +27,8 @@ type NotificationsProps = {
 };
 
 function Notifications(props: NotificationsProps) {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const [allNotifications, setAllNotifications] = useState<INotification[]>([]);
@@ -115,7 +118,7 @@ function Notifications(props: NotificationsProps) {
     <div className={styles.notifications}>
       <div className={styles.headline}>
         <Headline color="dark" size="18px">
-          Notifications
+          {t('profilesPage.notifications')}
         </Headline>
       </div>
 
@@ -137,14 +140,16 @@ function Notifications(props: NotificationsProps) {
 
       {(isInitialLoading || isAllNotificationsLoading) && <Loader />}
       {isAllNotificationsError && (
-        <Paragraph color="error">Could not find any notifications</Paragraph>
+        <Paragraph color="error">
+          {t('profilesPage.couldNotFindAnyNotifications')}
+        </Paragraph>
       )}
       {!isInitialLoading &&
         !isAllNotificationsLoading &&
         !isAllNotificationsError &&
         !paginatedData?.data.length && (
           <Paragraph color="dark" size="14px">
-            You have no notifications
+            {t('profilesPage.youHaveNoNotifications')}
           </Paragraph>
         )}
     </div>

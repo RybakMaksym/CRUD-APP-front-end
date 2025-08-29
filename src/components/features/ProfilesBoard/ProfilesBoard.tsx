@@ -1,13 +1,14 @@
 'use client';
 
-import type { SelectChangeEvent } from '@mui/material';
+import { MenuItem, type SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import FilterInput from '@/components/features/FilterInput/FilterInput';
 import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
 import styles from '@/components/features/ProfilesBoard/ProfilesBoard.module.scss';
-import FilterSelect from '@/components/ui/FilterSelect/FilterSelect';
+import CustomSelect from '@/components/ui/CustomSelect/CustomSelect';
 import Headline from '@/components/ui/Headline/Headline';
 import Loader from '@/components/ui/Loader/Loader';
 import Paragraph from '@/components/ui/Paragraph/Paragraph';
@@ -18,6 +19,7 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { useProfileFilter } from '@/hooks/use-profile-filter';
 import { useSearch } from '@/hooks/use-search';
+import { FILTERS } from '@/lib/constants/filters';
 import { PROFILES_PAGE_LIMIT } from '@/lib/constants/profile';
 import {
   profileApi,
@@ -28,6 +30,8 @@ import userSelectors from '@/redux/user/user-selectors';
 import type { IProfile } from '@/types/profile';
 
 function ProfilesBoard() {
+  const { t } = useTranslation();
+
   const {
     filter,
     setFilter,
@@ -126,24 +130,25 @@ function ProfilesBoard() {
   if (isError) {
     return (
       <div className={styles.board}>
-        <Paragraph color="error">Could not find any profiles</Paragraph>
+        <Paragraph color="error">
+          {t('profilesPage.couldNotFindAnyProfiles')}
+        </Paragraph>
       </div>
     );
   }
 
   return (
     <div className={styles.board}>
-      <Headline color="dark">Profiles</Headline>
+      <Headline color="dark">{t('profilesPage.profiles')}</Headline>
 
       <div className={styles.search}>
         <SearchInput
-          placeholder="Search"
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
 
-        {(filter === FilterOption.COUNRTY || filter === FilterOption.CITY) && (
+        {(filter === FilterOption.COUNTRY || filter === FilterOption.CITY) && (
           <FilterInput
             options={suggestions}
             inputValue={inputValue}
@@ -152,7 +157,7 @@ function ProfilesBoard() {
           />
         )}
 
-        <FilterSelect
+        <CustomSelect
           value={filter}
           onChange={(e: SelectChangeEvent) => {
             const val = e.target.value as FilterOption;
@@ -160,7 +165,13 @@ function ProfilesBoard() {
             setInputValue('');
             setSelectedOption('');
           }}
-        />
+        >
+          {FILTERS.map((filter) => (
+            <MenuItem key={filter.value} value={filter.value}>
+              {t(`profilesPage.${filter.label}`)}
+            </MenuItem>
+          ))}
+        </CustomSelect>
       </div>
       <InfinityScrollWrapper
         onLoadMore={() => {

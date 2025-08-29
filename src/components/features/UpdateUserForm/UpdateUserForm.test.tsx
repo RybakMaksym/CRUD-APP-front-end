@@ -4,7 +4,14 @@ import { useRouter } from 'next/navigation';
 import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import { Role } from '@/enums/role';
 import { useUpdateUserByIdMutation } from '@/redux/user/user-api';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
@@ -30,6 +37,7 @@ describe('UpdateUserForm', () => {
     role: Role.USER,
     avatarUrl: undefined,
     profiles: [],
+    language: Languages.ENGLISH,
   };
 
   const mockOnClose = jest.fn();
@@ -54,7 +62,7 @@ describe('UpdateUserForm', () => {
       />,
     );
 
-    expect(screen.getByPlaceholderText('username')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('name')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('email')).toBeInTheDocument();
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
@@ -83,7 +91,7 @@ describe('UpdateUserForm', () => {
         onConfirm={mockOnConfirm}
       />,
     );
-    fireEvent.change(screen.getByPlaceholderText('username'), {
+    fireEvent.change(screen.getByPlaceholderText('name'), {
       target: { value: 'new' },
     });
     fireEvent.change(screen.getByPlaceholderText('email'), {

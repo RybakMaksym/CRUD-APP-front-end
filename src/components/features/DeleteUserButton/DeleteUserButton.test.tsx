@@ -7,6 +7,12 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 const pushMock = jest.fn();
 const dispatchMock = jest.fn();
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
 }));

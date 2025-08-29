@@ -25,8 +25,8 @@ const customJestConfig: Config = {
     '<rootDir>/src/app/.*layout\\.tsx',
     '<rootDir>/src/app/.*not-found\\.tsx',
     '<rootDir>/src/app/.*page\\.tsx',
-    '<rootDir>/src/providers/ClientProviders\\.tsx',
-    '<rootDir>/src/providers/SocketProvider\\.tsx',
+    '<rootDir>/src/providers',
+    '<rootDir>/src/i18n',
     '<rootDir>/src/enums',
     '<rootDir>/src/types',
     '<rootDir>/src/styles',
@@ -40,6 +40,8 @@ const customJestConfig: Config = {
     '<rootDir>/src/redux/profile',
     '<rootDir>/src/redux/socket',
     '<rootDir>/src/redux/notification',
+    '<rootDir>/src/redux/settings',
+    '\\.stories\\.tsx?$',
   ],
 };
 

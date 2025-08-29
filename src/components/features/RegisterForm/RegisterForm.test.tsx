@@ -7,6 +7,12 @@ const mockRegister = jest.fn();
 const mockDispatch = jest.fn();
 const mockPush = jest.fn();
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/redux/auth/authorization-api', () => ({
   useRegisterMutation: () => [mockRegister, {}],
 }));

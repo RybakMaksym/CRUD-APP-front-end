@@ -5,6 +5,7 @@ import Paragraph from '@/components/ui/Paragraph/Paragraph';
 const meta: Meta<typeof Paragraph> = {
   title: 'UI/Paragraph',
   component: Paragraph,
+  tags: ['autodocs'],
   argTypes: {
     color: {
       control: { type: 'select' },
@@ -22,6 +23,11 @@ const meta: Meta<typeof Paragraph> = {
     children: 'This is a paragraph',
     color: 'white',
     size: '21px',
+  },
+  globals: {
+    backgrounds: {
+      value: 'dark',
+    },
   },
 };
 

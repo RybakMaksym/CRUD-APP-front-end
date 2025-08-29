@@ -10,6 +10,12 @@ const mockOnConfirm = jest.fn();
 
 const mockUpdateProfile = jest.fn();
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 jest.mock('@/redux/profile/profile-api', () => ({
   useUpdateProfileByIdMutation: () => [mockUpdateProfile, { isLoading: false }],
 }));
@@ -40,11 +46,11 @@ describe('UpdateProfileForm', () => {
     );
     const maleRadios = screen.getAllByLabelText(/Male/i);
 
-    expect(screen.getByPlaceholderText('Name')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('name')).toBeInTheDocument();
     expect(maleRadios.length).toBeGreaterThan(0);
-    expect(screen.getByLabelText(/Female/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Country')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('City')).toBeInTheDocument();
+    expect(screen.getByLabelText(/female/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('country')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('city')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
   });
@@ -61,14 +67,14 @@ describe('UpdateProfileForm', () => {
         onConfirm={mockOnConfirm}
       />,
     );
-    fireEvent.change(screen.getByPlaceholderText('Name'), {
+    fireEvent.change(screen.getByPlaceholderText('name'), {
       target: { value: 'Jane Doe' },
     });
-    fireEvent.click(screen.getByLabelText(/Female/i));
-    fireEvent.change(screen.getByPlaceholderText('Country'), {
+    fireEvent.click(screen.getByLabelText(/female/i));
+    fireEvent.change(screen.getByPlaceholderText('country'), {
       target: { value: 'Canada' },
     });
-    fireEvent.change(screen.getByPlaceholderText('City'), {
+    fireEvent.change(screen.getByPlaceholderText('city'), {
       target: { value: 'Toronto' },
     });
     fireEvent.click(screen.getByRole('button', { name: /save/i }));

@@ -64,12 +64,12 @@ describe('useProfileFilter', () => {
   it('should trigger filtering when selectedOption is set for COUNTRY', async () => {
     const { result } = renderHook(() => useProfileFilter());
     act(() => {
-      result.current.setFilter(FilterOption.COUNRTY);
+      result.current.setFilter(FilterOption.COUNTRY);
       result.current.setSelectedOption('Ukraine');
     });
 
     expect(mockTriggerFilterProfiles).toHaveBeenCalledWith({
-      field: FilterOption.COUNRTY,
+      field: FilterOption.COUNTRY,
       query: 'Ukraine',
     });
   });

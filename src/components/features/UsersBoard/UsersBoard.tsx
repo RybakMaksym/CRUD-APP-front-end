@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from '@/components/features/UsersBoard/UsersBoard.module.scss';
 import CustomPagination from '@/components/ui/CustomPagination/CustomPagination';
@@ -18,6 +19,8 @@ import {
 } from '@/redux/user/user-api';
 
 function UsersBoard() {
+  const { t } = useTranslation();
+
   const { searchQuery, activeSearch, handleInputChange, handleKeyDown } =
     useSearch();
 
@@ -52,17 +55,18 @@ function UsersBoard() {
   if (isError) {
     return (
       <div className={styles.board}>
-        <Paragraph color="error">Could not find any users</Paragraph>;
+        <Paragraph color="error">
+          {t('usersPage.couldNotFindAnyUsers')}
+        </Paragraph>
       </div>
     );
   }
 
   return (
     <div className={styles.board}>
-      <Headline color="dark">Users</Headline>
+      <Headline color="dark">{t('usersPage.users')}</Headline>
       <div className={styles.search}>
         <SearchInput
-          placeholder="Search"
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

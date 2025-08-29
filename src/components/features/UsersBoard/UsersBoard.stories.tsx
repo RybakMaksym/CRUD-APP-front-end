@@ -3,7 +3,8 @@ import { http, HttpResponse } from 'msw';
 
 import UsersBoard from '@/components/features/UsersBoard/UsersBoard';
 import { Role } from '@/enums/role';
-import { IUser } from '@/types/user';
+import { Languages } from '@/types/languages';
+import type { IUser } from '@/types/user';
 
 const listUsers: IUser[] = [
   {
@@ -12,6 +13,7 @@ const listUsers: IUser[] = [
     email: 'alice@example.com',
     role: Role.USER,
     profiles: ['profile1', 'profile2'],
+    language: Languages.ENGLISH,
   },
   {
     id: '2',
@@ -19,6 +21,7 @@ const listUsers: IUser[] = [
     email: 'bob@example.com',
     role: Role.ADMIN,
     profiles: ['profile3'],
+    language: Languages.ENGLISH,
   },
   {
     id: '3',
@@ -26,6 +29,7 @@ const listUsers: IUser[] = [
     email: 'charlie@example.com',
     role: Role.USER,
     profiles: [],
+    language: Languages.ENGLISH,
   },
 ];
 
@@ -36,6 +40,7 @@ const searchUsers: IUser[] = [
     email: 'search.john@example.com',
     role: Role.USER,
     profiles: ['profile4'],
+    language: Languages.ENGLISH,
   },
   {
     id: '11',
@@ -43,6 +48,7 @@ const searchUsers: IUser[] = [
     email: 'search.jane@example.com',
     role: Role.ADMIN,
     profiles: ['profile5', 'profile6'],
+    language: Languages.ENGLISH,
   },
 ];
 

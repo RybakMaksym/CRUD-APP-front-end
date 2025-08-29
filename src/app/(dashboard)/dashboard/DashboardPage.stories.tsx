@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import DashBaordPage from '@/app/(dashboard)/dashboard/page';
 import { Role } from '@/enums/role';
 import { profileApi } from '@/redux/profile/profile-api';
-import { IStatsResponse } from '@/types/response';
+import type { IStatsResponse } from '@/types/response';
 
 const mockStore = configureStore({
   reducer: {
@@ -47,6 +47,7 @@ const meta: Meta<typeof DashBaordPage> = {
             totalProfiles: 120,
             totalAdults: 80,
           };
+
           return HttpResponse.json(mockStats);
         }),
       ],

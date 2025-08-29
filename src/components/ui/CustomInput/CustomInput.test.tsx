@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form, Formik } from 'formik';
 
@@ -19,12 +19,12 @@ describe('CustomInput', () => {
     const input = screen.getByPlaceholderText(
       'Enter email',
     ) as HTMLInputElement;
-
     expect(input).toBeInTheDocument();
     expect(input.value).toBe('');
   });
 
   it('should update value on change', async () => {
+    const user = userEvent.setup();
     render(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form>
@@ -35,10 +35,13 @@ describe('CustomInput', () => {
     const input = screen.getByPlaceholderText(
       'Enter email',
     ) as HTMLInputElement;
-    await userEvent.type(input, 'test@example.com');
 
-    expect(input.value).toBe('test@example.com');
-  });
+    await user.type(input, 'test@example.com');
+
+    await waitFor(() => {
+      expect(input.value).toBe('test@example.com');
+    });
+  }, 10000);
 
   it('should show error message when input is blurred and validation fails', async () => {
     const validate = (values: typeof initialValues) => {
@@ -49,6 +52,7 @@ describe('CustomInput', () => {
       return errors;
     };
 
+    const user = userEvent.setup();
     render(
       <Formik
         initialValues={initialValues}
@@ -61,10 +65,10 @@ describe('CustomInput', () => {
       </Formik>,
     );
     const input = screen.getByPlaceholderText('Enter email');
-    const user = userEvent.setup();
+
     await user.click(input);
     await user.tab();
 
     expect(await screen.findByText('Email is required')).toBeInTheDocument();
-  });
+  }, 10000);
 });

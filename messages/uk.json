@@ -1,0 +1,65 @@
+{
+  "profilesPage": {
+    "profiles": "Профілі",
+    "notifications": "Сповіщення",
+    "filter": "Фільтр",
+    "typeToFilter": "Введіть для фільтрації",
+    "country": "Країна",
+    "city": "Місто",
+    "adults": "Користувачі 18+",
+    "addProfile": "Додати новий профіль",
+    "createProfile": "Створити новий профіль",
+    "editProfile": "Редагувати профіль",
+    "deleteProfile": "Ви впевнені що ви хочите видалити профіль?",
+    "gender": "Стать:",
+    "male": "Чоловіча",
+    "female": "Жіноча",
+    "profileBirth": "Дата народження:",
+    "profileCountry": "Країна:",
+    "profileCity": "Місто:",
+    "profilesCount": "{{profilesCount}} профайлів",
+    "couldNotFindAnyProfiles": "Не вдалося знайти жодного профілю",
+    "couldNotFindAnyNotifications": "Не вдалося знайти жодного сповіщення",
+    "youHaveNoNotifications": "У вас немає сповіщень"
+  },
+  "usersPage": {
+    "users": "Користувачі",
+    "name": "Ім'я",
+    "email": "Пошта",
+    "isAdmin": "Чи адмін",
+    "deleteUser": "Ви впевнені що ви хочите видалити юзера?",
+    "couldNotFindAnyUsers": "Не вдалося знайти жодного користувача"
+  },
+  "settingsPage": {
+    "settings": "Налаштування",
+    "language": "Мова:",
+    "english": "Англійська",
+    "ukrainian": "Українська"
+  },
+  "dashboardPage": {
+    "dashboard": "Панель керування",
+    "users": "Користувачі",
+    "profiles": "Профілі",
+    "adults": "Користувачі 18+",
+    "couldNotFindAnyInformation": "Не вдалося знайти жодної інформації"
+  },
+  "sidebar": {
+    "profiles": "Профілі",
+    "settings": "Налаштування",
+    "users": "Користувачі",
+    "dashboard": "Панель керування"
+  },
+  "general": {
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "choosePicture": "Оберіть зображення",
+    "search": "Пошук",
+    "save": "Зберегти",
+    "update": "Оновити",
+    "close": "Закрити",
+    "yes": "Так",
+    "no": "Ні",
+    "loading": "Завантаження...",
+    "logOut": "Вийти"
+  }
+}

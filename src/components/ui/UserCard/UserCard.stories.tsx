@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import UserCard from '@/components/ui/UserCard/UserCard';
 import { Role } from '@/enums/role';
+import { Languages } from '@/types/languages';
 
 const mockUser = {
   id: '123',
@@ -10,6 +11,7 @@ const mockUser = {
   role: Role.USER,
   profiles: [],
   avatarUrl: undefined,
+  language: Languages.ENGLISH,
 };
 
 const meta: Meta<typeof UserCard> = {

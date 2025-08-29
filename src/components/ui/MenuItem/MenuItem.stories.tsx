@@ -16,6 +16,14 @@ const meta: Meta<typeof MenuItem> = {
   globals: {
     backgrounds: { value: 'dark' },
   },
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        push: (path: string) => console.log(`Navigating to: ${path}`),
+      },
+    },
+  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue('/profiles');
   },

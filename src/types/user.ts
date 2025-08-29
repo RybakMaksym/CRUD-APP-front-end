@@ -1,5 +1,6 @@
 import type { Role } from '@/enums/role';
 import type { IRegisterForm } from '@/types/auth';
+import type { Languages } from '@/types/languages';
 
 export interface IUser {
   id: string;
@@ -7,6 +8,7 @@ export interface IUser {
   email: string;
   role: Role;
   avatarUrl?: string;
+  language: Languages;
   profiles: string[];
 }
 

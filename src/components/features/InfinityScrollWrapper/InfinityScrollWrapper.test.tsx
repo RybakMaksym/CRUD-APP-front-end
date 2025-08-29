@@ -5,6 +5,12 @@ import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/I
 const mockObserve = jest.fn();
 const mockUnobserve = jest.fn();
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 beforeAll(() => {
   (global as any).IntersectionObserver = jest.fn(() => ({
     observe: mockObserve,
@@ -35,7 +41,7 @@ describe('InfinityScrollWrapper', () => {
       </InfinityScrollWrapper>,
     );
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('loading')).toBeInTheDocument();
   });
 
   it('should NOT render loader when additionalConditions is false', () => {
@@ -48,7 +54,7 @@ describe('InfinityScrollWrapper', () => {
       </InfinityScrollWrapper>,
     );
 
-    expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    expect(screen.queryByText('loading')).not.toBeInTheDocument();
   });
 
   it('should observe the target element on mount', () => {

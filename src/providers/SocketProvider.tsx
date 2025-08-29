@@ -20,7 +20,7 @@ function SocketProvider({ children }: { children: ReactNode }) {
     return () => {
       disconnectSocket(dispatch);
     };
-  }, [accessToken, userId]);
+  }, [accessToken, userId, dispatch]);
 
   return <>{children}</>;
 }

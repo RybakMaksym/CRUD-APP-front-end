@@ -1,4 +1,7 @@
+'use client';
+
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CreateProfileButton from '@/components/features/CreateProfileButton/CreateProfileButton';
 import InfinityScrollWrapper from '@/components/features/InfinityScrollWrapper/InfinityScrollWrapper';
@@ -15,6 +18,8 @@ type UsersProfilesProps = {
 };
 
 function UsersProfiles(props: UsersProfilesProps) {
+  const { t } = useTranslation();
+
   const [page, setPage] = useState(1);
   const [allProfiles, setAllProfiles] = useState<IProfile[]>([]);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -51,8 +56,12 @@ function UsersProfiles(props: UsersProfilesProps) {
   const isLastPage = !paginatedData?.nextPage;
   const canLoadMore = !isAllProfilesLoading && !isLastPage;
 
-  if (isAllProfilesError) {
-    return <Paragraph color="error">Could not find any profiles</Paragraph>;
+  if (isAllProfilesLoading) {
+    return (
+      <Paragraph color="error">
+        {t('profilesPage.couldNotFindAnyProfiles')}
+      </Paragraph>
+    );
   }
 
   if (isInitialLoading || isAllProfilesError) {

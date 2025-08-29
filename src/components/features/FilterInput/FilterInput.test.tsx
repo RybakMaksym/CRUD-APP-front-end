@@ -2,6 +2,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import FilterInput from '@/components/features/FilterInput/FilterInput';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 describe('FilterInput', () => {
   const options = ['Kyiv', 'Lviv', 'Odessa'];
   const mockOnInputChange = jest.fn();
@@ -21,9 +27,7 @@ describe('FilterInput', () => {
       />,
     );
 
-    expect(
-      screen.getByPlaceholderText('Type to filter...'),
-    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('typeToFilter')).toBeInTheDocument();
   });
 
   it('should call onInputChange when typing', () => {
@@ -35,7 +39,7 @@ describe('FilterInput', () => {
         onChange={mockOnChange}
       />,
     );
-    const input = screen.getByPlaceholderText('Type to filter...');
+    const input = screen.getByPlaceholderText('typeToFilter');
     fireEvent.change(input, { target: { value: 'Ky' } });
 
     expect(mockOnInputChange).toHaveBeenCalled();
@@ -51,7 +55,7 @@ describe('FilterInput', () => {
         onChange={mockOnChange}
       />,
     );
-    const input = screen.getByPlaceholderText('Type to filter...');
+    const input = screen.getByPlaceholderText('typeToFilter');
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'ArrowDown' });
     fireEvent.keyDown(input, { key: 'Enter' });

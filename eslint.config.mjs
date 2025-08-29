@@ -18,6 +18,7 @@ const eslintConfig = [
     'plugin:prettier/recommended',
     'plugin:import/typescript',
   ),
+  ...storybook.configs['flat/recommended'],
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -40,6 +41,14 @@ const eslintConfig = [
             ['internal'],
             ['parent', 'sibling', 'index'],
           ],
+          pathGroups: [
+            {
+              pattern: 'next/font/**',
+              group: 'external',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
@@ -76,9 +85,9 @@ const eslintConfig = [
           disallowTypeAnnotations: false,
         },
       ],
+      'storybook/no-renderer-packages': 'off',
     },
   },
-  ...storybook.configs['flat/recommended'],
 ];
 
 export default eslintConfig;

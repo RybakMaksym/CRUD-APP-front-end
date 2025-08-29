@@ -1,0 +1,65 @@
+{
+  "profilesPage": {
+    "profiles": "Profiles",
+    "notifications": "Notifications",
+    "filter": "Filter",
+    "typeToFilter": "Type to filter",
+    "country": "Country",
+    "city": "City",
+    "adults": "Users 18+",
+    "addProfile": "Add new profile",
+    "createProfile": "Create new profile",
+    "editProfile": "Edit profile",
+    "deleteProfile": "Are you sure you want to delete profile?",
+    "gender": "Gender:",
+    "male": "Male",
+    "female": "Female",
+    "profileBirth": "Date of birth:",
+    "profileCountry": "Country:",
+    "profileCity": "City:",
+    "profilesCount": "{{profilesCount}} profiles",
+    "couldNotFindAnyProfiles": "Could not find any profiles",
+    "couldNotFindAnyNotifications": "Could not find any notifications",
+    "youHaveNoNotifications": "You have no notifications"
+  },
+  "usersPage": {
+    "users": "Users",
+    "name": "Name",
+    "email": "Email",
+    "isAdmin": "Is admin",
+    "deleteUser": "Are you sure you want to delete user?",
+    "couldNotFindAnyUsers": "Could not find any users"
+  },
+  "settingsPage": {
+    "settings": "Settings",
+    "language": "Language:",
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  },
+  "dashboardPage": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "profiles": "Profiles",
+    "adults": "Users 18+",
+    "couldNotFindAnyInformation": "Could not find any information"
+  },
+  "sidebar": {
+    "profiles": "Profiles",
+    "settings": "Settings",
+    "users": "Users",
+    "dashboard": "Dashboard"
+  },
+  "general": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "choosePicture": "Choose picture",
+    "search": "search",
+    "save": "Save",
+    "update": "Update",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "logOut": "Log-out"
+  }
+}

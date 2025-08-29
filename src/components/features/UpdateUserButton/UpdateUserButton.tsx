@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
@@ -12,6 +13,8 @@ type UpdateUserButtonProps = {
 };
 
 function UpdateUserButton({ user }: UpdateUserButtonProps) {
+  const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const closeForm = () => setIsOpen(false);
@@ -19,7 +22,7 @@ function UpdateUserButton({ user }: UpdateUserButtonProps) {
   return (
     <>
       <CustomButton background="green" onClick={() => setIsOpen(true)}>
-        Edit
+        {t('general.edit')}
       </CustomButton>
 
       <CustomModal isOpen={isOpen}>

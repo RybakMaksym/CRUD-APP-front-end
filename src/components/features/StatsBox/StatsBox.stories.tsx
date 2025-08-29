@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import StatsBox from '@/components/features/StatsBox/StatsBox';
-import { IStatsResponse } from '@/types/response';
+import type { IStatsResponse } from '@/types/response';
 
 const meta: Meta<typeof StatsBox> = {
   title: 'Features/StatsBox',
@@ -18,6 +18,7 @@ const meta: Meta<typeof StatsBox> = {
             totalProfiles: 120,
             totalAdults: 80,
           };
+
           return HttpResponse.json(mockStats);
         }),
       ],

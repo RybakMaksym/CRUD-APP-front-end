@@ -1,15 +1,23 @@
+import { configureStore } from '@reduxjs/toolkit';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Provider } from 'react-redux';
 
 import SideBar from '@/components/features/SideBar/SideBar';
 import { Role } from '@/enums/role';
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
 
 const meta: Meta<typeof SideBar> = {
   title: 'Features/SideBar',
   component: SideBar,
   tags: ['autodocs'],
   argTypes: {},
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        push: (path: string) => console.log(`Navigating to: ${path}`),
+      },
+    },
+  },
 };
 
 export default meta;

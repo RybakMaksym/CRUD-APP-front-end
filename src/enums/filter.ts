@@ -1,6 +1,6 @@
 export enum FilterOption {
   DEFAULT = 'default',
-  COUNRTY = 'country',
+  COUNTRY = 'country',
   CITY = 'city',
   AGE = 'age',
 }

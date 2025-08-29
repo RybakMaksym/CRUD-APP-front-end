@@ -1,7 +1,10 @@
+'use client';
+
 import { DialogActions } from '@mui/material';
 import type { FormikHelpers } from 'formik';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 import CustomButton from '@/components/ui/CustomButton/CustomButton';
 import CustomCheckbox from '@/components/ui/CustomCheckbox/CustomCheckbox';
@@ -28,7 +31,10 @@ type UpdateUserFormProps = {
 };
 
 function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
+  const { t } = useTranslation();
+
   const [updateUser, { isLoading }] = useUpdateUserByIdMutation();
+
   const router = useRouter();
 
   const dispatch = useAppDispatch();
@@ -81,7 +87,7 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
     >
       {({ status, setFieldValue }) => (
         <Form className={`${styles.form} ${styles.white}`}>
-          <Headline color="dark">Edit</Headline>
+          <Headline color="dark">{t('general.edit')}</Headline>
           <PicturePicker
             onChange={(event) =>
               setFieldValue('avatar', event.target.files?.[0])
@@ -93,17 +99,21 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
           <CustomInput
             background="dark"
             name="username"
-            placeholder="username"
+            placeholder={t('usersPage.name')}
           />
           <CustomInput
             background="dark"
             name="email"
             type="email"
-            placeholder="email"
+            placeholder={t('usersPage.email')}
           />
 
           <div className={styles['checkbox-wrapper']}>
-            <CustomCheckbox label="Is admin" labelColor="dark" name="isAdmin" />
+            <CustomCheckbox
+              label={t('usersPage.isAdmin')}
+              labelColor="dark"
+              name="isAdmin"
+            />
           </div>
 
           {status && <Paragraph color="error">{status}</Paragraph>}
@@ -114,10 +124,10 @@ function UpdateUserForm({ user, onConfirm, onClose }: UpdateUserFormProps) {
               isLoading={isLoading}
               background="green"
             >
-              Save
+              {t('general.save')}
             </CustomButton>
             <CustomButton background="red" onClick={onClose}>
-              Close
+              {t('general.close')}
             </CustomButton>
           </DialogActions>
         </Form>

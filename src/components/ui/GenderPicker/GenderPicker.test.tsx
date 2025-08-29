@@ -4,6 +4,12 @@ import { Form, Formik } from 'formik';
 
 import GenderPicker from '@/components/ui/GenderPicker/GenderPicker';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 describe('GenderPicker', () => {
   it('should render gender radio buttons with labels', () => {
     render(
@@ -16,7 +22,7 @@ describe('GenderPicker', () => {
     const maleRadio = screen.getByDisplayValue('male');
     const femaleRadio = screen.getByDisplayValue('female');
 
-    expect(screen.getByText('Gender:')).toBeInTheDocument();
+    expect(screen.getByText('gender')).toBeInTheDocument();
     expect(maleRadio).toBeInTheDocument();
     expect(femaleRadio).toBeInTheDocument();
     expect(maleRadio).not.toBeChecked();

@@ -34,6 +34,14 @@ const meta: Meta<typeof Menu> = {
       value: 'dark',
     },
   },
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        push: (path: string) => console.log(`Navigating to: ${path}`),
+      },
+    },
+  },
 };
 
 export default meta;

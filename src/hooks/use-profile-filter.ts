@@ -21,7 +21,7 @@ export const useProfileFilter = () => {
 
   useEffect(() => {
     if (
-      (filter === FilterOption.CITY || filter === FilterOption.COUNRTY) &&
+      (filter === FilterOption.CITY || filter === FilterOption.COUNTRY) &&
       inputValue
     ) {
       triggerSuggestions({
@@ -37,7 +37,7 @@ export const useProfileFilter = () => {
     if (filter === FilterOption.AGE) {
       triggerFilterProfiles({ field: FilterOption.AGE, query: '' });
     } else if (
-      (filter === FilterOption.CITY || filter === FilterOption.COUNRTY) &&
+      (filter === FilterOption.CITY || filter === FilterOption.COUNTRY) &&
       selectedOption
     ) {
       triggerFilterProfiles({ field: filter, query: selectedOption });

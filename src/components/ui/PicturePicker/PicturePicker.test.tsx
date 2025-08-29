@@ -3,6 +3,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import PicturePicker from '@/components/ui/PicturePicker/PicturePicker';
 import { DEFAULT_AVATAR, MAX_FILE_SIZE_MB } from '@/lib/constants/avatar';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key.split('.')[1],
+  }),
+}));
+
 describe('PicturePicker', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -66,6 +72,6 @@ describe('PicturePicker', () => {
   it('should render paragraph with correct color', () => {
     render(<PicturePicker onChange={jest.fn()} labelColor="dark" />);
 
-    expect(screen.getByText(/choose picture/i)).toBeInTheDocument();
+    expect(screen.getByText('choosePicture')).toBeInTheDocument();
   });
 });

@@ -74,7 +74,7 @@ const meta: Meta<typeof ProfilesBoard> = {
         }),
         http.get(
           `${process.env.NEXT_PUBLIC_API_URL}/profile/suggestions`,
-          (req) => {
+          () => {
             return HttpResponse.json(suggestions);
           },
         ),
