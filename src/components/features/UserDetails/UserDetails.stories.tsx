@@ -5,6 +5,7 @@ import UserDetails from '@/components/features/UserDetails/UserDetails';
 import { Gender } from '@/enums/gender';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
+import { Languages } from '@/types/languages';
 import type { IPaginatedResponse } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
 import type { IUser } from '@/types/user';
@@ -73,6 +74,7 @@ const mockUser: IUser = {
   role: Role.USER,
   avatarUrl: DEFAULT_AVATAR,
   profiles: ['profile1', 'profile2'],
+  language: Languages.ENGLISH,
 };
 
 export const Default: Story = {

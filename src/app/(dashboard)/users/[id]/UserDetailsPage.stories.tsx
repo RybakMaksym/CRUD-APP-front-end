@@ -4,6 +4,7 @@ import { http, HttpResponse } from 'msw';
 import UserDetailsPage from '@/app/(dashboard)/users/[id]/page';
 import { Gender } from '@/enums/gender';
 import { Role } from '@/enums/role';
+import { Languages } from '@/types/languages';
 import type { IPaginatedResponse } from '@/types/navigation';
 import type { IProfile } from '@/types/profile';
 
@@ -13,6 +14,7 @@ const mockUser = {
   email: 'johndoe@example.com',
   role: Role.USER,
   profiles: ['1', '2'],
+  language: Languages.ENGLISH,
 };
 
 const mockProfiles: IPaginatedResponse<IProfile> = {

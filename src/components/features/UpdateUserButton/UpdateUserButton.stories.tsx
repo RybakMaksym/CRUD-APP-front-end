@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import UpdateUserButton from '@/components/features/UpdateUserButton/UpdateUserButton';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
 
 const mockUser: IUser = {
@@ -12,6 +13,7 @@ const mockUser: IUser = {
   role: Role.USER,
   avatarUrl: DEFAULT_AVATAR,
   profiles: ['profile1', 'profile2'],
+  language: Languages.ENGLISH,
 };
 
 const meta: Meta<typeof UpdateUserButton> = {

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import UpdateUserForm from '@/components/features/UpdateUserForm/UpdateUserForm';
 import { Role } from '@/enums/role';
 import { DEFAULT_AVATAR } from '@/lib/constants/avatar';
+import { Languages } from '@/types/languages';
 import type { IUser } from '@/types/user';
 
 const meta: Meta<typeof UpdateUserForm> = {
@@ -34,6 +35,7 @@ const mockUser: IUser = {
   role: Role.USER,
   avatarUrl: DEFAULT_AVATAR,
   profiles: ['profile1', 'profile2'],
+  language: Languages.ENGLISH,
 };
 
 export const Default: Story = {
