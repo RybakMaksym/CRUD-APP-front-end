@@ -32,7 +32,7 @@ function NotificationButton() {
   });
 
   useEffect(() => {
-    if (paginatedData?.data[0].isNew) {
+    if (paginatedData?.data[0]?.isNew) {
       dispatch(setHasNewNotification(true));
     }
   }, [paginatedData, dispatch]);

@@ -20,7 +20,7 @@ function CreateProfileButton(props: CreateProfileButtonProps) {
   const { t } = useTranslation();
 
   let ownerId = useAppSelector(userSelectors.getUserId);
-  ownerId ||= props.userId;
+  ownerId = props.userId ?? ownerId;
 
   const [isOpen, setIsOpen] = useState(false);
 
