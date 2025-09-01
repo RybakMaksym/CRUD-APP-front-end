@@ -24,7 +24,7 @@ import type { IRegisterForm } from '@/types/auth';
 import type { AuthFormProps } from '@/types/auth-form';
 
 function RegisterForm(props: AuthFormProps) {
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -57,19 +57,22 @@ function RegisterForm(props: AuthFormProps) {
       validationSchema={REGISTER_FORM_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ status, setFieldValue, errors }) => {
-        const validationErrors = Object.values(errors);
+      {({ status, setFieldValue, errors, touched, submitCount }) => {
+        const validationErrors = Object.entries(errors).filter(
+          ([field]) =>
+            touched[field as keyof typeof touched] || submitCount > 0,
+        );
 
         return (
           <Form className={`${styles.form} ${styles.dark}`}>
             <Headline>{props.title}</Headline>
 
             {(status || validationErrors.length > 0) && (
-              <div>
+              <div className={styles.errors}>
                 {status && <Paragraph color="error">{status}</Paragraph>}
-                {validationErrors.map((err, idx) => (
+                {validationErrors.map(([, message], idx) => (
                   <Paragraph key={idx} color="error">
-                    {err}
+                    {message}
                   </Paragraph>
                 ))}
               </div>
@@ -103,7 +106,9 @@ function RegisterForm(props: AuthFormProps) {
               <CustomCheckbox label="Is admin" name="isAdmin" />
             </div>
 
-            <CustomButton type="submit">Sign Up</CustomButton>
+            <CustomButton isLoading={isLoading} type="submit">
+              Sign Up
+            </CustomButton>
 
             <Paragraph>
               <div className={styles.link}>

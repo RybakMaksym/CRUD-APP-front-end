@@ -22,7 +22,7 @@ import type { ILogInForm } from '@/types/auth';
 import type { AuthFormProps } from '@/types/auth-form';
 
 function LogInForm(props: AuthFormProps) {
-  const [logIn] = useLogInMutation();
+  const [logIn, { isLoading }] = useLogInMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -45,19 +45,22 @@ function LogInForm(props: AuthFormProps) {
       validationSchema={LOG_IN_FORM_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ status, errors }) => {
-        const validationErrors = Object.values(errors);
+      {({ status, errors, touched, submitCount }) => {
+        const validationErrors = Object.entries(errors).filter(
+          ([field]) =>
+            touched[field as keyof typeof touched] || submitCount > 0,
+        );
 
         return (
           <Form className={`${styles.form} ${styles.dark}`}>
             <Headline>{props.title}</Headline>
 
             {(status || validationErrors.length > 0) && (
-              <div>
+              <div className={styles.errors}>
                 {status && <Paragraph color="error">{status}</Paragraph>}
-                {validationErrors.map((err, idx) => (
+                {validationErrors.map(([, message], idx) => (
                   <Paragraph key={idx} color="error">
-                    {err}
+                    {message}
                   </Paragraph>
                 ))}
               </div>
@@ -76,7 +79,9 @@ function LogInForm(props: AuthFormProps) {
               showError={false}
             />
 
-            <CustomButton type="submit">Sign In</CustomButton>
+            <CustomButton isLoading={isLoading} type="submit">
+              Sign In
+            </CustomButton>
 
             <Paragraph>
               <div className={styles.link}>

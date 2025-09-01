@@ -1,1 +1,1 @@
-export const USERS_PAGE_LIMIT = 8;
+export const USERS_PAGE_LIMIT = 20;

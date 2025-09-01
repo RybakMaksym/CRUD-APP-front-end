@@ -134,7 +134,7 @@ describe('UsersBoard', () => {
       isError: false,
     });
     mockUseUsersTotalQuery.mockReturnValue({
-      data: { total: 10 },
+      data: { total: 21 },
     });
 
     render(<UsersBoard />);

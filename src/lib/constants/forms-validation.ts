@@ -53,8 +53,14 @@ const AUTH_SCHEMA = Yup.object({
 });
 
 const USERNAME_VALIDATION = Yup.string()
-  .min(MIN_FIELD_LENGTH, `Must be at least ${MIN_FIELD_LENGTH} characters`)
-  .max(MAX_FIELD_LENGTH, `Must be at most ${MAX_FIELD_LENGTH} characters`)
+  .min(
+    MIN_FIELD_LENGTH,
+    `Username must be at least ${MIN_FIELD_LENGTH} characters`,
+  )
+  .max(
+    MAX_FIELD_LENGTH,
+    `Username must be at most ${MAX_FIELD_LENGTH} characters`,
+  )
   .required('Username is required');
 
 const IS_ADMIN_VALIDATION = Yup.boolean().default(false);
